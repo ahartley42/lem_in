@@ -1,6 +1,7 @@
 #ifndef LEM_IN_H
 # define LEM_IN_H
 
+# include "../libft/libft.h"
 # include <unistd.h>
 # include <stdlib.h>
 # include <string.h>
