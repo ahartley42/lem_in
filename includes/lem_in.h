@@ -16,5 +16,5 @@ typedef struct		s_room
 	struct s_room	**next; //	array of linked paths
 }					t_room;
 
-void				check_int(char *s);
+int				check_int(char *s);
 #endif
