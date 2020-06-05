@@ -1,6 +1,7 @@
 #ifndef LEM_IN_H
 # define LEM_IN_H
 
+# include "../libft/libft.h"
 # include <unistd.h>
 # include <stdlib.h>
 # include <string.h>
@@ -16,5 +17,5 @@ typedef struct		s_room
 	struct s_room	**next; //	array of linked paths
 }					t_room;
 
-void				check_int(char *s);
+int				check_int(char *s);
 #endif
