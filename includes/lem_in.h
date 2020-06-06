@@ -6,6 +6,14 @@
 # include <stdlib.h>
 # include <string.h>
 
+typedef struct		s_base
+{
+	char 			*name;
+	int				id;
+	int				ants;
+	struct s_base	**next;
+}					t_base;
+
 typedef struct		s_room
 {
 	int				room_id; //	id of room

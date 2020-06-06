@@ -10,30 +10,41 @@
 #                                                                              #
 # **************************************************************************** #
 
-NAME = lem_in.a
-LEM = Lem_in
+LEM = lem-in
 LIBFT = -L./libft -lft
-FLAGES = -Wall -Wextra -Werror
+LIBFT_A = libft/libft.a
+FLAGS = -Wall -Wextra -Werror
 GCC = gcc
-SRC = *.c
-OPTION = -c $(SRC)
-OBJ = *.o
+
+SRC_PATH = srcs/
+OBJ_PATH = obj/
+
+SRC = check_int.c free.c main.c
+OBJ = $(SRC:%.c=%.o)
+
+OBJ_USAGE = $(addprefix $(OBJ_PATH), $(OBJ))
 
 all: $(LEM)
 
-$(NAME):
-	$(GCC) $(FLAGES) $(OPTION)
-	ar rc $(NAME) $(OBJ)
-	ranlib $(NAME)
+$(LEM):	$(OBJ_PATH) $(OBJ_USAGE) $(LIBFT_A)
+	$(GCC) $(FLAGS) -o $@ $(OBJ_USAGE) $(LIBFT)
+
+$(LIBFT_A):
+	cd libft && make
+
+$(OBJ_PATH)%.o: $(SRC_PATH)%.c
+	$(GCC) $(FLAGS) -c $^ -o $@ -I ./includes
+
+$(OBJ_PATH):
+	mkdir -p $(OBJ_PATH)
 
 clean:
-	rm -f $(OBJ)
+	cd libft && make clean
+	rm -rf $(OBJ_PATH)
+
 fclean:	clean
-	rm -f $(NAME)
 	cd libft && make fclean
 	rm -f $(LEM)
-re:	fclean	all
 
-$(LEM):	$(NAME)
-	cd libft && make all
-	$(GCC) $(FLAGES) $(LEM).c $(NAME) $(LIBFT) -o $(LEM)
+re:	fclean	all
+	cd libft && make re
