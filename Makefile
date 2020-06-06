@@ -11,7 +11,7 @@
 # **************************************************************************** #
 
 NAME = lem_in.a
-LEM = Lem_in
+LEM = Lem-in
 LIBFT = -L./libft -lft
 FLAGES = -Wall -Wextra -Werror
 GCC = gcc
