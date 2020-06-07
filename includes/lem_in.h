@@ -22,7 +22,8 @@ typedef struct		s_room
 	int				xy[2]; //	x and y coordinates
 	char			*name; //	name of room
 	unsigned char	type; //	4 = end, 2 = start, 1 = occupied
-	struct s_room	**next; //	array of linked paths
+	struct s_room	**path; //	array of linked paths
+	struct s_room	*next; //	node to next
 }					t_room;
 
 int				check_int(char *s);
