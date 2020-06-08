@@ -1,6 +1,4 @@
 #include "../includes/lem_in.h"
-#include "../libft/libft.h"
-
 
 unsigned char	rinit(char **cmd, int *x, t_base *base, unsigned char e)
 {
