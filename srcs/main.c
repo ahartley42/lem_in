@@ -101,6 +101,52 @@ int ft_strlen_space(char *str)
     return (i);
 }
 
+int ft_strlen_space_error(char *str)
+{
+    size_t i;
+    
+    i = 0;
+
+    if(str[i] == 'L')
+    {
+        ft_putstr("Error: cannot have caps L at the start of the name \n");
+        exit(1);
+    }
+    while(str[i] != '\0')
+    {
+        if (str[i] == '-')
+        {
+            ft_putstr("Error: cannot have a - in the name \n");
+            exit(1);
+        }
+        if (str[i] == ' ')
+        {
+            break;
+        }
+        i++;
+    }
+    return (i);
+}
+
+void ft_strlen_space_count(char *str)
+{
+    int i;
+    int k;
+
+    i = 0;
+    k = 0;
+    while (str[i] != '\0')
+    {
+        if (str[i] == ' ')
+        k++;
+        i++; 
+    }
+    if (k > 2 || k < 2)
+    {
+        ft_putstr("Error: Badly Formatted Map, room invalid \n");
+        exit(1);
+    }
+}
 // int ft_check_ants_and_skip_comments_on_top(char **twodarray, *ant_amount)
 // {
 //     int i;
@@ -163,7 +209,7 @@ void check_file(t_room *lem, char **twodarray, int *ant_amount)
     while (twodarray[i])
     {
         if (twodarray[i][0] == '#' && !(ft_strequ(twodarray[i], "##start") || ft_strequ(twodarray[i], "##end"))){
-            printf("skiped: %s",twodarray[i]);
+            printf("skiped: %s\n",twodarray[i]);
         i++;
         }
         if (check_int(twodarray[i]) == 1)
@@ -178,11 +224,25 @@ void check_file(t_room *lem, char **twodarray, int *ant_amount)
             // ft_add_Command_rooms(twodarray[i + 1], total);
         }
         if ((strlen = ft_strlen_space(twodarray[i])) && twodarray[i][strlen] == ' ' && twodarray[i][strlen + 1]){
-            printf("was here\n");
+            // printf("was here\n");
+            char    **check_rooms;
+            ft_strlen_space_count(twodarray[i]); // counting the amount of spaces more or less than 2 displays error
+            check_rooms = ft_strsplit(twodarray[i], ' ');
+            ft_strlen_space_error(check_rooms[0]); // checks for name starting with L and - inside the name
+            if (check_int(check_rooms[1]) == 1 && check_int(check_rooms[2]) == 1)
+            {
+                printf("Correct \n");
+            }else
+            {
+                ft_putstr("Error: Badly Formatted Map X Y not integer \n");
+                exit(1);
+            }
+            printf("room check: %s\n", check_rooms[0]);
+            free2dArray(check_rooms);
         }
         i++;
-        printf("i: %d\n", i);
-        printf("strlen: %d\n", strlen);
+        // printf("i: %d\n", i);
+        // printf("strlen: %d\n", strlen);
         strlen = 0;
     }
 }
