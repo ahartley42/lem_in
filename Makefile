@@ -10,7 +10,8 @@
 #                                                                              #
 # **************************************************************************** #
 
-LEM = lem-in
+NAME = lem_in.a
+LEM = Lem-in
 LIBFT = -L./libft -lft
 LIBFT_A = libft/libft.a
 FLAGS = -Wall -Wextra -Werror
