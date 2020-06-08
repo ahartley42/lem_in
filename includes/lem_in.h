@@ -29,4 +29,10 @@ typedef struct		s_room
 int				check_int(char *s);
 int    			ft_check_ants(char *base);
 void    		free2dArray(char **str);
+
+//strlen_modified
+int    			ft_strlen_pipes(char *str);
+void 			ft_strlen_space_count(char *str);
+int 			ft_strlen_space_error(char *str);
+int 			ft_strlen_space(char *str);
 #endif
