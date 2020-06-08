@@ -27,5 +27,6 @@ typedef struct		s_room
 }					t_room;
 
 int				check_int(char *s);
+int    			ft_check_ants(char *base);
 void    		free2dArray(char **str);
 #endif
