@@ -103,7 +103,6 @@ int    ft_strlen_pipes(char *str)
         j++;
         i++;
     }
-    printf("j: %d \n", j);
     if (j != 1){
         ft_putstr("Error: Badly Formatted Map, pipe invalid \n");
         exit(1);
