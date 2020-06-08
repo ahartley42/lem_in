@@ -147,6 +147,33 @@ void ft_strlen_space_count(char *str)
         exit(1);
     }
 }
+
+int    ft_strlen_pipes(char *str)
+{
+    int i;
+    int j;
+    
+    i = 0;
+    j = 0;
+    if(str[i] == 'L')
+    {
+        ft_putstr("Error: cannot have caps L at the start of the name \n");
+        exit(1);
+    }
+    while (str[i] != '\0')
+    {
+        if (str[i] == '-')
+        j++;
+        i++;
+    }
+    printf("j: %d \n", j);
+    if (j != 1){
+        ft_putstr("Error: Badly Formatted Map, pipe invalid \n");
+        exit(1);
+    }
+    return (1);
+}
+
 // int ft_check_ants_and_skip_comments_on_top(char **twodarray, *ant_amount)
 // {
 //     int i;
@@ -173,6 +200,7 @@ void check_file(t_room *lem, char **twodarray, int *ant_amount)
     int end;    // will be removed for struct
     int total;
     int strlen;
+    int strlenpipe;
 
     lem->room_id = 1; // remove because lem not been used yet
     i = 0;
@@ -180,6 +208,7 @@ void check_file(t_room *lem, char **twodarray, int *ant_amount)
     end = 0;
     total = 0;
     strlen = 0;
+    strlenpipe = 0;
     // i = ft_check_ants_and_skip_comments_on_top(**twodarray, &ant_amount); // not working right now
 
     // looking for ant_amount once found breaks out and returns ant amount  if not found returns error
@@ -239,6 +268,20 @@ void check_file(t_room *lem, char **twodarray, int *ant_amount)
             }
             printf("room check: %s\n", check_rooms[0]);
             free2dArray(check_rooms);
+        }
+        if ((strlenpipe = ft_strlen_space(twodarray[i])) && twodarray[i][strlenpipe] == '\0' && twodarray[i][0] != '#')
+        {
+            // printf("%s \n", twodarray[i]);
+            // printf("we got inside here \n");
+            strlenpipe = 0;
+            if (( strlenpipe = ft_strlen_pipes(twodarray[i])) == 1)
+            {
+                printf("Correct pipe \n");
+            }
+            else{
+                printf("Error: Invalid Pipe \n");
+            }
+            
         }
         i++;
         // printf("i: %d\n", i);
