@@ -24,7 +24,7 @@ int    ft_check_start_end(char *twodarray)
     }else // will have to remove
     {
         ft_putstr("Error: no known command");
-        exit(1);
+        return (-1);
     }
 }
 
@@ -65,6 +65,8 @@ void verify_map_and_data(t_room *lem, char **twodarray, int *ant_amount)
     int total;
     int strlen;
     int strlenpipe;
+    int pipeTrack;
+    int roomTrack;
 
     lem->room_id = 1; // remove because lem not been used yet
     i = 0;
@@ -73,6 +75,8 @@ void verify_map_and_data(t_room *lem, char **twodarray, int *ant_amount)
     total = 0;
     strlen = 0;
     strlenpipe = 0;
+    pipeTrack = 0;
+    roomTrack = 0;
     // i = ft_check_ants_and_skip_comments_on_top(**twodarray, &ant_amount); // not working right now
 
     // looking for ant_amount once found breaks out and returns ant amount  if not found returns error
@@ -128,6 +132,7 @@ void verify_map_and_data(t_room *lem, char **twodarray, int *ant_amount)
                 ft_putstr("Error: Badly Formatted Map X Y not integer \n");
                 exit(1);
             }
+            roomTrack++;
             free2dArray(check_rooms);
         }
         if ((strlenpipe = ft_strlen_space(twodarray[i])) && twodarray[i][strlenpipe] == '\0' && twodarray[i][0] != '#')
@@ -140,9 +145,24 @@ void verify_map_and_data(t_room *lem, char **twodarray, int *ant_amount)
             else{
                 ft_putstr("Error: Invalid Pipe \n");
             }
-            
+            pipeTrack++;
         }
         i++;
         strlen = 0;
+    }
+    if (start < 1 || end < 1)
+    {
+        ft_putstr("Error: Badly Formatted Map no start or end \n");
+        exit(1);
+    }
+    if (pipeTrack < 1)
+    {
+        ft_putstr("Error: Badly Formatted no Pipes \n");
+        exit(1);
+    }
+    if (roomTrack < 1)
+    {
+        ft_putstr("Error: Badly Formatted no rooms \n");
+        exit(1);
     }
 }
