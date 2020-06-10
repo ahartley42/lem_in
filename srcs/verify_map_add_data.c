@@ -83,6 +83,16 @@ void verify_map_and_data(t_room *lem, char **twodarray, int *ant_amount)
     // looking for ant_amount once found breaks out and returns ant amount  if not found returns error
     while (twodarray[i])
     {
+        i++;
+    }
+    if (i < 2)
+    {
+        ft_putstr("Error: wrong \n");
+        exit(1);
+    }
+    i = 0;
+    while (twodarray[i])
+    {
         if (twodarray[i][0] == '#') {
             if (ft_strequ(twodarray[i], "##start") || ft_strequ(twodarray[i], "##end")){
 
