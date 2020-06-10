@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: svan-nie <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: tcoetzee <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/20 10:39:04 by svan-nie          #+#    #+#             */
-/*   Updated: 2019/06/06 09:23:49 by svan-nie         ###   ########.fr       */
+/*   Updated: 2020/06/06 05:54:40 by tcoetzee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 # include <string.h>
 # include <unistd.h>
 # include <stdlib.h>
+
+# define BUFF_SIZE	32
 
 typedef struct		s_list
 {
@@ -87,5 +89,7 @@ void				ft_lstdelone(t_list **alst, void (*del)(void *, size_t));
 void				ft_lstiter(t_list *lst, void (*f)(t_list *elem));
 t_list				*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem));
 t_list				*ft_lstnew(void const *content, size_t content_size);
+
+int					get_next_line(const int fd, char **line);
 
 #endif

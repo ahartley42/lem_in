@@ -10,6 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "../includes/lem_in.h"
+
 int    ft_check_ants(char *base)
 {
     long ant;
