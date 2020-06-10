@@ -30,6 +30,9 @@ int				check_int(char *s);
 int    			ft_check_ants(char *base);
 void    		free2dArray(char **str);
 
+//Read_map
+char			**read_map();
+
 //verify_map
 void verify_map_and_data(t_room *lem, char **twodarray, int *ant_amount);
 
