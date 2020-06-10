@@ -10,7 +10,6 @@
 #                                                                              #
 # **************************************************************************** #
 
-NAME = lem_in.a
 LEM = lem-in
 LIBFT = -L./libft -lft
 LIBFT_A = libft/libft.a
@@ -20,7 +19,7 @@ GCC = gcc
 SRC_PATH = srcs/
 OBJ_PATH = obj/
 
-SRC = check_int.c check_ants.c read_map.c ft_strlen_modified.c verify_map_add_data.c free.c main.c
+SRC = check_int.c free.c main.c read_map.c
 OBJ = $(SRC:%.c=%.o)
 
 OBJ_USAGE = $(addprefix $(OBJ_PATH), $(OBJ))
