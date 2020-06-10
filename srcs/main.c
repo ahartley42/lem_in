@@ -279,6 +279,5 @@ int main(void){
     verify_map_and_data(&lem, map, &ant_amount);
     printf("%d", ant_amount);
     free2dArray(map);
-
     return (0);
 }

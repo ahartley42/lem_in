@@ -6,7 +6,7 @@
 /*   By: tcoetzee <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/06 05:53:36 by tcoetzee          #+#    #+#             */
-/*   Updated: 2020/06/10 03:11:30 by tcoetzee         ###   ########.fr       */
+/*   Updated: 2020/06/10 11:53:44 by tcoetzee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,23 +23,23 @@ static int push_to_line(int ret, int fd, char **s, char **line)
     else
     {
         length = 0;
-        while ((*s)[length] != '\0' && (*s)[length] != '\n') {
+        while (s[fd][length] != '\0' && s[fd][length] != '\n') {
             length++;
         }
 
-        if ((*s)[length] == '\n')
+        if (s[fd][length] == '\n')
         {
-            *line = ft_strsub(*s, 0, length);
-            temp = ft_strdup(&((*s)[length + 1]));
-            free(*s);
-            *s = temp;
-            if ((*s)[0] == '\0')
-                ft_strdel(s);
+            *line = ft_strsub(s[fd], 0, length);
+            temp = ft_strdup(&(s[fd][length + 1]));
+            free(s[fd]);
+            s[fd] = temp;
+            if (s[fd][0] == '\0')
+                ft_strdel(&s[fd]);
         }
         else
         {
-            *line = ft_strdup(*s);
-            ft_strdel(s);
+            *line = ft_strdup(s[fd]);
+            ft_strdel(&s[fd]);
         }
         return (1);
     }
@@ -59,10 +59,13 @@ int get_next_line(const int fd, char **line)
     {
         buf[ret] = '\0';
         if (s[fd] == NULL)
-            s[fd] = ft_strnew(1);
-        temp = ft_strjoin(s[fd], buf);
-        free(s[fd]);
-        s[fd] = temp;
+            s[fd] = ft_strdup(buf);
+        else
+        {
+            temp = ft_strjoin(s[fd], buf);
+            free(s[fd]);
+            s[fd] = temp;
+        }
         if (ft_strchr(buf, '\n'))
             break;
     }
