@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   read_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tcoetzee <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: svan-nie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/06 06:43:14 by tcoetzee          #+#    #+#             */
-/*   Updated: 2020/06/10 02:55:01 by tcoetzee         ###   ########.fr       */
+/*   Updated: 2020/06/10 14:48:51 by svan-nie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/lem_in.h"
-#include <stdio.h>
 
 char **validate_map(char *array)
 {
