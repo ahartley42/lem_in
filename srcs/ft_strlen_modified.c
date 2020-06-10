@@ -124,6 +124,11 @@ void    ft_strlen_2d_array(char **str)
     {
         while (str[i][k])
         {
+            if (str[i][0] == 'L')
+            {
+                ft_putstr("Error: Can't start with 'L' \n");
+                exit(1);
+            }
             if (str[i][k] == '-'){
                 trackHyphen++;
                 break;
