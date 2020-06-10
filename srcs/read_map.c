@@ -42,7 +42,7 @@ char	*fjoin(char *s1, char *s2)
 		tmp = ft_strdup(s2);
 		ans = ft_strjoin(tmp, "\n");
 	}
-	else if (line)
+	else if (s2)
 	{
 		tmp = ft_strjoin(s1, s2);
 		free(s1);
