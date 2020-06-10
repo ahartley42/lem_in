@@ -12,7 +12,6 @@
 /* ************************************************************************** */
 
 #include "../includes/lem_in.h"
-#include <stdio.h>
 
 char **validate_map(char *array)
 {
