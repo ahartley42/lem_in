@@ -45,6 +45,7 @@ char	*fjoin(char *s1, char *s2)
 	else if (line)
 	{
 		tmp = ft_strjoin(s1, s2);
+		free(s1);
 		ans = ft_strjoin(tmp, "\n");
 	}
 	free(tmp);
