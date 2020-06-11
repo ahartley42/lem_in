@@ -24,3 +24,19 @@ void    free2dArray(char **str)
     }
     free(str);
 }
+
+void	froom(t_room **lst)
+{
+	char 	*s;
+	t_room	**p;
+
+	if ((*lst)->next)
+	{
+		froom(&((*lst)->next));
+	}
+	s = (*lst)->name;
+	p = (*lst)->path;
+	free(s);
+	free(p);
+	free(*lst);
+}
