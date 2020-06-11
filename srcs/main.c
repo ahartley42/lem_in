@@ -242,12 +242,40 @@
 //     }
 // }
 
+void	froom(t_room **lst)
+{
+	char 	*s;
+	t_room	**p;
+
+	if ((*lst)->next)
+	{
+//		printf("%d\n", (*lst)->next->xy[0]);
+		froom(&((*lst)->next));
+	}
+	s = (*lst)->name;
+	p = (*lst)->path;
+//	printf("%s\n", s);
+	free(s);
+	free(p);
+	free(*lst);
+}
+
 int main(void){
     t_room *lem;
+    t_room *tmp;
     char    **map;
     int ant_amount;
-    ant_amount = 0;
     lem = initialize_struct();
+    ant_amount = 0;
+    tmp = lem;
+    // lem->name = "hello";
+    // if (lem == NULL)
+    // exit(1);
+    // lem->next = malloc(sizeof(t_room));
+    // lem->next->name = "bye";
+    // printf("name: %s \n", lem->name);
+    // printf("name2: %s \n", lem->next->name);
+
 
     // lem->room_id = 1;
     // lem->next = initialize_struct();
@@ -276,6 +304,7 @@ int main(void){
     // i = 0;
     //useing
     map = read_map();
+
     // printf("what: %s \n", map[0]);
     // printf("what: %s \n", map[1]);
     // printf("what: %s \n", map[2]);
@@ -285,10 +314,24 @@ int main(void){
     //     printf("%s \n", map[i]);
     //     i++;
     // }
+
     ft_strlen_2d_array(map);
-    verify_map_and_data(lem, map, &ant_amount);
-    printf("lem: %d \n", lem->room_id);
+    verify_map_and_data(tmp, map, &ant_amount);
+
+    // printf("lem: %d \n", lem->room_id);
+    // printf("lem: %d \n", lem->next->room_id);
+    // printf("lem: %d \n", lem->room_id);
+    printf("lem string: %s \n", lem->name);
+    printf("lem string: %s \n", lem->next->name);
+    // while (lem->next != NULL)
+    // {
+    //     printf("name: %s", lem->name);
+    // }
+    // printf("lem: %d \n", lem->xy[0]);
+    // printf("lem: %d \n", lem->xy[1]);
+    // printf("lem: %d \n", lem->);
     printf("%d \n", ant_amount);
     free2dArray(map);
+    froom(&lem);
     return (0);
 }
