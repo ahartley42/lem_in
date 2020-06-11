@@ -1,22 +1,22 @@
 #include "../includes/lem_in.h"
 #include <stdio.h> // remove for testing
 
-t_room *initialize_struct()//initialize 
-{
-    t_room *lem;
+// t_room *initialize_struct()//initialize 
+// {
+//     t_room *lem;
 
-    lem = (t_room *)malloc(sizeof(*lem));
-    lem->room_id = 0;
-    lem->ant_id = 0;
-    lem->run = 0;
-    lem->xy[0] = 0;
-    lem->xy[1] = 0;
-    lem->name = NULL;
-    lem->type = 0;
-    lem->path = NULL;
-    lem->next = NULL;
-    return (lem);
-}
+//     lem = (t_room *)malloc(sizeof(*lem));
+//     lem->room_id = 0;
+//     lem->ant_id = 0;
+//     lem->run = 0;
+//     lem->xy[0] = 0;
+//     lem->xy[1] = 0;
+//     lem->name = NULL;
+//     lem->type = 0;
+//     lem->path = NULL;
+//     lem->next = NULL;
+//     return (lem);
+// }
 
 // int    ft_check_ants(char *base)
 // {
