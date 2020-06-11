@@ -1,5 +1,5 @@
 #include "../includes/lem_in.h"
-#include <stdio.h> // remove
+#include <stdio.h> // remove for testing
 
 t_room *initialize_struct()//initialize 
 {
@@ -244,17 +244,17 @@ t_room *initialize_struct()//initialize
 
 int main(void){
     t_room *lem;
-    // char    **map;
+    char    **map;
     int ant_amount;
     ant_amount = 0;
     lem = initialize_struct();
 
-    lem->room_id = 1;
-    lem->next = (t_room*)malloc(sizeof(*lem));
-    lem->next->room_id = 2;
-    printf("lem: %d \n", lem->room_id);
-    printf("lem: %d \n", lem->next->room_id);
-    // lem->next = malloc(sizeof(t_room));
+    // lem->room_id = 1;
+    // lem->next = initialize_struct();
+    // lem->next->room_id = 2;
+    // printf("lem: %d \n", lem->room_id);
+    // printf("lem: %d \n", lem->next->room_id);
+
         //useing
     // char    str[] = "#john\n5\n##end\nend 1 0\n##start\nstart 2 0\nLab 3 0\nba 4 0\nstart-a\na-end"; // test for caps L
     // char    str[] = "#john\n5\n##end\nend 1 0\n##start\nstart 2 0\nc-ab 3 0\nba 4 0\nstart-a\na-end"; // test for - in name
@@ -275,7 +275,7 @@ int main(void){
     // int i;
     // i = 0;
     //useing
-    // map = read_map();
+    map = read_map();
     // printf("what: %s \n", map[0]);
     // printf("what: %s \n", map[1]);
     // printf("what: %s \n", map[2]);
@@ -285,9 +285,10 @@ int main(void){
     //     printf("%s \n", map[i]);
     //     i++;
     // }
-    // ft_strlen_2d_array(map);
-    // verify_map_and_data(&lem, map, &ant_amount);
-    printf("%d", ant_amount);
-    // free2dArray(map);
+    ft_strlen_2d_array(map);
+    verify_map_and_data(lem, map, &ant_amount);
+    printf("lem: %d \n", lem->room_id);
+    printf("%d \n", ant_amount);
+    free2dArray(map);
     return (0);
 }
