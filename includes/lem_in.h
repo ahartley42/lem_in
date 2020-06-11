@@ -27,7 +27,7 @@ int    			ft_check_ants(char *base);
 
 //Freeing 2dArray and the whole linkList
 void    		free2dArray(char **str);
-void			froom(t_room **lst)
+void			froom(t_room **lst);
 
 //Read_map
 char			**read_map();
