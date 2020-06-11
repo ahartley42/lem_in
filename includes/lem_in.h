@@ -18,6 +18,9 @@ typedef struct		s_room
 	struct s_room	*next; //	node to next
 }					t_room;
 
+//initialize_struct to 0 and NULL
+t_room 			*initialize_struct();
+
 int				check_int(char *s);
 int    			ft_check_ants(char *base);
 void    		free2dArray(char **str);
