@@ -30,7 +30,7 @@ int    ft_check_start_end(char *twodarray)
 }
 
 // keeping track if two starts or ends
-void ft_keep_track_start_end(int total,int *start,int *end)
+void ft_keep_track_start_end(int total,int *start,int *end,int *isStart,int *isEnd)
 {
     int st;
     int ed;
@@ -40,6 +40,7 @@ void ft_keep_track_start_end(int total,int *start,int *end)
     {
         st++;
         *start = st;
+        *isStart = st;
         if (st == 2)
         {
             ft_putstr("Error: two starts error Program Exit\n");
@@ -50,6 +51,7 @@ void ft_keep_track_start_end(int total,int *start,int *end)
     {
         ed++;
         *end = ed;
+        *isEnd = ed;
         if (ed == 2)
         {
             ft_putstr("Error: two ends error Program Exit\n");
@@ -58,29 +60,23 @@ void ft_keep_track_start_end(int total,int *start,int *end)
     }
 }
 
-void    ft_add_rooms(t_room *lem, char **room_data)
-{
-    int i;
+// void    ft_add_rooms(t_room *lem, char **room_data)
+// {
+//     int i;
 
-    i = 0;
-    // printf("array[0]: %s \n", array[0]);
-    // printf("array[1]: %s \n", array[1]);
-    // printf("array[2]: %s \n", array[2]);
-    lem->room_id = i;
-    i++;
-    // printf("this is the string: %s \n", room_data[0]);
-    lem->name = ft_strdup(room_data[0]);
-    lem->xy[0] = ft_atoi(room_data[1]);
-    lem->xy[1] = ft_atoi(room_data[2]);
-    lem->ant_id = 0;
-    lem->run = 0;
-    lem->type = 0;
-    lem->path = NULL;
-    lem->next = NULL;
-    lem->next = initialize_struct();
-    // lem->next->next = NULL;
-    // lem->next = NULL;
-}
+//     i = 0;
+//     lem->room_id = i;
+//     i++;
+//     lem->name = ft_strdup(room_data[0]);
+//     lem->xy[0] = ft_atoi(room_data[1]);
+//     lem->xy[1] = ft_atoi(room_data[2]);
+//     lem->ant_id = 0;
+//     lem->run = 0;
+//     lem->type = 0;
+//     lem->path = NULL;
+//     lem->next = NULL;
+//     lem->next = initialize_struct();
+// }
 
 void verify_map_and_data(t_room *lem_tmp, char **twodarray, int *ant_amount)
 {
@@ -93,6 +89,8 @@ void verify_map_and_data(t_room *lem_tmp, char **twodarray, int *ant_amount)
     int     strlenpipe;
     int     pipeTrack;
     int     roomTrack;
+    int     isStart;
+    int     isEnd;
 
     // lem->room_id = 1; // remove because lem not been used yet
     // lem->next = initialize_struct();
@@ -107,6 +105,8 @@ void verify_map_and_data(t_room *lem_tmp, char **twodarray, int *ant_amount)
     strlenpipe = 0;
     pipeTrack = 0;
     roomTrack = 0;
+    isStart = 0;
+    isEnd = 0;
     // i = ft_check_ants_and_skip_comments_on_top(**twodarray, &ant_amount); // not working right now
 
     // looking for ant_amount once found breaks out and returns ant amount  if not found returns error
@@ -156,8 +156,18 @@ void verify_map_and_data(t_room *lem_tmp, char **twodarray, int *ant_amount)
         if (twodarray[i][0] == '#' && twodarray[i][1] == '#') // checks for start and end
         {
             total = ft_check_start_end(twodarray[i]);
-            ft_keep_track_start_end(total, &start, &end);
+            ft_keep_track_start_end(total, &start, &end, &isStart, &isEnd);
             // ft_add_Command_rooms(twodarray[i + 1], total);
+            if (isStart == 1)
+            {
+                isStart++;
+                i++;
+            }
+            if (isEnd == 1)
+            {
+                isEnd++;
+                i++;
+            }
         }
         if ((strlen = ft_strlen_space(twodarray[i])) && twodarray[i][strlen] == ' ' && twodarray[i][strlen + 1]){ // checks for room valid
             char    **check_rooms;
@@ -166,9 +176,21 @@ void verify_map_and_data(t_room *lem_tmp, char **twodarray, int *ant_amount)
             ft_strlen_space_error(check_rooms[0]); // checks for name starting with L and - inside the name
             if (check_int(check_rooms[1]) == 1 && check_int(check_rooms[2]) == 1)
             {
-                ft_putstr("Correct room \n");
-                ft_add_rooms(lem_tmp, check_rooms);
-                lem_tmp = lem_tmp->next;
+                if (isStart == 1){
+                    ft_putstr("Correct room \n");
+                    ft_add_start_room(lem_tmp, check_rooms);
+                    lem_tmp = lem_tmp->next;
+                }else if (isEnd == 1)
+                {
+                    ft_putstr("Correct room \n");
+                    ft_add_end_room(lem_tmp, check_rooms);
+                    lem_tmp = lem_tmp->next;
+                }else
+                {
+                    ft_putstr("Correct room \n");
+                    ft_add_rooms(lem_tmp, check_rooms);
+                    lem_tmp = lem_tmp->next;
+                }
             }else
             {
                 ft_putstr("Error: Badly Formatted Map X Y not integer \n");
