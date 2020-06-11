@@ -6,7 +6,7 @@
 /*   By: svan-nie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/06 06:43:14 by tcoetzee          #+#    #+#             */
-/*   Updated: 2020/06/10 17:00:43 by svan-nie         ###   ########.fr       */
+/*   Updated: 2020/06/11 13:30:01 by svan-nie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ char **read_map()
 	while ((ret = get_next_line(0, &line) == 1))
 	{
 			temp = fjoin(temp, line);
+			free(line);
 	}
 	return (validate_map(temp));
 }
