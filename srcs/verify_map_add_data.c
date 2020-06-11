@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "../includes/lem_in.h"
+#include <stdio.h> // remove
 
 int    ft_check_start_end(char *twodarray)
 {
@@ -82,6 +83,16 @@ void verify_map_and_data(t_room *lem, char **twodarray, int *ant_amount)
     // looking for ant_amount once found breaks out and returns ant amount  if not found returns error
     while (twodarray[i])
     {
+        i++;
+    }
+    if (i < 2)
+    {
+        ft_putstr("Error: wrong \n");
+        exit(1);
+    }
+    i = 0;
+    while (twodarray[i])
+    {
         if (twodarray[i][0] == '#') {
             if (ft_strequ(twodarray[i], "##start") || ft_strequ(twodarray[i], "##end")){
 
@@ -105,7 +116,7 @@ void verify_map_and_data(t_room *lem, char **twodarray, int *ant_amount)
     i++; // incrementing past the ant_amount
     while (twodarray[i])
     {
-        if (twodarray[i][0] == '#' && !(ft_strequ(twodarray[i], "##start") || ft_strequ(twodarray[i], "##end"))){
+        if (twodarray[i][0] == '#' && twodarray[i][1] != '#'){
         i++;
         }
         if (check_int(twodarray[i]) == 1)
@@ -126,7 +137,7 @@ void verify_map_and_data(t_room *lem, char **twodarray, int *ant_amount)
             ft_strlen_space_error(check_rooms[0]); // checks for name starting with L and - inside the name
             if (check_int(check_rooms[1]) == 1 && check_int(check_rooms[2]) == 1)
             {
-                ft_putstr("Correct \n");
+                ft_putstr("Correct room \n");
             }else
             {
                 ft_putstr("Error: Badly Formatted Map X Y not integer \n");
@@ -138,6 +149,7 @@ void verify_map_and_data(t_room *lem, char **twodarray, int *ant_amount)
         if ((strlenpipe = ft_strlen_space(twodarray[i])) && twodarray[i][strlenpipe] == '\0' && twodarray[i][0] != '#')
         {
             strlenpipe = 0;
+            printf("pipe: %s \n",twodarray[i]);
             if (( strlenpipe = ft_strlen_pipes(twodarray[i])) == 1)
             {
                 ft_putstr("Correct pipe \n");

@@ -33,4 +33,5 @@ int    			ft_strlen_pipes(char *str);
 void 			ft_strlen_space_count(char *str);
 int 			ft_strlen_space_error(char *str);
 int 			ft_strlen_space(char *str);
+void    		ft_strlen_2d_array(char **str);
 #endif

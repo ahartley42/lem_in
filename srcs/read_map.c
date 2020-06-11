@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   read_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: svan-nie <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: tcoetzee <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/06 06:43:14 by tcoetzee          #+#    #+#             */
-/*   Updated: 2020/06/10 14:48:51 by svan-nie         ###   ########.fr       */
+/*   Updated: 2020/06/10 12:11:00 by tcoetzee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ char **validate_map(char *array)
 		ft_putendl("ERROR");
 		exit(1);
 	}
+    free(array);
 	return (dblarray);
 }
 
@@ -36,6 +37,7 @@ char	*fjoin(char *s1, char *s2)
 	char	*ans;
 	char	*tmp;
 
+	tmp = NULL;
 	ans = NULL;
 	if (!s1)
 	{
@@ -45,6 +47,10 @@ char	*fjoin(char *s1, char *s2)
 	else if (line)
 	{
 		tmp = ft_strjoin(s1, s2);
+	else if (s2)
+	{
+		tmp = ft_strjoin(s1, s2);
+        free(s1);
 		ans = ft_strjoin(tmp, "\n");
 	}
 	free(tmp);
@@ -83,6 +89,18 @@ char **read_map()
 			temp = fjoin(temp, line);
 		}
 
+	}
+	return (validate_map(temp));
+}
+	int     ret;
+	char    *line;
+	char    *temp;
+
+	temp = NULL;
+	while ((ret = get_next_line(0, &line) == 1))
+	{
+			temp = fjoin(temp, line);
+			free(line);
 	}
 	return (validate_map(temp));
 }

@@ -191,20 +191,70 @@ static void initialize_struct(t_room *lem)//initialize
 //     }
 // }
 
+// void    ft_strlen_2d_array(char **str)
+// {
+//     int i;
+//     int k;
+//     int trackHyphen;
+
+//     i = 0;
+//     k = 0;
+//     trackHyphen = 0;
+//     while (str[i])
+//     {
+//         while (str[i][k])
+//         {
+//             if (str[i][k] == '-'){
+//                 trackHyphen++;
+//                 break;
+//             }
+//             k++;
+//         }
+//         if (trackHyphen == 1)
+//         break;
+//         k = 0;
+//         i++;
+//     }
+//     trackHyphen = 0;
+//     while (str[i])
+//     {
+//         while (str[i][k])
+//         {
+//             if (str[i][k] == '-')
+//             trackHyphen++;
+//             if (str[i][0] == '#' && (str[i][1] != '#' || str[i][1] == '\0'))
+//             trackHyphen++;
+//             k++;
+//         }
+//         if (trackHyphen == 0)
+//         {
+//             ft_putstr("Error: Badly Formatted Map with pipes \n");
+//             exit(1);
+//         }else
+//         trackHyphen = 0;
+//         printf("a \n");
+//         k = 0;
+//         i++;
+//     }
+// }
+
 int main(void){
     t_room lem;
-
+    char    **map;
+    int ant_amount;
+    ant_amount = 0;
     initialize_struct(&lem);
 
         //useing
     // char    str[] = "#john\n5\n##end\nend 1 0\n##start\nstart 2 0\nLab 3 0\nba 4 0\nstart-a\na-end"; // test for caps L
     // char    str[] = "#john\n5\n##end\nend 1 0\n##start\nstart 2 0\nc-ab 3 0\nba 4 0\nstart-a\na-end"; // test for - in name
-    char    str[] = "#john\n5\n##end\nend 1 0\n#wee\n##start\nstart 2 0\ncab 3 0\nba 4 0\nstart-a\na-end";
-    char **array;
-    int ant_amount;
+    // char    str[] = "#john\n5\n#wee\n##start\nstart 2 0\n##end\nend 1 0\ncab 3 0\nba 4 0\nstart-a\na-end"; // checking to see if no start or
+    // char    str[] = "#wee";
+    // char **array;
+    // int ant_amount;
 
-    ant_amount = 0;
-    array = ft_strsplit(str, '\n');
+    // ant_amount = 0;
+    // array = ft_strsplit(str, '\n');
     
     // printf("%s\n", array[1]);
     // printf("%s\n", &array[1][0]);
@@ -212,11 +262,22 @@ int main(void){
     // printf("%s\n", &array[1][2]);
     // printf("%s\n", &array[1][3]);
     // printf("%s\n", &array[1][4]);
-
+    // int i;
+    // i = 0;
     //useing
-    verify_map_and_data(&lem, array, &ant_amount);
+    map = read_map();
+    // printf("what: %s \n", map[0]);
+    // printf("what: %s \n", map[1]);
+    // printf("what: %s \n", map[2]);
+    // printf("what: %s \n", map[3]);
+    // while (map[i])
+    // {
+    //     printf("%s \n", map[i]);
+    //     i++;
+    // }
+    ft_strlen_2d_array(map);
+    verify_map_and_data(&lem, map, &ant_amount);
     printf("%d", ant_amount);
-    free2dArray(array);
-
+    free2dArray(map);
     return (0);
 }
