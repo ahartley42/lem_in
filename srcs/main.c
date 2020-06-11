@@ -242,23 +242,23 @@
 //     }
 // }
 
-void	froom(t_room **lst)
-{
-	char 	*s;
-	t_room	**p;
+// void	froom(t_room **lst)
+// {
+// 	char 	*s;
+// 	t_room	**p;
 
-	if ((*lst)->next)
-	{
-//		printf("%d\n", (*lst)->next->xy[0]);
-		froom(&((*lst)->next));
-	}
-	s = (*lst)->name;
-	p = (*lst)->path;
-//	printf("%s\n", s);
-	free(s);
-	free(p);
-	free(*lst);
-}
+// 	if ((*lst)->next)
+// 	{
+// //		printf("%d\n", (*lst)->next->xy[0]);
+// 		froom(&((*lst)->next));
+// 	}
+// 	s = (*lst)->name;
+// 	p = (*lst)->path;
+// //	printf("%s\n", s);
+// 	free(s);
+// 	free(p);
+// 	free(*lst);
+// }
 
 int main(void){
     t_room *lem;
@@ -323,13 +323,19 @@ int main(void){
     // printf("lem: %d \n", lem->room_id);
     printf("lem string: %s \n", lem->name);
     printf("lem string: %s \n", lem->next->name);
-    // while (lem->next != NULL)
+    // while (lem->next)
     // {
-    //     printf("name: %s", lem->name);
+    //     printf("name: %s \n", lem->next->name);
     // }
     // printf("lem: %d \n", lem->xy[0]);
     // printf("lem: %d \n", lem->xy[1]);
     // printf("lem: %d \n", lem->);
+    tmp = lem;
+    	while((tmp) != NULL)
+	{
+		printf("name: %s \n", (tmp)->name);
+        tmp = tmp->next;
+	}
     printf("%d \n", ant_amount);
     free2dArray(map);
     froom(&lem);
