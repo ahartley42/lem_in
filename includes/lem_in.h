@@ -21,6 +21,12 @@ typedef struct		s_room
 // initialize_struct setting it to NULL and 0
 t_room *initialize_struct();
 
+
+//adding Rooms
+void    ft_add_rooms(t_room *lem, char **room_data);
+void    ft_add_start_room(t_room *lem, char **room_data);
+void    ft_add_end_room(t_room *lem, char **room_data);
+
 //checking to see if integer
 int				check_int(char *s);
 int    			ft_check_ants(char *base);
