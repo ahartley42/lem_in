@@ -97,6 +97,11 @@ int    ft_strlen_pipes(char *str)
         ft_putstr("Error: cannot have caps L at the start of the name \n");
         exit(1);
     }
+    if (str[i] == '-')
+    {
+        ft_putstr("Error: Badly Formatted pipes \n");
+        exit(1); 
+    }
     while (str[i] != '\0')
     {
         if (str[i] == '-')
