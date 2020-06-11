@@ -58,7 +58,31 @@ void ft_keep_track_start_end(int total,int *start,int *end)
     }
 }
 
-void verify_map_and_data(t_room *lem, char **twodarray, int *ant_amount)
+void    ft_add_rooms(t_room *lem, char **room_data)
+{
+    int i;
+
+    i = 0;
+    // printf("array[0]: %s \n", array[0]);
+    // printf("array[1]: %s \n", array[1]);
+    // printf("array[2]: %s \n", array[2]);
+    lem->room_id = i;
+    i++;
+    // printf("this is the string: %s \n", room_data[0]);
+    lem->name = ft_strdup(room_data[0]);
+    lem->xy[0] = ft_atoi(room_data[1]);
+    lem->xy[1] = ft_atoi(room_data[2]);
+    lem->ant_id = 0;
+    lem->run = 0;
+    lem->type = 0;
+    lem->path = NULL;
+    lem->next = NULL;
+    lem->next = initialize_struct();
+    // lem->next->next = NULL;
+    // lem->next = NULL;
+}
+
+void verify_map_and_data(t_room *lem_tmp, char **twodarray, int *ant_amount)
 {
     // char    nameTrack[] = "";
     int     i;
@@ -70,7 +94,9 @@ void verify_map_and_data(t_room *lem, char **twodarray, int *ant_amount)
     int     pipeTrack;
     int     roomTrack;
 
-    lem->room_id = 1; // remove because lem not been used yet
+    // lem->room_id = 1; // remove because lem not been used yet
+    // lem->next = initialize_struct();
+    // lem->next->room_id = 2;
     // nameTrack = "wee";
     // printf("%s", nameTrack);
     i = 0;
@@ -138,11 +164,11 @@ void verify_map_and_data(t_room *lem, char **twodarray, int *ant_amount)
             ft_strlen_space_count(twodarray[i]); // counting the amount of spaces more or less than 2 displays error
             check_rooms = ft_strsplit(twodarray[i], ' ');
             ft_strlen_space_error(check_rooms[0]); // checks for name starting with L and - inside the name
-            printf("what inside: %s", check_rooms[0]);
             if (check_int(check_rooms[1]) == 1 && check_int(check_rooms[2]) == 1)
             {
                 ft_putstr("Correct room \n");
-                printf("whats inside: %s \n", check_rooms[0]);
+                ft_add_rooms(lem_tmp, check_rooms);
+                lem_tmp = lem_tmp->next;
             }else
             {
                 ft_putstr("Error: Badly Formatted Map X Y not integer \n");
