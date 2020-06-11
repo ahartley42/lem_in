@@ -18,12 +18,16 @@ typedef struct		s_room
 	struct s_room	*next; //	node to next
 }					t_room;
 
-//initialize_struct to 0 and NULL
-t_room 			*initialize_struct();
+// initialize_struct setting it to NULL and 0
+t_room *initialize_struct();
 
+//checking to see if integer
 int				check_int(char *s);
 int    			ft_check_ants(char *base);
+
+//Freeing 2dArray and the whole linkList
 void    		free2dArray(char **str);
+void			froom(t_room **lst)
 
 //Read_map
 char			**read_map();
