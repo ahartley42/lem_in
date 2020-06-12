@@ -78,6 +78,25 @@ void ft_keep_track_start_end(int total,int *start,int *end,int *isStart,int *isE
 //     lem->next = initialize_struct();
 // }
 
+void ft_check_for_error(int *start, int *end, int *pipeTrack, int *roomTrack)
+{
+        if (*start < 1 || *end < 1)
+    {
+        ft_putstr("Error: Badly Formatted Map no start or end \n");
+        exit(1);
+    }
+    if (*pipeTrack < 1)
+    {
+        ft_putstr("Error: Badly Formatted no Pipes \n");
+        exit(1);
+    }
+    if (*roomTrack < 1)
+    {
+        ft_putstr("Error: Badly Formatted no rooms \n");
+        exit(1);
+    }
+}
+
 void verify_map_and_data(t_room *lem_tmp, char **twodarray, int *ant_amount)
 {
     // char    nameTrack[] = "";
@@ -162,11 +181,25 @@ void verify_map_and_data(t_room *lem_tmp, char **twodarray, int *ant_amount)
             {
                 isStart++;
                 i++;
+                if ((strlen = ft_strlen_space(twodarray[i])) && twodarray[i][strlen] == ' ' && twodarray[i][strlen + 1])
+                {
+                }
+                else{
+                ft_putendl("Error: starting room invalid");
+                exit(1);
+                }
             }
             if (isEnd == 1)
             {
                 isEnd++;
                 i++;
+                if ((strlen = ft_strlen_space(twodarray[i])) && twodarray[i][strlen] == ' ' && twodarray[i][strlen + 1])
+                {
+                }
+                else{
+                ft_putendl("Error: ending room invalid");
+                exit(1);
+                }
             }
         }
         if ((strlen = ft_strlen_space(twodarray[i])) && twodarray[i][strlen] == ' ' && twodarray[i][strlen + 1]){ // checks for room valid
@@ -215,19 +248,5 @@ void verify_map_and_data(t_room *lem_tmp, char **twodarray, int *ant_amount)
         i++;
         strlen = 0;
     }
-    if (start < 1 || end < 1)
-    {
-        ft_putstr("Error: Badly Formatted Map no start or end \n");
-        exit(1);
-    }
-    if (pipeTrack < 1)
-    {
-        ft_putstr("Error: Badly Formatted no Pipes \n");
-        exit(1);
-    }
-    if (roomTrack < 1)
-    {
-        ft_putstr("Error: Badly Formatted no rooms \n");
-        exit(1);
-    }
+    ft_check_for_error(&start, &end, &pipeTrack, &roomTrack); //saving lines
 }
