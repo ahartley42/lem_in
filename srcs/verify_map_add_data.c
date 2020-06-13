@@ -248,5 +248,5 @@ void verify_map_and_data(t_room *lem_tmp, char **twodarray, int *ant_amount)
         i++;
         strlen = 0;
     }
-    ft_check_for_error(&start, &end, &pipeTrack, &roomTrack); //saving lines
+    ft_check_for_error(&start, &end, &pipeTrack, &roomTrack); //saving lines checks to see if end and start < 1 or if pipeTrack and roomTrack is < 1
 }
