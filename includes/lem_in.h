@@ -23,9 +23,9 @@ t_room *initialize_struct();
 
 
 //adding Rooms
-void    ft_add_rooms(t_room *lem, char **room_data);
-void    ft_add_start_room(t_room *lem, char **room_data);
-void    ft_add_end_room(t_room *lem, char **room_data);
+void    ft_add_rooms(t_room *lem, char **room_data, int *j);
+void    ft_add_start_room(t_room *lem, char **room_data, int *j);
+void    ft_add_end_room(t_room *lem, char **room_data, int *j);
 
 //checking to see if integer
 int				check_int(char *s);
