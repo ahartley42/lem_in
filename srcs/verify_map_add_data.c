@@ -101,6 +101,7 @@ void verify_map_and_data(t_room *lem_tmp, char **twodarray, int *ant_amount)
 {
     // char    nameTrack[] = "";
     int     i;
+    int     j;
     int     start;  // will be removed for struct
     int     end;    // will be removed for struct
     int     total;
@@ -117,6 +118,7 @@ void verify_map_and_data(t_room *lem_tmp, char **twodarray, int *ant_amount)
     // nameTrack = "wee";
     // printf("%s", nameTrack);
     i = 0;
+    j = 0;
     start = 0;
     end = 0;
     total = 0;
@@ -211,17 +213,17 @@ void verify_map_and_data(t_room *lem_tmp, char **twodarray, int *ant_amount)
             {
                 if (isStart == 1){
                     ft_putstr("Correct room \n");
-                    ft_add_start_room(lem_tmp, check_rooms);
+                    ft_add_start_room(lem_tmp, check_rooms, &j);
                     lem_tmp = lem_tmp->next;
                 }else if (isEnd == 1)
                 {
                     ft_putstr("Correct room \n");
-                    ft_add_end_room(lem_tmp, check_rooms);
+                    ft_add_end_room(lem_tmp, check_rooms, &j);
                     lem_tmp = lem_tmp->next;
                 }else
                 {
                     ft_putstr("Correct room \n");
-                    ft_add_rooms(lem_tmp, check_rooms);
+                    ft_add_rooms(lem_tmp, check_rooms, &j);
                     lem_tmp = lem_tmp->next;
                 }
             }else
