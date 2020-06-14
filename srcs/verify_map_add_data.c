@@ -111,7 +111,9 @@ void verify_map_and_data(t_room *lem_tmp, char **twodarray, int *ant_amount)
     int     roomTrack;
     int     isStart;
     int     isEnd;
+    t_room  *head;
 
+    head = lem_tmp;
     // lem->room_id = 1; // remove because lem not been used yet
     // lem->next = initialize_struct();
     // lem->next->room_id = 2;
@@ -241,6 +243,7 @@ void verify_map_and_data(t_room *lem_tmp, char **twodarray, int *ant_amount)
             if (( strlenpipe = ft_strlen_pipes(twodarray[i])) == 1)
             {
                 ft_putstr("Correct pipe \n");
+                add_pipes(head, twodarray[i]);
             }
             else{
                 ft_putstr("Error: Invalid Pipe \n");
