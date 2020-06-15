@@ -19,32 +19,37 @@ typedef struct		s_room
 }					t_room;
 
 // initialize_struct setting it to NULL and 0
-t_room *initialize_struct();
+					t_room *initialize_struct();
 
 
 //adding Rooms
-void    ft_add_rooms(t_room *lem, char **room_data, int *j);
-void    ft_add_start_room(t_room *lem, char **room_data, int *j);
-void    ft_add_end_room(t_room *lem, char **room_data, int *j);
+void    			ft_add_rooms(t_room *lem, char **room_data, int *j);
+void    			ft_add_start_room(t_room *lem, char **room_data, int *j);
+void    			ft_add_end_room(t_room *lem, char **room_data, int *j);
 
 //checking to see if integer
-int				check_int(char *s);
-int    			ft_check_ants(char *base);
+int					check_int(char *s);
+int    				ft_check_ants(char *base);
 
 //Freeing 2dArray and the whole linkList
-void    		free2dArray(char **str);
-void			froom(t_room **lst);
+void    			free2dArray(char **str);
+void				froom(t_room **lst);
 
 //Read_map
-char			**read_map();
+char				**read_map();
 
 //verify_map
-void verify_map_and_data(t_room *lem, char **twodarray, int *ant_amount);
+void				verify_map_and_data(t_room *lem, char **twodarray, int *ant_amount);
 
 //strlen_modified
-int    			ft_strlen_pipes(char *str);
-void 			ft_strlen_space_count(char *str);
-int 			ft_strlen_space_error(char *str);
-int 			ft_strlen_space(char *str);
-void    		ft_strlen_2d_array(char **str);
+int    				ft_strlen_pipes(char *str);
+void 				ft_strlen_space_count(char *str);
+int 				ft_strlen_space_error(char *str);
+int 				ft_strlen_space(char *str);
+void    			ft_strlen_2d_array(char **str);
+
+//algorithm
+void				rpush(t_room **room, t_room *add);
+void				rpop(t_room **room, int i);
+
 #endif
