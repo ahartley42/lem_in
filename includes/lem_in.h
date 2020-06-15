@@ -21,7 +21,6 @@ typedef struct		s_room
 // initialize_struct setting it to NULL and 0
 					t_room *initialize_struct();
 
-
 //adding Rooms
 void    			ft_add_rooms(t_room *lem, char **room_data, int *j);
 void    			ft_add_start_room(t_room *lem, char **room_data, int *j);
@@ -40,7 +39,11 @@ void				free_two_strings(char *s1, char *s2);
 char				**read_map();
 
 //verify_map
+<<<<<<< HEAD
 void				verify_map_and_data(t_room *lem, char **twodarray, int *ant_amount);
+=======
+void verify_map_and_data(t_room *lem_tmp, t_room *lem_head, char **twodarray, int *ant_amount);
+>>>>>>> shane
 
 //strlen_modified
 int    				ft_strlen_pipes(char *str);
