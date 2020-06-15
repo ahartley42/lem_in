@@ -1,5 +1,4 @@
 #include "../includes/lem_in.h"
-#include "../libft/libft.h"
 #include <stdio.h>
 
 /*
@@ -15,20 +14,6 @@
 **	struct s_room		*next;
 ** }					t_room;
 */
-
-t_room	**lay(t_room ***path, int size)
-{
-	int		i;
-
-	i = 0;
-	*path = (t_room **)malloc(sizeof(t_room **) * size + 1);
-	while (i < 0)
-	{
-		*path[i] = (t_room *)malloc(sizeof(t_room *));
-		i++;
-	}
-	*path[i] = NULL;
-}
 
 t_room	*add(char *name, int *xy, int id, unsigned char type)
 {
@@ -63,27 +48,6 @@ void	froom(t_room **lst)
 	free(*lst);
 }
 
-/*
-t_room	*finder(t_room *base, char *name)
-{
-	while (!ft_strequ(base->name, name))
-		base = base->next;
-	return (base);
-}
-
-int	retin(char **s, char *name)
-{
-	int	i;
-
-	i = 0;
-	while (s[i] && !ft_strequ(s[i], name))
-		i++;
-	if (!s[i])
-		return (-1);
-	return (i);
-}
-*/
-
 // main for testing struct leaks
 int main(void)
 {
@@ -93,26 +57,29 @@ int main(void)
 	char	**s;
 
 	xy[0] = 0;
-	xy[1] = 0;
+	xy[1] = 1;
 	s = ft_strsplit("a0b0c0d0e", '0');
-	now = add(s[xy[1]], xy, 1, 4);
-	now->path = lay(&(now->path), 1);
-	xy[0] += 1;
-	xy[1] += 1;
+	now = add(s[xy[0]], xy, 1, 4);
 	tmp = now;
-	while (xy[0] < 5)
+	while (xy[0] < 4)
 	{
+		xy[0] += 1;
+		xy[1] += 3;
 		tmp->next = add(s[xy[0]], xy, 1, 4);
 		tmp = tmp->next;
-		tmp->path = lay(&(tmp->path), 1);
-		if (xy[1] == 2)
-		{
-			tmp->path[1] = now;
-//			printf("%s of HERE; %s of PATH; %s of PATH NEXT\n", tmp->name, tmp->path[1]->name, tmp->path[1]->next->name);
-		}
-		xy[0] += 1;
-		xy[1] += 1;
 	}
+	rpush(&now, now->next);
+	rpush(&now, now->next->next);
+	rpush(&now, now->next->next->next);
+	printf("-----\nROOM1\n-----\n\nname: %s\n\n", now->name);
+	printf("-----\nROOM2\n-----\n\nname: %s\n\n", now->path[0]->name);
+	printf("-----\nROOM3\n-----\n\nname: %s\n\n", now->path[1]->name);
+	printf("-----\nROOM4\n-----\n\nname: %s\n\n", now->path[2]->name);
+	printf("\e[5;33mDELETING PATH 1\e[0m\n\n");
+	rpop(&now, 0);
+	printf("-----\nROOM1\n-----\n\nname: %s\n\n", now->name);
+	printf("-----\nROOM3\n-----\n\nname: %s\n\n", now->path[0]->name);
+	printf("-----\nROOM4\n-----\n\nname: %s\n\n", now->path[1]->name);
 	free2dArray(s);
 	froom(&now);
 	return (0);
