@@ -260,11 +260,37 @@
 // 	free(*lst);
 // }
 
+void	rpush(t_room **room, t_room *add)
+{
+	int	i;
+	int j;
+	t_room **new;
+
+	i = 0;
+	j = 0;
+	if ((*room)->path)
+	{
+		while ((*room)->path[i])
+			i++;
+	}
+	new = (t_room **)malloc(sizeof(t_room **) * (i + 2));
+	while (j < i)
+	{
+		new[j] = (*room)->path[j];
+		j++;
+	}
+	new[j] = add;
+	new[j + 1] = NULL;
+	free((*room)->path);
+	(*room)->path = new;
+}
+
 int main(void){
     t_room *lem;
     t_room *tmp;
-    char    **map;
+    // char    **map;
     int ant_amount;
+
     lem = initialize_struct();
     ant_amount = 0;
     tmp = lem;
@@ -286,13 +312,13 @@ int main(void){
         //useing
     // char    str[] = "#john\n5\n##end\nend 1 0\n##start\nstart 2 0\nLab 3 0\nba 4 0\nstart-a\na-end"; // test for caps L
     // char    str[] = "#john\n5\n##end\nend 1 0\n##start\nstart 2 0\nc-ab 3 0\nba 4 0\nstart-a\na-end"; // test for - in name
-    // char    str[] = "#john\n5\n#wee\n##start\nstart 2 0\n##end\nend 1 0\ncab 3 0\nba 4 0\nstart-a\na-end"; // checking to see if no start or
+    char    str[] = "#john\n5\n#wee\n##start\nstart 2 0\n##end\nend 1 0\na 3 0\nstart-a\na-end"; // checking to see if no start or
     // char    str[] = "#wee";
-    // char **array;
+    char **array;
     // int ant_amount;
 
     // ant_amount = 0;
-    // array = ft_strsplit(str, '\n');
+    array = ft_strsplit(str, '\n');
     
     // printf("%s\n", array[1]);
     // printf("%s\n", &array[1][0]);
@@ -303,7 +329,7 @@ int main(void){
     // int i;
     // i = 0;
     //useing
-    map = read_map();
+    // map = read_map();
 
     // printf("what: %s \n", map[0]);
     // printf("what: %s \n", map[1]);
@@ -315,14 +341,14 @@ int main(void){
     //     i++;
     // }
 
-    ft_strlen_2d_array(map);
-    verify_map_and_data(tmp, map, &ant_amount);
+    // ft_strlen_2d_array(map);
+    verify_map_and_data(tmp, lem, array, &ant_amount);
 
     // printf("lem: %d \n", lem->room_id);
     // printf("lem: %d \n", lem->next->room_id);
     // printf("lem: %d \n", lem->room_id);
-    printf("lem string: %s \n", lem->name);
-    printf("lem string: %s \n", lem->next->name);
+    // printf("lem string: %s \n", lem->name);
+    // printf("lem string: %s \n", lem->next->name);
     // while (lem->next)
     // {
     //     printf("name: %s \n", lem->next->name);
@@ -331,13 +357,27 @@ int main(void){
     // printf("lem: %d \n", lem->xy[1]);
     // printf("lem: %d \n", lem->);
     tmp = lem;
-    	while((tmp) != NULL)
-	{
-		printf("name: %s \n", (tmp)->name);
-        tmp = tmp->next;
-	}
+    tmp = tmp->next;
+    tmp = tmp->next;
+    // 	while((tmp) != NULL)
+	// {
+    //     // printf("room_id: %d \n", (tmp)->room_id);
+	// 	// printf("name: %s \n", (tmp)->name);
+    //     rpush(&lem, tmp);
+    //     tmp = tmp->next;
+	// }
+
+    // printf("lem struct: %s \n", lem->name);
+    // tmp = tmp->next;
+    // printf("lem struct: %s \n", tmp->name);
+    // rpush(&lem, tmp);
+    printf("what \n");
+    printf("%d \n", lem->path[0]->room_id);
+    printf("%d \n", tmp->path[1]->room_id);
+    // printf("e %s \n", lem->path[3]->name);
+
     printf("%d \n", ant_amount);
-    free2dArray(map);
+    free2dArray(array);
     froom(&lem);
     return (0);
 }
