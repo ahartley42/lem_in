@@ -1,13 +1,13 @@
 #include "../includes/lem_in.h"
 
-void	rpop(t_room ***path, int i)
+void	rpop(t_room **room, int i)
 {
-	while ((*path)[i + 1])
+	while ((*room)->path[i + 1])
 	{
-		(*path)[i] = (*path)[i + 1];
+		(*room)->path[i] = (*room)->path[i + 1];
 		i++;
 	}
-	(*path)[i] = NULL;
+	(*room)->path[i] = NULL;
 }
 
 void	rpush(t_room **room, t_room *add)
@@ -18,12 +18,15 @@ void	rpush(t_room **room, t_room *add)
 
 	i = 0;
 	j = 0;
-	while ((*room)->path[i])
-		i++;
-	new = (t_room *)malloc(sizeof(t_room *) * (i + 2));
+	if ((*room)->path)
+	{
+		while ((*room)->path[i])
+			i++;
+	}
+	new = (t_room **)malloc(sizeof(t_room **) * (i + 2));
 	while (j < i)
 	{
-		new[j] = (*room)[j];
+		new[j] = (*room)->path[j];
 		j++;
 	}
 	new[j] = add;
@@ -32,6 +35,7 @@ void	rpush(t_room **room, t_room *add)
 	(*room)->path = new;
 }
 
+/*
 unsigned char	pathfinder(t_room **room, unsigned char e)
 {
 	int	i;
@@ -55,5 +59,5 @@ unsigned char	pathfinder(t_room **room, unsigned char e)
 	(*room)->type ^= 1;
 	return (e);
 }
-
+*/
 //
