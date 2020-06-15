@@ -18,16 +18,21 @@ typedef struct		s_room
 	struct s_room	*next; //	node to next
 }					t_room;
 
-int				check_int(char *s);
-int    			ft_check_ants(char *base);
-void    		free2dArray(char **str);
+int					check_int(char *s);
+int    				ft_check_ants(char *base);
+void    			free2dArray(char **str);
 
 //verify_map
-void verify_map_and_data(t_room *lem, char **twodarray, int *ant_amount);
+void				verify_map_and_data(t_room *lem, char **twodarray, int *ant_amount);
 
 //strlen_modified
-int    			ft_strlen_pipes(char *str);
-void 			ft_strlen_space_count(char *str);
-int 			ft_strlen_space_error(char *str);
-int 			ft_strlen_space(char *str);
+int    				ft_strlen_pipes(char *str);
+void	 			ft_strlen_space_count(char *str);
+int 				ft_strlen_space_error(char *str);
+int 				ft_strlen_space(char *str);
+
+//algorithm
+void				rpush(t_room **room, t_room *add);
+void				rpop(t_room **room, int i);
+
 #endif
