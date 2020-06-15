@@ -10,6 +10,28 @@ void	rpop(t_room ***path, int i)
 	(*path)[i] = NULL;
 }
 
+void	rpush(t_room **room, t_room *add)
+{
+	int	i;
+	int j;
+	t_room **new;
+
+	i = 0;
+	j = 0;
+	while ((*room)->path[i])
+		i++;
+	new = (t_room *)malloc(sizeof(t_room *) * (i + 2));
+	while (j < i)
+	{
+		new[j] = (*room)[j];
+		j++;
+	}
+	new[j] = add;
+	new[j + 1] = NULL;
+	free((*room)->path);
+	(*room)->path = new;
+}
+
 unsigned char	pathfinder(t_room **room, unsigned char e)
 {
 	int	i;
