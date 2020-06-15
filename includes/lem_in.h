@@ -40,15 +40,27 @@ char				**read_map();
 
 //verify_map
 void verify_map_and_data(t_room *lem_tmp, t_room *lem_head, char **twodarray, int *ant_amount);
+
 //strlen_modified
 int    				ft_strlen_pipes(char *str);
 void 				ft_strlen_space_count(char *str);
 int 				ft_strlen_space_error(char *str);
 int 				ft_strlen_space(char *str);
 void    			ft_strlen_2d_array(char **str);
+int 				ft_strlen_hyphen(char **twodarray,int *i);
+int    				ft_strlen_till_end(char **twodarray, int *i, int *len);
+
+//strcpy_modified
+char				*ft_strcpy_to_hyphen(char *dest, const char *src, char n);
+char				*ft_strcpy_after_hyphen(char *dest, const char *src, char n);
 
 //algorithm
 void				rpush(t_room **room, t_room *add);
 void				rpop(t_room **room, int i);
+
+//error
+void				error(unsigned char e);
+void 				ft_check_for_error(int *start, int *end, int *pipeTrack, int *roomTrack);
+void 				ft_wrong_name_error(char *firstName, char *lastName, t_room *lem_head);
 
 #endif
