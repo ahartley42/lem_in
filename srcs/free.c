@@ -40,3 +40,9 @@ void	froom(t_room **lst)
 	free(p);
 	free(*lst);
 }
+
+void	free_two_strings(char *s1, char *s2)
+{
+	free(s1);
+	free(s2);
+}
