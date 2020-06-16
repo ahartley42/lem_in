@@ -87,7 +87,7 @@ char    *ft_find_lastName(char **twodarray, int *i)
     return (lastName);
 }
 
-    // going to go through all the (tmp)->path to see if the room all ready exists inside if it does it will just skip it
+// going to go through all the (tmp)->path to see if the room all ready exists inside if it does it will just skip it
 // int ft_check_address_exists(char *firstName, char *lastName, t_room *lem_head)
 // {
 //     t_room *tmp;
