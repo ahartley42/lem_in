@@ -41,6 +41,8 @@ void ft_wrong_name_error(char *firstName, char *lastName, t_room *lem_head)
     count2 = 0;
     while ((tmp) != NULL)
     {
+		// if (ft_strequ(firstName, "#"))
+        // count++;
         if (ft_strequ(firstName, (tmp)->name))
         count++;
         if (ft_strequ(lastName, (tmp)->name))

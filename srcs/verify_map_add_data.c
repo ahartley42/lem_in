@@ -22,11 +22,8 @@ int    ft_check_start_end(char *twodarray)
     else if (ft_strequ(twodarray, "##end"))
     {
         return (1);
-    }else // will have to remove
-    {
-        ft_putstr("Error: no known command");
-        return (-1);
     }
+    return (0);
 }
 
 // keeping track if two starts or ends
@@ -90,6 +87,69 @@ char    *ft_find_lastName(char **twodarray, int *i)
     return (lastName);
 }
 
+    // going to go through all the (tmp)->path to see if the room all ready exists inside if it does it will just skip it
+// int ft_check_address_exists(char *firstName, char *lastName, t_room *lem_head)
+// {
+//     t_room *tmp;
+//     t_room *tmp2;
+//     int i;
+//     int count;
+//     int count2;
+
+//     tmp = lem_head;
+//     tmp2 = lem_head;
+//     i = 0;
+//     count = 0;
+//     count2 = 0;
+//     printf("before tmp: %s \n", (tmp)->name);
+//     printf("before tmp2: %s \n", (tmp2)->name);
+//     while ((tmp) != NULL)
+//     {
+//         if (ft_strequ(firstName, (tmp)->name))
+//             break;
+//         tmp = tmp->next;
+//     }
+//     while ((tmp2) != NULL)
+//     {
+//         if (ft_strequ(lastName, (tmp2)->name))
+//             break;
+//         tmp2 = tmp2->next;
+//     }
+//     printf("tmp: %s \n", (tmp)->name);
+//     printf("tmp2: %s \n", (tmp2)->name);
+//     if ((tmp)->path != NULL)
+//     {
+//     while ((tmp)->path[i] != NULL)
+//     {
+//         if (ft_strequ(lastName, tmp->path[i]->name))
+//         {
+//             count++;
+//             break;
+//         }
+//         i++;
+    
+//     }
+//     }
+//     i = 0;
+//         if ((tmp)->path != NULL)
+//     {
+//     while ((tmp2)->path[i] != NULL)
+//     {
+//         if (ft_strequ(firstName, tmp2->path[i]->name))
+//         {
+//             count2++;
+//             break;
+//         }
+//         i++;
+//     }
+//     }
+//     printf("count %d \n", count);
+//     printf("count2 %d \n", count2);
+//     if(count > 0 && count2 > 0)
+//     return (0);
+//     return (1);
+// }
+
 void    ft_add_pipe_address(t_room *lem_head,char **twodarray, int *i)
 {
     t_room *tmp;
@@ -107,29 +167,35 @@ void    ft_add_pipe_address(t_room *lem_head,char **twodarray, int *i)
     {
         firstName = ft_find_firstName(twodarray, &j);
         lastName = ft_find_lastName(twodarray, &j);
-        ft_wrong_name_error(firstName, lastName, lem_head);
-        while ((tmp) != NULL)
+        if (twodarray[j][0] != '#')
         {
-            if (ft_strequ(firstName, (tmp)->name))
-            break;
-            tmp = tmp->next;
+            ft_wrong_name_error(firstName, lastName, lem_head);
+            // if (ft_check_address_exists(firstName, lastName, lem_head) == 1){ // working on this function
+            while ((tmp) != NULL)
+            {
+             if (ft_strequ(firstName, (tmp)->name))
+             break;
+                tmp = tmp->next;
+            }
+            while ((tmp2) != NULL)
+            {
+                if (ft_strequ(lastName, (tmp2)->name))
+                break;
+                tmp2 = tmp2->next;
+            }
+            rpush(&tmp, tmp2);
+            rpush(&tmp2, tmp);
+            tmp = lem_head;
+            tmp2 = lem_head;
+            printf("i was here \n");
+            // }
         }
-        while ((tmp2) != NULL)
-        {
-            if (ft_strequ(lastName, (tmp2)->name))
-            break;
-            tmp2 = tmp2->next;
-        }
-        rpush(&tmp, tmp2);
-        rpush(&tmp2, tmp);
-        tmp = lem_head;
-        tmp2 = lem_head;
         j++;
         free_two_strings(firstName, lastName);
     }
 }
 
-void verify_map_and_data(t_room *lem_tmp, t_room *lem_head, char **twodarray, int *ant_amount)
+void    verify_map_and_data(t_room *lem_tmp, t_room *lem_head, char **twodarray, int *ant_amount)
 {
     // char    nameTrack[] = "";
     int     i;
@@ -210,6 +276,10 @@ void verify_map_and_data(t_room *lem_tmp, t_room *lem_head, char **twodarray, in
             {
                 isStart++;
                 i++;
+                while (twodarray[i][0] == '#' && (twodarray[i][1] != '#' || twodarray[i][1] == '\0'))
+                i++;
+                while (twodarray[i][0] == '#' && twodarray[i][1] == '#')
+                i++;
                 if ((strlen = ft_strlen_space(twodarray[i])) && twodarray[i][strlen] == ' ' && twodarray[i][strlen + 1])
                 {
                 }
@@ -221,6 +291,10 @@ void verify_map_and_data(t_room *lem_tmp, t_room *lem_head, char **twodarray, in
             if (isEnd == 1)
             {
                 isEnd++;
+                i++;
+                while (twodarray[i][0] == '#' && (twodarray[i][1] != '#' || twodarray[i][1] == '\0'))
+                i++;
+                while (twodarray[i][0] == '#' && twodarray[i][1] == '#')
                 i++;
                 if ((strlen = ft_strlen_space(twodarray[i])) && twodarray[i][strlen] == ' ' && twodarray[i][strlen + 1])
                 {
