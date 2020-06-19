@@ -88,67 +88,117 @@ char    *ft_find_lastName(char **twodarray, int *i)
 }
 
 // going to go through all the (tmp)->path to see if the room all ready exists inside if it does it will just skip it
-// int ft_check_address_exists(char *firstName, char *lastName, t_room *lem_head)
-// {
-//     t_room *tmp;
-//     t_room *tmp2;
-//     int i;
-//     int count;
-//     int count2;
+int ft_check_address_exists(char *firstName, char *lastName, t_room *lem_head)
+{
+    t_room *tmp;
+    t_room *tmp2;
+    int i;
+    int count;
+    int count2;
 
-//     tmp = lem_head;
-//     tmp2 = lem_head;
-//     i = 0;
-//     count = 0;
-//     count2 = 0;
-//     printf("before tmp: %s \n", (tmp)->name);
-//     printf("before tmp2: %s \n", (tmp2)->name);
-//     while ((tmp) != NULL)
-//     {
-//         if (ft_strequ(firstName, (tmp)->name))
-//             break;
-//         tmp = tmp->next;
-//     }
-//     while ((tmp2) != NULL)
-//     {
-//         if (ft_strequ(lastName, (tmp2)->name))
-//             break;
-//         tmp2 = tmp2->next;
-//     }
-//     printf("tmp: %s \n", (tmp)->name);
-//     printf("tmp2: %s \n", (tmp2)->name);
-//     if ((tmp)->path != NULL)
-//     {
-//     while ((tmp)->path[i] != NULL)
-//     {
-//         if (ft_strequ(lastName, tmp->path[i]->name))
-//         {
-//             count++;
-//             break;
-//         }
-//         i++;
+    tmp = lem_head;
+    tmp2 = lem_head;
+    i = 0;
+    count = 0;
+    count2 = 0;
+    printf("before tmp: %s \n", (tmp)->name);
+    printf("before tmp2: %s \n", (tmp2)->name);
+    while ((tmp) != NULL)
+    {
+        if (ft_strequ(firstName, (tmp)->name))
+            break;
+        tmp = tmp->next;
+    }
+    while ((tmp2) != NULL)
+    {
+        if (ft_strequ(lastName, (tmp2)->name))
+            break;
+        tmp2 = tmp2->next;
+    }
+    printf("tmp: %s \n", (tmp)->name);
+    printf("tmp2: %s \n", (tmp2)->name);
+    if ((tmp)->path != NULL)
+    {
+    while ((tmp)->path[i] != NULL)
+    {
+        if (ft_strequ(lastName, tmp->path[i]->name))
+        {
+            count++;
+            break;
+        }
+        i++;
+    }
+    }
+    i = 0;
+    if ((tmp2)->path != NULL)
+    {
+    while ((tmp2)->path[i] != NULL)
+    {
+        if (ft_strequ(firstName, tmp2->path[i]->name))
+        {
+            count2++;
+            break;
+        }
+        i++;
+    }
+    }
+    printf("count %d \n", count);
+    printf("count2 %d \n", count2);
+    if(count > 0 && count2 > 0)
+    return (0);
+    return (1);
+}
+
+void    check_x_and_y(t_room *lem_head)
+{
+    t_room *tmp;
+    t_room *tmp2;
+    // char *x;
+    // char *x2;
+    // char *y;
+    // char *y2;
+    // int count;
+
+    // count = 0;
+    tmp = lem_head;
+    tmp2 = lem_head;
+    // count = 0;
+    // count2 = 1;
+    // printf("%s  wee \n", tmp->name);
+    printf("x and y \n");
+    // printf("%d\n", tmp->xy[0]);
+    // printf("%d\n", tmp->xy[1]);
+    // tmp = tmp->next;
+    // printf("%d\n", tmp->xy[0]);
+    // printf("%d\n", tmp->xy[1]);
+
+    // if (ft_strequ(x = ft_itoa((tmp)->xy[0]), x2 = ft_itoa((tmp)->xy[0])))
+    // {
+    //     printf("i was able to get inside here \n");
+    // }
+    // free_two_strings(x, y);
     
-//     }
-//     }
-//     i = 0;
-//         if ((tmp)->path != NULL)
-//     {
-//     while ((tmp2)->path[i] != NULL)
-//     {
-//         if (ft_strequ(firstName, tmp2->path[i]->name))
-//         {
-//             count2++;
-//             break;
-//         }
-//         i++;
-//     }
-//     }
-//     printf("count %d \n", count);
-//     printf("count2 %d \n", count2);
-//     if(count > 0 && count2 > 0)
-//     return (0);
-//     return (1);
-// }
+    while ((tmp) != NULL)
+    {
+        tmp2 = tmp2->next;
+        while ((tmp2) != NULL)
+        {
+            while ((tmp2) != NULL)
+            {
+                if (tmp->xy[0] == tmp2->xy[0] || tmp->xy[1] == tmp2->xy[1])
+                {
+                    ft_putendl("ERROR: overlapping rooms");
+                    exit(1);
+                }
+                tmp2 = tmp2->next;
+            }
+        }
+        printf(" im here \n");
+        tmp = tmp->next;
+        if ((tmp) != NULL)
+        tmp2 = tmp;
+    }
+}
 
 void    ft_add_pipe_address(t_room *lem_head,char **twodarray, int *i)
 {
@@ -169,8 +219,9 @@ void    ft_add_pipe_address(t_room *lem_head,char **twodarray, int *i)
         lastName = ft_find_lastName(twodarray, &j);
         if (twodarray[j][0] != '#')
         {
+            check_x_and_y(lem_head);
             ft_wrong_name_error(firstName, lastName, lem_head);
-            // if (ft_check_address_exists(firstName, lastName, lem_head) == 1){ // working on this function
+            if (ft_check_address_exists(firstName, lastName, lem_head) == 1){ // working on this function
             while ((tmp) != NULL)
             {
              if (ft_strequ(firstName, (tmp)->name))
@@ -188,7 +239,7 @@ void    ft_add_pipe_address(t_room *lem_head,char **twodarray, int *i)
             tmp = lem_head;
             tmp2 = lem_head;
             printf("i was here \n");
-            // }
+            }
         }
         j++;
         free_two_strings(firstName, lastName);
@@ -197,7 +248,6 @@ void    ft_add_pipe_address(t_room *lem_head,char **twodarray, int *i)
 
 void    verify_map_and_data(t_room *lem_tmp, t_room *lem_head, char **twodarray, int *ant_amount)
 {
-    // char    nameTrack[] = "";
     int     i;
     int     j;
     int     start;  // will be removed for struct
