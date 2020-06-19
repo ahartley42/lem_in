@@ -314,7 +314,7 @@ int main(void){
     // char    str[] = "#john\n5\n##end\nend 1 0\n##start\nstart 2 0\nc-ab 3 0\nba 4 0\nstart-a\na-end"; // test for - in name
     // char    str[] = "#john\n5\n#wee\n##start\n##hello\nstart 2 0\n##end\nend 1 0\na 3 0\nstart-a\na-end"; // checking to see if no start or
     // char    str[] = "##jax\n#s\n5\n##end\nend 1 0\n##start\nstart 2 0\nb 4 0\na 3 0\nstart-a\n#start\na-b\nb-end"; // passes comments and commands inside pipes
-    char    str[] = "#jax\n#s\n5\n##end\nend 1 0\n##start\nstart 2 0\nb 4 0\na 3 0\nstart-a\na-b\nb-a";
+    char    str[] = "#jax\n#s\n5\n##end\nend 1 2\n##start\nstart 2 3\nb 4 4\na 3 5\nstart-a\na-b\nb-a";
     // char    str[] = "#john\n5\n#wee\n##start\n##hello\nstart 2 0\n##end\nend 1 0\na 3 0\nstart-a\na-end"; // working use for testing
     char **array;
     // int ant_amount;
