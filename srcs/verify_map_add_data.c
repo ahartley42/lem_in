@@ -314,7 +314,7 @@ void    verify_map_and_data(t_room *lem_tmp, t_room *lem_head, char **twodarray,
         }
         if (check_int(twodarray[i]) == 1) // checks to see if more than one ant
         {
-            ft_putstr("Error: Badly Formatted Map \n");
+            ft_putstr("Error: Badly Formatted Map, Ants all ready Found \n");
             exit(1);
         }
         if (twodarray[i][0] == '#' && twodarray[i][1] == '#') // checks for start and end
@@ -326,9 +326,7 @@ void    verify_map_and_data(t_room *lem_tmp, t_room *lem_head, char **twodarray,
             {
                 isStart++;
                 i++;
-                while (twodarray[i][0] == '#' && (twodarray[i][1] != '#' || twodarray[i][1] == '\0'))
-                i++;
-                while (twodarray[i][0] == '#' && twodarray[i][1] == '#')
+                while ((twodarray[i][0] == '#' && (twodarray[i][1] != '#' || twodarray[i][1] == '\0')) || (twodarray[i][0] == '#' && twodarray[i][1] == '#'))
                 i++;
                 if ((strlen = ft_strlen_space(twodarray[i])) && twodarray[i][strlen] == ' ' && twodarray[i][strlen + 1])
                 {
@@ -342,10 +340,10 @@ void    verify_map_and_data(t_room *lem_tmp, t_room *lem_head, char **twodarray,
             {
                 isEnd++;
                 i++;
-                while (twodarray[i][0] == '#' && (twodarray[i][1] != '#' || twodarray[i][1] == '\0'))
+                while ((twodarray[i][0] == '#' && (twodarray[i][1] != '#' || twodarray[i][1] == '\0')) || (twodarray[i][0] == '#' && twodarray[i][1] == '#'))
                 i++;
-                while (twodarray[i][0] == '#' && twodarray[i][1] == '#')
-                i++;
+                // while (twodarray[i][0] == '#' && twodarray[i][1] == '#')
+                // i++;
                 if ((strlen = ft_strlen_space(twodarray[i])) && twodarray[i][strlen] == ' ' && twodarray[i][strlen + 1])
                 {
                 }
