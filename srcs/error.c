@@ -51,12 +51,12 @@ void ft_wrong_name_error(char *firstName, char *lastName, t_room *lem_head)
     }
     if (count < 1)
     {
-        ft_putendl("ERROR: name does not exist");
+        ft_putendl("ERROR: room name does not exist");
         exit(1);
     }
     if (count2 < 1)
     {
-        ft_putendl("ERROR: name does not exist");
+        ft_putendl("ERROR: room name does not exist");
         exit(1);
     }
 }
