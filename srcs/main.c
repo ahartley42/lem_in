@@ -288,7 +288,7 @@
 int main(void){
     t_room *lem;
     t_room *tmp;
-    // char    **map;
+    char    **map;
     int ant_amount;
 
     lem = initialize_struct();
@@ -314,13 +314,13 @@ int main(void){
     // char    str[] = "#john\n5\n##end\nend 1 0\n##start\nstart 2 0\nc-ab 3 0\nba 4 0\nstart-a\na-end"; // test for - in name
     // char    str[] = "#john\n5\n#wee\n##start\n##hello\nstart 2 0\n##end\nend 1 0\na 3 0\nstart-a\na-end"; // checking to see if no start or
     // char    str[] = "##jax\n#s\n5\n##end\nend 1 0\n##start\nstart 2 0\nb 4 0\na 3 0\nstart-a\n#start\na-b\nb-end"; // passes comments and commands inside pipes
-    char    str[] = "#jax\n#s\n5\n##end\nend 1 2\n##start\nstart 2 3\nb 4 4\na 3 5\nstart-a\na-b\nb-a";
+    // char    str[] = "#jax\n#s\n5\n##end\nend 1 2\n##start\nstart 2 3\nb 4 4\na 3 5\nstart-a\na-b\nb-a";
     // char    str[] = "#john\n5\n#wee\n##start\n##hello\nstart 2 0\n##end\nend 1 0\na 3 0\nstart-a\na-end"; // working use for testing
-    char **array;
+    // char **array;
     // int ant_amount;
 
     // ant_amount = 0;
-    array = ft_strsplit(str, '\n');
+    // array = ft_strsplit(str, '\n');
     
     // printf("%s\n", array[1]);
     // printf("%s\n", &array[1][0]);
@@ -331,7 +331,7 @@ int main(void){
     // int i;
     // i = 0;
     //useing
-    // map = read_map();
+    map = read_map();
 
     // printf("what: %s \n", map[0]);
     // printf("what: %s \n", map[1]);
@@ -343,8 +343,8 @@ int main(void){
     //     i++;
     // }
 
-    ft_strlen_2d_array(array);
-    verify_map_and_data(tmp, lem, array, &ant_amount);
+    ft_strlen_2d_array(map);
+    verify_map_and_data(tmp, lem, map, &ant_amount);
 
     // printf("lem: %d \n", lem->room_id);
     // printf("lem: %d \n", lem->next->room_id);
@@ -391,7 +391,7 @@ int main(void){
     // printf("%s \n", tmp->path[1]->name);
 
     printf("%d \n", ant_amount);
-    free2dArray(array);
+    free2dArray(map);
     froom(&lem);
     return (0);
 }
