@@ -101,8 +101,6 @@ int ft_check_address_exists(char *firstName, char *lastName, t_room *lem_head)
     i = 0;
     count = 0;
     count2 = 0;
-    printf("before tmp: %s \n", (tmp)->name);
-    printf("before tmp2: %s \n", (tmp2)->name);
     while ((tmp) != NULL)
     {
         if (ft_strequ(firstName, (tmp)->name))
@@ -115,8 +113,6 @@ int ft_check_address_exists(char *firstName, char *lastName, t_room *lem_head)
             break;
         tmp2 = tmp2->next;
     }
-    printf("tmp: %s \n", (tmp)->name);
-    printf("tmp2: %s \n", (tmp2)->name);
     if ((tmp)->path != NULL)
     {
     while ((tmp)->path[i] != NULL)
@@ -142,8 +138,6 @@ int ft_check_address_exists(char *firstName, char *lastName, t_room *lem_head)
         i++;
     }
     }
-    printf("count %d \n", count);
-    printf("count2 %d \n", count2);
     if(count > 0 && count2 > 0)
     return (0);
     return (1);
@@ -153,31 +147,9 @@ void    check_x_and_y(t_room *lem_head)
 {
     t_room *tmp;
     t_room *tmp2;
-    // char *x;
-    // char *x2;
-    // char *y;
-    // char *y2;
-    // int count;
 
-    // count = 0;
     tmp = lem_head;
     tmp2 = lem_head;
-    // count = 0;
-    // count2 = 1;
-    // printf("%s  wee \n", tmp->name);
-    printf("x and y \n");
-    // printf("%d\n", tmp->xy[0]);
-    // printf("%d\n", tmp->xy[1]);
-    // tmp = tmp->next;
-    // printf("%d\n", tmp->xy[0]);
-    // printf("%d\n", tmp->xy[1]);
-
-    // if (ft_strequ(x = ft_itoa((tmp)->xy[0]), x2 = ft_itoa((tmp)->xy[0])))
-    // {
-    //     printf("i was able to get inside here \n");
-    // }
-    // free_two_strings(x, y);
-    
     while ((tmp) != NULL)
     {
         tmp2 = tmp2->next;
@@ -193,7 +165,6 @@ void    check_x_and_y(t_room *lem_head)
                 tmp2 = tmp2->next;
             }
         }
-        printf(" im here \n");
         tmp = tmp->next;
         if ((tmp) != NULL)
         tmp2 = tmp;
@@ -211,8 +182,6 @@ void    ft_add_pipe_address(t_room *lem_head,char **twodarray, int *i)
     tmp = lem_head;
     tmp2 = lem_head;
     j = *i;
-    printf("%s \n", tmp->name);
-    printf("%s \n", tmp2->name);
     while (twodarray[j])
     {
         firstName = ft_find_firstName(twodarray, &j);
@@ -238,7 +207,6 @@ void    ft_add_pipe_address(t_room *lem_head,char **twodarray, int *i)
             rpush(&tmp2, tmp);
             tmp = lem_head;
             tmp2 = lem_head;
-            printf("i was here \n");
             }
         }
         j++;
@@ -361,17 +329,14 @@ void    verify_map_and_data(t_room *lem_tmp, t_room *lem_head, char **twodarray,
             if (check_int(check_rooms[1]) == 1 && check_int(check_rooms[2]) == 1)
             {
                 if (isStart == 1){
-                    ft_putstr("Correct room \n");
                     ft_add_start_room(lem_tmp, check_rooms, &j);
                     lem_tmp = lem_tmp->next;
                 }else if (isEnd == 1)
                 {
-                    ft_putstr("Correct room \n");
                     ft_add_end_room(lem_tmp, check_rooms, &j);
                     lem_tmp = lem_tmp->next;
                 }else
                 {
-                    ft_putstr("Correct room \n");
                     ft_add_rooms(lem_tmp, check_rooms, &j);
                     lem_tmp = lem_tmp->next;
                 }
@@ -386,11 +351,9 @@ void    verify_map_and_data(t_room *lem_tmp, t_room *lem_head, char **twodarray,
         if ((strlenpipe = ft_strlen_space(twodarray[i])) && twodarray[i][strlenpipe] == '\0' && twodarray[i][0] != '#') // checks to see if pipes is valid
         {
             strlenpipe = 0;
-            printf("pipe: %s \n",twodarray[i]);
             if (( strlenpipe = ft_strlen_pipes(twodarray[i])) == 1)
             {
                 // ft_strlen_name_hold(*lem_head, twodarray, &i);
-                ft_putstr("Correct pipe \n");
                 ft_add_pipe_address(lem_head, twodarray, &i);
             }
             else{
