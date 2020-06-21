@@ -1,4 +1,5 @@
 #include "../includes/lem_in.h"
+#include <stdio.h>
 
 int main(void){
     t_room *lem;
@@ -13,6 +14,7 @@ int main(void){
     ft_strlen_2d_array(map);
     verify_map_and_data(tmp, lem, map, &ant_amount);
     // ft_putendl_free_exit("ERROR", map, lem);
+    printf("%d", ant_amount);
     free2dArray(map);
     froom(&lem);
     return (0);

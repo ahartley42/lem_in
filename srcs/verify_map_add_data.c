@@ -13,206 +13,144 @@
 #include "../includes/lem_in.h"
 #include <stdio.h> // remove
 
-int    ft_check_start_end(char *twodarray)
+void    ft_check_one(char **twodarray, int *i)
 {
-     if (ft_strequ(twodarray, "##start"))
-    {
-        return (0);
-    }
-    else if (ft_strequ(twodarray, "##end"))
-    {
-        return (1);
-    }
-    return (0);
-}
-
-// keeping track if two starts or ends
-void ft_keep_track_start_end(int total,int *start,int *end,int *isStart,int *isEnd)
-{
-    int st;
-    int ed;
-    st = *start; // keeping track how many start and ends it finds
-    ed = *end;
-    if (total == 0)
-    {
-        st++;
-        *start = st;
-        *isStart = st;
-        if (st == 2)
-        {
-            ft_putstr("Error: two starts error Program Exit\n");
-            exit(1);
-        }
-    }
-    if (total == 1)
-    {
-        ed++;
-        *end = ed;
-        *isEnd = ed;
-        if (ed == 2)
-        {
-            ft_putstr("Error: two ends error Program Exit\n");
-            exit(1);
-        }
-    }
-}
-
-char    *ft_find_firstName(char **twodarray, int *i)
-{
-    char    *firstName;
-    int     len;
-    int     j;
-
-    len = 0;
-    j = *i;
-    len = ft_strlen_hyphen(twodarray, i);
-    firstName = ft_strnew(len);
-    ft_strcpy_to_hyphen(firstName, twodarray[j], '-');
-    return (firstName);
-}
-
-char    *ft_find_lastName(char **twodarray, int *i)
-{
-    char    *lastName;
-    int     len;
-    int     len2;
-    int     j;
-
-    len = 0;
-    j = *i;
-    len = ft_strlen_hyphen(twodarray, i);
-    len2 = ft_strlen_till_end(twodarray, i, &len);
-    lastName = ft_strnew(len2);
-    ft_strcpy_after_hyphen(lastName, twodarray[j], '-');
-    return (lastName);
-}
-
-// going to go through all the (tmp)->path to see if the room all ready exists inside if it does it will just skip it
-int ft_check_address_exists(char *firstName, char *lastName, t_room *lem_head)
-{
-    t_room *tmp;
-    t_room *tmp2;
-    int i;
-    int count;
-    int count2;
-
-    tmp = lem_head;
-    tmp2 = lem_head;
-    i = 0;
-    count = 0;
-    count2 = 0;
-    while ((tmp) != NULL)
-    {
-        if (ft_strequ(firstName, (tmp)->name))
-            break;
-        tmp = tmp->next;
-    }
-    while ((tmp2) != NULL)
-    {
-        if (ft_strequ(lastName, (tmp2)->name))
-            break;
-        tmp2 = tmp2->next;
-    }
-    if ((tmp)->path != NULL)
-    {
-    while ((tmp)->path[i] != NULL)
-    {
-        if (ft_strequ(lastName, tmp->path[i]->name))
-        {
-            count++;
-            break;
-        }
-        i++;
-    }
-    }
-    i = 0;
-    if ((tmp2)->path != NULL)
-    {
-    while ((tmp2)->path[i] != NULL)
-    {
-        if (ft_strequ(firstName, tmp2->path[i]->name))
-        {
-            count2++;
-            break;
-        }
-        i++;
-    }
-    }
-    if(count > 0 && count2 > 0)
-    return (0);
-    return (1);
-}
-
-void    check_x_and_y(t_room *lem_head)
-{
-    t_room *tmp;
-    t_room *tmp2;
-
-    tmp = lem_head;
-    tmp2 = lem_head;
-    while ((tmp) != NULL)
-    {
-        tmp2 = tmp2->next;
-        while ((tmp2) != NULL)
-        {
-            while ((tmp2) != NULL)
-            {
-                if (tmp->xy[0] == tmp2->xy[0] || tmp->xy[1] == tmp2->xy[1])
-                {
-                    ft_putendl("ERROR: overlapping rooms");
-                    exit(1);
-                }
-                tmp2 = tmp2->next;
-            }
-        }
-        tmp = tmp->next;
-        if ((tmp) != NULL)
-        tmp2 = tmp;
-    }
-}
-
-void    ft_add_pipe_address(t_room *lem_head,char **twodarray, int *i)
-{
-    t_room *tmp;
-    t_room *tmp2;
-    char    *firstName;
-    char    *lastName;
     int j;
 
-    tmp = lem_head;
-    tmp2 = lem_head;
     j = *i;
     while (twodarray[j])
     {
-        firstName = ft_find_firstName(twodarray, &j);
-        lastName = ft_find_lastName(twodarray, &j);
-        if (twodarray[j][0] != '#')
-        {
-            check_x_and_y(lem_head);
-            ft_wrong_name_error(firstName, lastName, lem_head);
-            if (ft_check_address_exists(firstName, lastName, lem_head) == 1){ // working on this function
-            while ((tmp) != NULL)
-            {
-             if (ft_strequ(firstName, (tmp)->name))
-             break;
-                tmp = tmp->next;
-            }
-            while ((tmp2) != NULL)
-            {
-                if (ft_strequ(lastName, (tmp2)->name))
-                break;
-                tmp2 = tmp2->next;
-            }
-            rpush(&tmp, tmp2);
-            rpush(&tmp2, tmp);
-            tmp = lem_head;
-            tmp2 = lem_head;
-            }
-        }
         j++;
-        free_two_strings(firstName, lastName);
+    }
+    if (j < 2)
+    {
+        ft_putendl("Error: wrong");
+        exit(1);
     }
 }
+
+// looking for ant_amount once found breaks out and returns ant amount  if not found returns error
+void    ft_check_for_ant_amount(char **twodarray, int *i, int *ant_amount)
+{
+    int j;
+
+    j = *i;
+    while (twodarray[j])
+    {
+        if (twodarray[j][0] == '#') {
+            if (ft_strequ(twodarray[j], "##start") || ft_strequ(twodarray[j], "##end")){
+
+            }
+            else{
+                j++;
+            }
+        }
+        if (check_int(twodarray[j]) == 1)
+        {
+            *ant_amount = ft_check_ants(twodarray[j]);
+            break;
+        }
+        j++;
+    }
+    if (*ant_amount == 0)
+    {
+        ft_putstr("Error: please enter ant's\n");
+        exit(1);
+    }
+    j++; // incrementing past the ant_amount
+    *i = j;
+}
+
+void ft_check_start_room(char **twodarray, int *i)
+{
+    int j;
+    int strlen;
+
+    j = *i;
+    strlen = 0;
+    if (twodarray[j + 1])
+    j++;
+    else
+    {
+        ft_putendl("ERROR");
+        exit(1);
+    }
+    while ((twodarray[j][0] == '#' && (twodarray[j][1] != '#' || twodarray[j][1] == '\0')) || (twodarray[j][0] == '#' && twodarray[j][1] == '#'))
+    j++;
+    if ((strlen = ft_strlen_space(twodarray[j])) && twodarray[j][strlen] == ' ' && twodarray[j][strlen + 1])
+    {
+    }
+    else
+    {
+        ft_putendl("Error: starting room invalid");
+        exit(1);
+    }
+    *i = j;
+}
+
+void ft_check_end_room(char **twodarray, int *i)
+{
+    int j;
+    int strlen;
+
+    j = *i;
+    strlen = 0;
+    if (twodarray[j + 1])
+    j++;
+    else
+    {
+        ft_putendl("ERROR");
+        exit(1);
+    }
+    while ((twodarray[j][0] == '#' && (twodarray[j][1] != '#' || twodarray[j][1] == '\0')) || (twodarray[j][0] == '#' && twodarray[j][1] == '#'))
+    j++;
+                // while (twodarray[i][0] == '#' && twodarray[i][1] == '#')
+                // i++;
+    if ((strlen = ft_strlen_space(twodarray[j])) && twodarray[j][strlen] == ' ' && twodarray[j][strlen + 1])
+    {
+    }
+    else
+    {
+        ft_putendl("Error: ending room invalid");
+        exit(1);
+    }
+    *i = j;
+}
+
+// void    ft_check_valid_room(char **twodarray,int *i, int *j, int *isStart, int *isEnd)
+// {
+//     int k;
+
+//     k = *i;
+//                 char    **check_rooms;
+//             ft_strlen_space_count(twodarray[k]); // counting the amount of spaces more or less than 2 displays error
+//             check_rooms = ft_strsplit(twodarray[k], ' ');
+//             ft_strlen_space_error(check_rooms[0]); // checks for name starting with L and - inside the name
+//             if (check_int(check_rooms[1]) == 1 && check_int(check_rooms[2]) == 1)
+//             {
+//                 if (*isStart == 1){
+//                     *isStart = + 1;
+//                     ft_add_start_room(lem_tmp, check_rooms, &j);
+//                     lem_tmp = lem_tmp->next;
+//                 }else if (*isEnd == 1)
+//                 {
+//                     *isEnd = + 1;
+//                     ft_add_end_room(lem_tmp, check_rooms, &j);
+//                     lem_tmp = lem_tmp->next;
+//                 }else
+//                 {
+//                     ft_add_rooms(lem_tmp, check_rooms, &j);
+//                     lem_tmp = lem_tmp->next;
+//                 }
+//             }else
+//             {
+//                 ft_putstr("Error: Badly Formatted Map X Y not integer \n");
+//                 exit(1);
+//             }
+//             *roomTrack = + 1;
+//             free2dArray(check_rooms);
+//             *i = k;
+// }
 
 void    verify_map_and_data(t_room *lem_tmp, t_room *lem_head, char **twodarray, int *ant_amount)
 {
@@ -227,6 +165,7 @@ void    verify_map_and_data(t_room *lem_tmp, t_room *lem_head, char **twodarray,
     int     roomTrack;
     int     isStart;
     int     isEnd;
+    // unsigned char   dip_Switch; // [2] start [4] end [5] pipeTrack [6] roomTrack
 
     i = 0;
     j = 0;
@@ -239,47 +178,14 @@ void    verify_map_and_data(t_room *lem_tmp, t_room *lem_head, char **twodarray,
     roomTrack = 0;
     isStart = 0;
     isEnd = 0;
-    // i = ft_check_ants_and_skip_comments_on_top(**twodarray, &ant_amount); // not working right now
 
-    // looking for ant_amount once found breaks out and returns ant amount  if not found returns error
+    ft_check_one(twodarray, &i);
+    ft_check_for_ant_amount(twodarray, &i, ant_amount);
+    // i++; // incrementing past the ant_amount
     while (twodarray[i])
     {
+        if (twodarray[i][0] == '#' && twodarray[i][1] != '#') // checks for comment
         i++;
-    }
-    if (i < 2)
-    {
-        ft_putstr("Error: wrong \n");
-        exit(1);
-    }
-    i = 0;
-    while (twodarray[i])
-    {
-        if (twodarray[i][0] == '#') {
-            if (ft_strequ(twodarray[i], "##start") || ft_strequ(twodarray[i], "##end")){
-
-            }
-            else{
-                i++;
-            }
-        }
-        if (check_int(twodarray[i]) == 1)
-        {
-            *ant_amount = ft_check_ants(twodarray[i]);
-            break;
-        }
-        i++;
-    }
-    if (*ant_amount == 0)
-    {
-        ft_putstr("Error: please enter ant's\n");
-        exit(1);
-    }
-    i++; // incrementing past the ant_amount
-    while (twodarray[i])
-    {
-        if (twodarray[i][0] == '#' && twodarray[i][1] != '#'){ // checks for comment
-        i++;
-        }
         if (check_int(twodarray[i]) == 1) // checks to see if more than one ant
         {
             ft_putstr("Error: Badly Formatted Map, Ants all ready Found \n");
@@ -289,39 +195,13 @@ void    verify_map_and_data(t_room *lem_tmp, t_room *lem_head, char **twodarray,
         {
             total = ft_check_start_end(twodarray[i]);
             ft_keep_track_start_end(total, &start, &end, &isStart, &isEnd);
-            // ft_add_Command_rooms(twodarray[i + 1], total);
             if (isStart == 1)
-            {
-                isStart++;
-                i++;
-                while ((twodarray[i][0] == '#' && (twodarray[i][1] != '#' || twodarray[i][1] == '\0')) || (twodarray[i][0] == '#' && twodarray[i][1] == '#'))
-                i++;
-                if ((strlen = ft_strlen_space(twodarray[i])) && twodarray[i][strlen] == ' ' && twodarray[i][strlen + 1])
-                {
-                }
-                else{
-                ft_putendl("Error: starting room invalid");
-                exit(1);
-                }
-            }
+            ft_check_start_room(twodarray, &i);
             if (isEnd == 1)
-            {
-                isEnd++;
-                i++;
-                while ((twodarray[i][0] == '#' && (twodarray[i][1] != '#' || twodarray[i][1] == '\0')) || (twodarray[i][0] == '#' && twodarray[i][1] == '#'))
-                i++;
-                // while (twodarray[i][0] == '#' && twodarray[i][1] == '#')
-                // i++;
-                if ((strlen = ft_strlen_space(twodarray[i])) && twodarray[i][strlen] == ' ' && twodarray[i][strlen + 1])
-                {
-                }
-                else{
-                ft_putendl("Error: ending room invalid");
-                exit(1);
-                }
-            }
+            ft_check_end_room(twodarray, &i);
         }
         if ((strlen = ft_strlen_space(twodarray[i])) && twodarray[i][strlen] == ' ' && twodarray[i][strlen + 1]){ // checks for room valid
+            // ft_check_valid_room(twodarray, &i, &j, &isStart, &isEnd);
             char    **check_rooms;
             ft_strlen_space_count(twodarray[i]); // counting the amount of spaces more or less than 2 displays error
             check_rooms = ft_strsplit(twodarray[i], ' ');
@@ -329,10 +209,12 @@ void    verify_map_and_data(t_room *lem_tmp, t_room *lem_head, char **twodarray,
             if (check_int(check_rooms[1]) == 1 && check_int(check_rooms[2]) == 1)
             {
                 if (isStart == 1){
+                    isStart++;
                     ft_add_start_room(lem_tmp, check_rooms, &j);
                     lem_tmp = lem_tmp->next;
                 }else if (isEnd == 1)
                 {
+                    isEnd++;
                     ft_add_end_room(lem_tmp, check_rooms, &j);
                     lem_tmp = lem_tmp->next;
                 }else
@@ -353,7 +235,6 @@ void    verify_map_and_data(t_room *lem_tmp, t_room *lem_head, char **twodarray,
             strlenpipe = 0;
             if (( strlenpipe = ft_strlen_pipes(twodarray[i])) == 1)
             {
-                // ft_strlen_name_hold(*lem_head, twodarray, &i);
                 ft_add_pipe_address(lem_head, twodarray, &i);
             }
             else{

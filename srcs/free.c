@@ -47,7 +47,7 @@ void	free_two_strings(char *s1, char *s2)
 	free(s2);
 }
 
-// void	ft_putendl_free_exit(char *str, char **map, t_room lem) 
+// void	ft_putendl_free_exit(char *str, char **map, t_room lem)
 // {
 //         int i;
 
