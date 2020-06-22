@@ -102,7 +102,7 @@ void	print_solution(t_room **room, int ants, int i)
 		ft_putchar('\n');
 	else
 	{
-		if (i <= ants)
+		if (i < ants && !((*room)->type & 2))
 			ft_putchar(' ');
 		print_solution(&((*room)->path[0]), ants, i);
 	}
