@@ -33,39 +33,46 @@ t_room	*add(char *name, int *xy, int id, unsigned char type)
 // main for testing struct leaks
 int main(void)
 {
-	t_room	*now;
-	t_room	*tmp;
-	int		xy[2];
-	char	**s;
+	t_room			*now;
+	t_room			*tmp;
+	int				xy[2];
+	int				n;
+	char			**s;
+	unsigned char	e;
 
 	xy[0] = 0;
 	xy[1] = 1;
-	s = ft_strsplit("a0b0c0d0e", '0');
-	now = add(s[xy[0]], xy, 1, 4);
+	e = 0;
+	s = ft_strsplit("a0b0c0d0e0f", '0');
+	now = add(s[xy[0]], xy, 1, 2);
 	tmp = now;
-	while (xy[0] < 4)
+	while (xy[0] < 5)
 	{
+		e = 0;
 		xy[0] += 1;
 		xy[1] += 3;
-		tmp->next = add(s[xy[0]], xy, 1, 4);
+		if (xy[0] == 5)
+			e = 4;
+		tmp->next = add(s[xy[0]], xy, 1, e);
 		tmp = tmp->next;
 	}
 	rpush(&now, now->next);
 	rpush(&now, now->next->next);
-	rpush(&now, now->next->next->next);
-	printf("-----\nROOM1\n-----\n\nname: %s\n\n", now->name);
-	printf("-----\nROOM2\n-----\n\nname: %s\n\n", now->path[0]->name);
-	printf("-----\nROOM3\n-----\n\nname: %s\n\n", now->path[1]->name);
-	printf("-----\nROOM4\n-----\n\nname: %s\n\n", now->path[2]->name);
-	printf("\e[5;33mDELETING PATH 1\e[0m\n\n");
-	rpop(&now, 0);
-	printf("-----\nROOM1\n-----\n\nname: %s\n\n", now->name);
-	printf("-----\nROOM3\n-----\n\nname: %s\n\n", now->path[0]->name);
-	printf("-----\nROOM4\n-----\n\nname: %s\n\n", now->path[1]->name);
-	printf("-----\nROOM2\n-----\n\nname: %s\n\n", now->next->name);
+	rpush(&(now->next), now->next->next->next);
+	rpush(&(now->next->next), now->next->next->next->next);
+	rpush(&(now->next->next->next), now->next->next->next->next->next);
+	rpush(&(now->next->next->next->next), now->next->next->next->next->next);
+	rpush(&(now->next), now->next->next->next->next->next);
+	pathfinder(&now);
+	n = path_size(&now);
+	e = 1;
+	while (e <= n + 7)
+	{
+		print_solution(&now, 7, e);
+		e++;
+	}
 	free2dArray(s);
 	froom(&now);
 	return (0);
 }
 
-// STRUCT IS COMPLETE -- PATH IS THE ONLY REMAINING UNCERTAINTY FOR LEAKS
