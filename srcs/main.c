@@ -30,6 +30,13 @@ int main(void){
 	while (!(tmp->type & 2))
 		tmp = tmp->next;
 	pathfinder(&tmp);
+	if (!path_size(&tmp))
+	{
+		free2dArray(map);
+		froom(&lem);
+		ft_putendl("\e[5;31mERROR: START AND END NOT LINKED\e[0m");
+		exit(1);
+	}
 	while (map[i])
 	{
 		ft_putendl(map[i]);
