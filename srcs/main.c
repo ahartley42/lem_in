@@ -1,5 +1,16 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: svan-nie <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/06/22 12:05:26 by svan-nie          #+#    #+#             */
+/*   Updated: 2020/06/22 12:05:48 by svan-nie         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/lem_in.h"
-#include <stdio.h>
 
 int main(void){
     t_room *lem;
@@ -25,7 +36,6 @@ int main(void){
 		i++;
 	}
     // ft_putendl_free_exit("ERROR", map, lem);
-    printf("%d", ant_amount);
     free2dArray(map);
     froom(&lem);
     return (0);
