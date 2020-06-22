@@ -152,6 +152,30 @@ void ft_check_end_room(char **twodarray, int *i)
 //             *i = k;
 // }
 
+void    check_if_pipe(t_room *lem_head,char **twodarray, int *i, int *pipeTrack)
+{
+    int strlenpipe;
+    int j;
+    int pipe;
+
+    strlenpipe = 0;
+    j = *i;
+    pipe = 0;
+    if ((strlenpipe = ft_strlen_space(twodarray[j])) && twodarray[j][strlenpipe] == '\0' && twodarray[j][0] != '#') // checks to see if pipes is valid
+    {
+    if (( strlenpipe = ft_strlen_pipes(twodarray[j])) == 1)
+    {
+        ft_add_pipe_address(lem_head, twodarray, &j);
+    }
+    else{
+        ft_putstr("Error: Invalid Pipe \n");
+    }
+    pipe++;
+    *pipeTrack = pipe;
+    *i = j;
+    }
+}
+
 void    verify_map_and_data(t_room *lem_tmp, t_room *lem_head, char **twodarray, int *ant_amount)
 {
     int     i;
@@ -160,11 +184,11 @@ void    verify_map_and_data(t_room *lem_tmp, t_room *lem_head, char **twodarray,
     int     end;    // will be removed for struct
     int     total;
     int     strlen;
-    int     strlenpipe;
     int     pipeTrack;
     int     roomTrack;
     int     isStart;
     int     isEnd;
+    //1, 2, 4, 8, 16, 32, 64, 128
     // unsigned char   dip_Switch; // [2] start [4] end [5] pipeTrack [6] roomTrack
 
     i = 0;
@@ -173,7 +197,6 @@ void    verify_map_and_data(t_room *lem_tmp, t_room *lem_head, char **twodarray,
     end = 0;
     total = 0;
     strlen = 0;
-    strlenpipe = 0;
     pipeTrack = 0;
     roomTrack = 0;
     isStart = 0;
@@ -230,18 +253,7 @@ void    verify_map_and_data(t_room *lem_tmp, t_room *lem_head, char **twodarray,
             roomTrack++;
             free2dArray(check_rooms);
         }
-        if ((strlenpipe = ft_strlen_space(twodarray[i])) && twodarray[i][strlenpipe] == '\0' && twodarray[i][0] != '#') // checks to see if pipes is valid
-        {
-            strlenpipe = 0;
-            if (( strlenpipe = ft_strlen_pipes(twodarray[i])) == 1)
-            {
-                ft_add_pipe_address(lem_head, twodarray, &i);
-            }
-            else{
-                ft_putstr("Error: Invalid Pipe \n");
-            }
-            pipeTrack++;
-        }
+        check_if_pipe(lem_head, twodarray, &i, &pipeTrack); // checks to see if pipes is valid
         i++;
         strlen = 0;
     }
