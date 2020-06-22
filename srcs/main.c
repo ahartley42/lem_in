@@ -21,7 +21,7 @@ int main(void){
 
     lem = initialize_struct();
     ant_amount = 0;
-	i = 1;
+	i = 0;
     tmp = lem;
     map = read_map();
     ft_strlen_2d_array(map);
@@ -30,7 +30,13 @@ int main(void){
 	while (!(tmp->type & 2))
 		tmp = tmp->next;
 	pathfinder(&tmp);
-	while (i <= ant_amount + path_size(&tmp))
+	while (map[i])
+	{
+		ft_putendl(map[i]);
+		i++;
+	}
+	i = 1;
+	while (i < ant_amount + path_size(&tmp))
 	{
 		print_solution(&tmp, ant_amount, i);
 		i++;
