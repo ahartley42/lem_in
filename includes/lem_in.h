@@ -74,4 +74,9 @@ void 				ft_check_for_error(int *start, int *end, int *pipeTrack, int *roomTrack
 // void 				ft_check_for_error(int *start, int *end, unsigned char dip_switch);
 void 				ft_wrong_name_error(char *firstName, char *lastName, t_room *lem_head);
 
+//test
+int					pathfinder(t_room **room);
+int					path_size(t_room **room);
+void				print_solution(t_room **room, int ants, int i);
+
 #endif

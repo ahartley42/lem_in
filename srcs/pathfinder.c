@@ -35,29 +35,66 @@ void	rpush(t_room **room, t_room *add)
 	(*room)->path = new;
 }
 
-/*
-unsigned char	pathfinder(t_room **room, unsigned char e)
+int	pathfinder(t_room **room)
 {
 	int	i;
 
 	i = 0;
 	(*room)->type |= 1;
 	if ((*room)->type & 4)
-		ending(); //algo needed
+		return (1);
+	else if (!((*room)->path))
+		return (0);
 	else
 	{
-		while ((*room)->path[i])
+		while ((*room)->path[0])
 		{
-			if (!((*room)->path[i]->type & 1) && !((*room)->path[i]->type & 2))
+			if (((*room)->path[0]->type & 1) || ((*room)->path[0]->type & 2))
+				rpop(room, 0);
+			else
 			{
-				e = pathfinder(&((*room)->path[i]), e);
-				error(e);
+				i = pathfinder(&((*room)->path[0]));
+				if (i != 1)
+					rpop(room, 0);
+				else
+					return (1);
 			}
-			i++;
 		}
 	}
 	(*room)->type ^= 1;
-	return (e);
+	return (0);
 }
-*/
+
+int		path_size(t_room **room)
+{
+	int	i;
+
+	i = 1;
+	if ((*room)->type & 4)
+		return (1);
+	i += path_size(&((*room)->path[0]));
+	return (i);
+}
+
+void	print_solution(t_room **room, int ants, int i)
+{
+	if (i <= ants && !((*room)->type & 2))
+	{
+		ft_putchar('L');
+		ft_putnbr(i);
+		ft_putchar('-');
+		ft_putstr((*room)->name);
+	}
+	i--;
+	if ((*room)->type & 4 || i <= 0)
+		ft_putchar('\n');
+	else
+	{
+		if (i <= ants)
+			ft_putchar(' ');
+		print_solution(&((*room)->path[0]), ants, i);
+	}
+}
+
+
 //
