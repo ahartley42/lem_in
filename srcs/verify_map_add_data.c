@@ -190,21 +190,16 @@ void    ft_check_for_random_ants(char **twodarray, int *i)
 void    verify_map_and_data(t_room *lem_tmp, t_room *lem_head, char **twodarray, int *ant_amount)
 {
     int     i;
-    int     j;
+    int     j; // increments the room_id number starting at 0
     int     total;
     int     strlen;
-    int     isStart;
-    int     isEnd;
     //1, 2, 4, 8, 16, 32, 64, 128
-    unsigned char   dip_Switch; // [2] start, [4] end, [8] pipeTrack [16] roomTrack
+    unsigned char   dip_Switch; // [2] start, [4] end, [8] pipeTrack, [16] roomTrack, [32] isStart, [64] isEnd
 
     i = 0;
     j = 0;
     total = 0;
     strlen = 0;
-    isStart = 0;
-    isEnd = 0;
-
     ft_check_one(twodarray, &i);
     ft_check_for_ant_amount(twodarray, &i, ant_amount);
     while (twodarray[i])
@@ -215,10 +210,10 @@ void    verify_map_and_data(t_room *lem_tmp, t_room *lem_head, char **twodarray,
         if (twodarray[i][0] == '#' && twodarray[i][1] == '#') // checks for start and end
         {
             total = ft_check_start_end(twodarray[i]);
-            ft_keep_track_start_end(total, &isStart, &isEnd, &dip_Switch);
-            if (isStart == 1)
+            ft_keep_track_start_end(total, &dip_Switch);
+            if ((dip_Switch & 32) == 32)
             ft_check_start_room(twodarray, &i);
-            if (isEnd == 1)
+            if ((dip_Switch & 64) == 64)
             ft_check_end_room(twodarray, &i);
         }
         if ((strlen = ft_strlen_space(twodarray[i])) && twodarray[i][strlen] == ' ' && twodarray[i][strlen + 1]){ // checks for room valid
@@ -229,17 +224,20 @@ void    verify_map_and_data(t_room *lem_tmp, t_room *lem_head, char **twodarray,
             ft_strlen_space_error(check_rooms[0]); // checks for name starting with L and - inside the name
             if (check_int(check_rooms[1]) == 1 && check_int(check_rooms[2]) == 1)
             {
-                if (isStart == 1){
-                    isStart++;
+                if ((dip_Switch & 32) == 32){
+                    printf("i was here start \n");
+                    dip_Switch ^= 32;
                     ft_add_start_room(lem_tmp, check_rooms, &j);
                     lem_tmp = lem_tmp->next;
-                }else if (isEnd == 1)
+                }else if ((dip_Switch & 64) == 64)
                 {
-                    isEnd++;
+                    printf("i was here end \n");
+                    dip_Switch ^= 64;
                     ft_add_end_room(lem_tmp, check_rooms, &j);
                     lem_tmp = lem_tmp->next;
                 }else
                 {
+                    printf("i was here random \n");
                     ft_add_rooms(lem_tmp, check_rooms, &j);
                     lem_tmp = lem_tmp->next;
                 }
