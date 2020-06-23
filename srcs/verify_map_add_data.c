@@ -41,9 +41,8 @@ void    ft_check_for_ant_amount(char **twodarray, int *i, int *ant_amount)
             if (ft_strequ(twodarray[j], "##start") || ft_strequ(twodarray[j], "##end")){
 
             }
-            else{
-                j++;
-            }
+            else
+            j++;
         }
         if (check_int(twodarray[j]) == 1)
         {
@@ -117,7 +116,7 @@ void ft_check_end_room(char **twodarray, int *i)
     *i = j;
 }
 
-// void    ft_check_valid_room(char **twodarray,int *i, int *j, int *isStart, int *isEnd)
+// void    ft_check_valid_room(t_room *lem_tmp, char **twodarray,int *i, int *j, int *isStart, int *isEnd,unsigned char *dip_Switch)
 // {
 //     int k;
 
@@ -125,21 +124,22 @@ void ft_check_end_room(char **twodarray, int *i)
 //                 char    **check_rooms;
 //             ft_strlen_space_count(twodarray[k]); // counting the amount of spaces more or less than 2 displays error
 //             check_rooms = ft_strsplit(twodarray[k], ' ');
+//             printf("room: %s \n", check_rooms[0]);
 //             ft_strlen_space_error(check_rooms[0]); // checks for name starting with L and - inside the name
 //             if (check_int(check_rooms[1]) == 1 && check_int(check_rooms[2]) == 1)
 //             {
 //                 if (*isStart == 1){
 //                     *isStart = + 1;
-//                     ft_add_start_room(lem_tmp, check_rooms, &j);
+//                     ft_add_start_room(lem_tmp, check_rooms, j);
 //                     lem_tmp = lem_tmp->next;
 //                 }else if (*isEnd == 1)
 //                 {
 //                     *isEnd = + 1;
-//                     ft_add_end_room(lem_tmp, check_rooms, &j);
+//                     ft_add_end_room(lem_tmp, check_rooms, j);
 //                     lem_tmp = lem_tmp->next;
 //                 }else
 //                 {
-//                     ft_add_rooms(lem_tmp, check_rooms, &j);
+//                     ft_add_rooms(lem_tmp, check_rooms, j);
 //                     lem_tmp = lem_tmp->next;
 //                 }
 //             }else
@@ -147,20 +147,19 @@ void ft_check_end_room(char **twodarray, int *i)
 //                 ft_putstr("Error: Badly Formatted Map X Y not integer \n");
 //                 exit(1);
 //             }
-//             *roomTrack = + 1;
+//             // *roomTrack = + 1;
+//             *dip_Switch |= 16;
+//             // *i = k;
 //             free2dArray(check_rooms);
-//             *i = k;
 // }
 
-void    check_if_pipe(t_room *lem_head,char **twodarray, int *i, int *pipeTrack)
+void    check_if_pipe(t_room *lem_head,char **twodarray, int *i, unsigned char *dip_Switch)
 {
     int strlenpipe;
     int j;
-    int pipe;
 
     strlenpipe = 0;
     j = *i;
-    pipe = 0;
     if ((strlenpipe = ft_strlen_space(twodarray[j])) && twodarray[j][strlenpipe] == '\0' && twodarray[j][0] != '#') // checks to see if pipes is valid
     {
     if (( strlenpipe = ft_strlen_pipes(twodarray[j])) == 1)
@@ -170,61 +169,60 @@ void    check_if_pipe(t_room *lem_head,char **twodarray, int *i, int *pipeTrack)
     else{
         ft_putstr("Error: Invalid Pipe \n");
     }
-    pipe++;
-    *pipeTrack = pipe;
+    *dip_Switch |= 8;
     *i = j;
     }
+}
+
+void    ft_check_for_random_ants(char **twodarray, int *i)
+{
+    int j;
+
+    j = *i;
+    if (check_int(twodarray[j]) == 1) // checks to see if more than one ant
+    {
+        ft_putstr("Error: Badly Formatted Map, Ants all ready Found \n");
+        exit(1);
+    }
+    *i = j;
 }
 
 void    verify_map_and_data(t_room *lem_tmp, t_room *lem_head, char **twodarray, int *ant_amount)
 {
     int     i;
     int     j;
-    int     start;  // will be removed for struct
-    int     end;    // will be removed for struct
     int     total;
     int     strlen;
-    int     pipeTrack;
-    int     roomTrack;
     int     isStart;
     int     isEnd;
     //1, 2, 4, 8, 16, 32, 64, 128
-    // unsigned char   dip_Switch; // [2] start [4] end [5] pipeTrack [6] roomTrack
+    unsigned char   dip_Switch; // [2] start, [4] end, [8] pipeTrack [16] roomTrack
 
     i = 0;
     j = 0;
-    start = 0;
-    end = 0;
     total = 0;
     strlen = 0;
-    pipeTrack = 0;
-    roomTrack = 0;
     isStart = 0;
     isEnd = 0;
 
     ft_check_one(twodarray, &i);
     ft_check_for_ant_amount(twodarray, &i, ant_amount);
-    // i++; // incrementing past the ant_amount
     while (twodarray[i])
     {
         if (twodarray[i][0] == '#' && twodarray[i][1] != '#') // checks for comment
         i++;
-        if (check_int(twodarray[i]) == 1) // checks to see if more than one ant
-        {
-            ft_putstr("Error: Badly Formatted Map, Ants all ready Found \n");
-            exit(1);
-        }
+        ft_check_for_random_ants(twodarray, &i); // checks to see if more than one ant
         if (twodarray[i][0] == '#' && twodarray[i][1] == '#') // checks for start and end
         {
             total = ft_check_start_end(twodarray[i]);
-            ft_keep_track_start_end(total, &start, &end, &isStart, &isEnd);
+            ft_keep_track_start_end(total, &isStart, &isEnd, &dip_Switch);
             if (isStart == 1)
             ft_check_start_room(twodarray, &i);
             if (isEnd == 1)
             ft_check_end_room(twodarray, &i);
         }
         if ((strlen = ft_strlen_space(twodarray[i])) && twodarray[i][strlen] == ' ' && twodarray[i][strlen + 1]){ // checks for room valid
-            // ft_check_valid_room(twodarray, &i, &j, &isStart, &isEnd);
+            // ft_check_valid_room(lem_tmp, twodarray, &i, &j, &isStart, &isEnd , &dip_Switch);
             char    **check_rooms;
             ft_strlen_space_count(twodarray[i]); // counting the amount of spaces more or less than 2 displays error
             check_rooms = ft_strsplit(twodarray[i], ' ');
@@ -250,12 +248,12 @@ void    verify_map_and_data(t_room *lem_tmp, t_room *lem_head, char **twodarray,
                 ft_putstr("Error: Badly Formatted Map X Y not integer \n");
                 exit(1);
             }
-            roomTrack++;
+            dip_Switch |= 16;
             free2dArray(check_rooms);
         }
-        check_if_pipe(lem_head, twodarray, &i, &pipeTrack); // checks to see if pipes is valid
+        check_if_pipe(lem_head, twodarray, &i, &dip_Switch); // checks to see if pipes is valid
         i++;
         strlen = 0;
     }
-    ft_check_for_error(&start, &end, &pipeTrack, &roomTrack); //saving lines checks to see if end and start < 1 or if pipeTrack and roomTrack is < 1
+    ft_check_for_error(dip_Switch); //saving lines checks to see if end and start < 1 or if pipeTrack and roomTrack is < 1
 }

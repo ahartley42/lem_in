@@ -6,7 +6,7 @@
 /*   By: svan-nie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/22 12:07:29 by svan-nie          #+#    #+#             */
-/*   Updated: 2020/06/22 12:07:31 by svan-nie         ###   ########.fr       */
+/*   Updated: 2020/06/22 18:44:27 by svan-nie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,8 @@ void 				verify_map_and_data(t_room *lem_tmp, t_room *lem_head, char **twodarray
 
 //verify_map_functions
 int    				ft_check_start_end(char *twodarray);
-void 				ft_keep_track_start_end(int total,int *start,int *end, int *isStart, int *isEnd);
+// void 				ft_keep_track_start_end(int total,int *start,int *end, int *isStart, int *isEnd);
+void 				ft_keep_track_start_end(int total, int *isStart, int *isEnd, unsigned char *dip_Switch);
 char    			*ft_find_firstName(char **twodarray, int *i);
 char    			*ft_find_lastName(char **twodarray, int *i);
 int 				ft_check_address_exists(char *firstName, char *lastName, t_room *lem_head);
@@ -82,8 +83,9 @@ void				rpop(t_room **room, int i);
 
 //error
 void				error(unsigned char e);
-void 				ft_check_for_error(int *start, int *end, int *pipeTrack, int *roomTrack);
-// void 				ft_check_for_error(int *start, int *end, unsigned char dip_switch);
+// void 				ft_check_for_error(int *start, int *end, int *pipeTrack, int *roomTrack);
+// void 				ft_check_for_error(int *start, int *end, unsigned char dip_Switch);
+void 				ft_check_for_error(unsigned char dip_Switch);
 void 				ft_wrong_name_error(char *firstName, char *lastName, t_room *lem_head);
 
 //test
