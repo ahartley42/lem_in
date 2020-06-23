@@ -6,7 +6,7 @@
 /*   By: svan-nie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/22 12:07:29 by svan-nie          #+#    #+#             */
-/*   Updated: 2020/06/23 21:07:37 by svan-nie         ###   ########.fr       */
+/*   Updated: 2020/06/23 22:11:41 by svan-nie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,8 @@ int    				ft_strlen_pipes(char *str);
 void 				ft_strlen_space_count(char *str);
 int 				ft_strlen_space_error(char *str);
 int 				ft_strlen_space(char *str);
-void    			ft_strlen_2d_array(char **str);
+// void    			ft_strlen_2d_array(char **str);
+void    			ft_strlen_2d_array(char **str, t_room *lem);
 int 				ft_strlen_hyphen(char **twodarray,int *i);
 int    				ft_strlen_till_end(char **twodarray, int *i, int *len);
 

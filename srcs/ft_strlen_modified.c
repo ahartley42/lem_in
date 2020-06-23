@@ -38,7 +38,7 @@ int ft_strlen_space(char *str)
 // looking for space in ft_strlen if it comes accross L or - in a name it will error out
 int ft_strlen_space_error(char *str)
 {
-    size_t i;
+    int i;
     
     i = 0;
 
@@ -116,7 +116,7 @@ int    ft_strlen_pipes(char *str)
 }
 
 // checks to see if the pipes are in the correct order it will only skip through comments if anthing else in under the pipes it will display error
-void    ft_strlen_2d_array(char **str)
+void    ft_strlen_2d_array(char **str, t_room *lem)
 {
     int i;
     int k;
@@ -130,10 +130,7 @@ void    ft_strlen_2d_array(char **str)
         while (str[i][k])
         {
             if (str[i][0] == 'L')
-            {
-                ft_putstr("Error: Can't start with 'L' \n");
-                exit(1);
-            }
+            err_duo(&lem, str);
             if (str[i][k] == '-'){
                 trackHyphen++;
                 break;
@@ -157,10 +154,8 @@ void    ft_strlen_2d_array(char **str)
             k++;
         }
         if (trackHyphen == 0)
-        {
-            ft_putstr("Error: Badly Formatted Map with pipes \n");
-            exit(1);
-        }else
+        err_duo(&lem, str);
+        else
         trackHyphen = 0;
         k = 0;
         i++;
