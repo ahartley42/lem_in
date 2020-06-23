@@ -94,25 +94,27 @@ void    verify_map_and_data(t_room *lem_tmp, t_room *lem_head, char **twodarray,
     ft_check_for_error(dip_Switch);
 }
 
-// line 22
-// ft_strlen_space
-// checks to see if pipes is valid
-// line 36
-// ft_check_for_random_ants
-// checks to see if more than one ant
-// line 51
-// ft_check_start_end_room
-// checks for start and end
-// line 62
-// ft_skip_comment
-// checks for comment
-// line 74
-// dip_switch
-// 1, 2, 4, 8, 16, 32, 64, 128
-// [2] start, [4] end, [8] pipeTrack, [16] roomTrack, [32] isStart, [64] isEnd
-// line 90
-// check_if_pipe
-// checks to see if pipes is valid
-// line 94
-// ft_check_for_error
-// saving lines checks to see if end and start or trackroom or trackpipe is on if not error
+/*
+** line 22
+** ft_strlen_space
+** checks to see if pipes is valid
+** line 36
+** ft_check_for_random_ants
+** checks to see if more than one ant
+** line 51
+** ft_check_start_end_room
+** checks for start and end
+** line 62
+** ft_skip_comment
+** checks for comment
+** line 74
+** dip_switch
+** 1, 2, 4, 8, 16, 32, 64, 128
+** [2] start, [4] end, [8] pipeTrack, [16] roomTrack, [32] isStart, [64] isEnd
+** line 90
+** check_if_pipe
+** checks to see if pipes is valid
+** line 94
+** ft_check_for_error
+** saving lines checks to see if end and start or trackroom or trackpipe is on if not error
+*/
