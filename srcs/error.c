@@ -6,7 +6,7 @@
 /*   By: svan-nie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/22 12:06:37 by svan-nie          #+#    #+#             */
-/*   Updated: 2020/06/22 18:42:01 by svan-nie         ###   ########.fr       */
+/*   Updated: 2020/06/24 00:34:17 by svan-nie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,27 +22,24 @@ void	error(unsigned char e)
 }
 
 // checks to see if start and end, and checks to see if it has enterd pipes and rooms
-void ft_check_for_error(unsigned char dip_Switch)
+void ft_check_for_error(unsigned char dip_Switch, char **twodarray, t_room *lem_head)
 {
     if ((dip_Switch & 2) == 0 || (dip_Switch & 4) == 0)
     {
-        ft_putstr("Error: Badly Formatted Map no start or end \n");
-        exit(1);   
+        err_duo(&lem_head, twodarray);
     }
     if ((dip_Switch & 8) == 0)
     {
-        ft_putstr("Error: Badly Formatted no Pipes \n");
-        exit(1);
+        err_duo(&lem_head, twodarray);
     }
     if ((dip_Switch & 16) == 0)
     {
-        ft_putstr("Error: Badly Formatted no rooms \n");
-        exit(1);
+        err_duo(&lem_head, twodarray);
     }
 }
 
 // checking to see if the name passed in pipes exist and is not fake
-void ft_wrong_name_error(char *firstName, char *lastName, t_room *lem_head)
+void ft_wrong_name_error(char *firstName, char *lastName, t_room *lem_head, char **twodarray)
 {
     t_room *tmp;
     int     count;
@@ -63,12 +60,12 @@ void ft_wrong_name_error(char *firstName, char *lastName, t_room *lem_head)
     }
     if (count < 1)
     {
-        ft_putendl("ERROR: room name does not exist");
-        exit(1);
+        free_two_strings(firstName, lastName);
+        err_duo(&lem_head, twodarray);
     }
     if (count2 < 1)
     {
-        ft_putendl("ERROR: room name does not exist");
-        exit(1);
+        free_two_strings(firstName, lastName);
+        err_duo(&lem_head, twodarray);
     }
 }

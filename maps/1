@@ -10,7 +10,6 @@ end 1 2
 ##alltheway
 start 2 3
 a 3 4
-##start
 b 4 5
 start-a
 a-b

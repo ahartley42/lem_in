@@ -67,7 +67,7 @@ int ft_check_address_exists(char *firstName, char *lastName, t_room *lem_head)
     return (1);
 }
 
-void    check_x_and_y(t_room *lem_head)
+void    check_x_and_y(t_room *lem_head, char **twodarray, char *firstName, char *lastName)
 {
     t_room *tmp;
     t_room *tmp2;
@@ -81,10 +81,15 @@ void    check_x_and_y(t_room *lem_head)
         {
             while ((tmp2) != NULL)
             {
-                if (tmp->xy[0] == tmp2->xy[0] && tmp->xy[1] == tmp2->xy[1])
+                if (tmp->xy[0] == tmp2->xy[0])
                 {
-                    ft_putendl("ERROR: overlapping rooms");
-                    exit(1);
+                    free_two_strings(firstName, lastName);
+                    err_duo(&lem_head, twodarray);
+                }
+                if (tmp->xy[1] == tmp2->xy[1])
+                {
+                    free_two_strings(firstName, lastName);
+                    err_duo(&lem_head, twodarray);
                 }
                 tmp2 = tmp2->next;
             }
@@ -112,8 +117,8 @@ void    ft_add_pipe_address(t_room *lem_head,char **twodarray, int *i)
         lastName = ft_find_lastName(twodarray, &j);
         if (twodarray[j][0] != '#')
         {
-            check_x_and_y(lem_head);
-            ft_wrong_name_error(firstName, lastName, lem_head);
+            check_x_and_y(lem_head, twodarray, firstName, lastName);
+            ft_wrong_name_error(firstName, lastName, lem_head, twodarray);
             if (ft_check_address_exists(firstName, lastName, lem_head) == 1){
             while ((tmp) != NULL)
             {

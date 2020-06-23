@@ -25,15 +25,12 @@ int    ft_check_start_end(char *twodarray)
     return (2);
 }
 
-void ft_keep_track_start_end(int total, unsigned char *dip_Switch)
+void ft_keep_track_start_end(int total, unsigned char *dip_Switch, char **twodarray, t_room *lem)
 {
     if (total == 0)
     {
         if ((*dip_Switch & 2) == 2)
-        {
-            ft_putstr("Error: two starts error Program Exit\n");
-            exit(1);
-        }
+        err_duo(&lem, twodarray);
         *dip_Switch |= 32;
         if ((*dip_Switch & 2) == 0)
         *dip_Switch |= 2;
@@ -41,10 +38,7 @@ void ft_keep_track_start_end(int total, unsigned char *dip_Switch)
     if (total == 1)
     {
         if ((*dip_Switch & 4) == 4)
-        {
-            ft_putstr("Error: two ends error Program Exit\n");
-            exit(1);
-        }
+        err_duo(&lem, twodarray);
         *dip_Switch |= 64;
         if ((*dip_Switch & 4) == 0)
         *dip_Switch |= 4;

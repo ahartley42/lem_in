@@ -6,7 +6,7 @@
 /*   By: svan-nie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/22 12:07:29 by svan-nie          #+#    #+#             */
-/*   Updated: 2020/06/23 22:11:41 by svan-nie         ###   ########.fr       */
+/*   Updated: 2020/06/24 00:37:35 by svan-nie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,22 +47,32 @@ char				**read_map();
 void 				verify_map_and_data(t_room *lem_tmp, t_room *lem_head, char **twodarray, int *ant_amount);
 
 int    				ft_check_start_end(char *twodarray);
-void 				ft_keep_track_start_end(int total, unsigned char *dip_Switch);
+// void 				ft_keep_track_start_end(int total, unsigned char *dip_Switch);
+void 				ft_keep_track_start_end(int total, unsigned char *dip_Switch, char **twodarray, t_room *lem);
 char    			*ft_find_firstName(char **twodarray, int *i);
 char    			*ft_find_lastName(char **twodarray, int *i);
 int 				ft_check_address_exists(char *firstName, char *lastName, t_room *lem_head);
-void    			check_x_and_y(t_room *lem_head);
+// void    			check_x_and_y(t_room *lem_head);
+// void    			check_x_and_y(t_room *lem_head, char **twodarray);
+void    			check_x_and_y(t_room *lem_head, char **twodarray, char *firstName, char *lastName);
 void    			ft_add_pipe_address(t_room *lem_head,char **twodarray, int *i);
-void    			ft_check_one(char **twodarray, int *i);
-void    			ft_check_for_ant_amount(char **twodarray, int *i, int *ant_amount);
-void 				ft_check_start_room(char **twodarray, int *i);
-void 				ft_check_end_room(char **twodarray, int *i);
-void    			ft_check_valid_room(t_room *lem_tmp, char **twodarray, int *ij, unsigned char *dip_Switch);
+// void    			ft_check_one(char **twodarray, int *i);
+void    			ft_check_one(char **twodarray, int *i, t_room *lem);
+// void    			ft_check_for_ant_amount(char **twodarray, int *i, int *ant_amount);
+void				ft_check_for_ant_amount(char **twodarray, int *i, int *ant_amount, t_room *lem);
+void 				ft_check_start_room(char **twodarray, int *i, t_room *lem);
+void 				ft_check_end_room(char **twodarray, int *i, t_room *lem);
+// void    			ft_check_valid_room(t_room *lem_tmp, char **twodarray, int *ij, unsigned char *dip_Switch);
+void    			ft_check_valid_room(t_room *lem_tmp, t_room *lem, char **twodarray, int *ij, unsigned char *dip_Switch);
 
-int    				ft_strlen_pipes(char *str);
-void 				ft_strlen_space_count(char *str);
-int 				ft_strlen_space_error(char *str);
-int 				ft_strlen_space(char *str);
+// int    				ft_strlen_pipes(char *str);
+int					ft_strlen_pipes(char *str, char **twodarray, t_room *lem);
+// void 				ft_strlen_space_count(char *str);
+void 				ft_strlen_space_count(char *str, char **twodarray, t_room *lem);
+// int 				ft_strlen_space_error(char *str);
+int 				ft_strlen_space_error(char *str, char **twodarray, t_room *lem);
+// int 				ft_strlen_space(char *str);
+int 				ft_strlen_space(char *str, char **twodarray, t_room *lem);
 // void    			ft_strlen_2d_array(char **str);
 void    			ft_strlen_2d_array(char **str, t_room *lem);
 int 				ft_strlen_hyphen(char **twodarray,int *i);
@@ -75,8 +85,10 @@ void				rpush(t_room **room, t_room *add);
 void				rpop(t_room **room, int i);
 
 void				error(unsigned char e);
-void 				ft_check_for_error(unsigned char dip_Switch);
-void 				ft_wrong_name_error(char *firstName, char *lastName, t_room *lem_head);
+// void 				ft_check_for_error(unsigned char dip_Switch);
+void 				ft_check_for_error(unsigned char dip_Switch, char **twodarray, t_room *lem_head);
+// void 				ft_wrong_name_error(char *firstName, char *lastName, t_room *lem_head);
+void 				ft_wrong_name_error(char *firstName, char *lastName, t_room *lem_head, char **twodarray);
 
 int					pathfinder(t_room **room);
 int					path_size(t_room **room);

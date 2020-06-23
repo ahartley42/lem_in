@@ -29,10 +29,10 @@ void    ft_add_rooms(t_room *lem, char **room_data, int *j)
     lem->path = NULL;
     lem->next = NULL;
     lem->next = initialize_struct();
-    if ((lem->type & 6) == 6)
-    {
-        exit(1);
-    }
+    // if ((lem->type & 6) == 6)
+    // {
+    //     exit(1);
+    // }
 }
 
 void    ft_add_start_room(t_room *lem, char **room_data, int *j)
@@ -52,10 +52,10 @@ void    ft_add_start_room(t_room *lem, char **room_data, int *j)
     lem->path = NULL;
     lem->next = NULL;
     lem->next = initialize_struct();
-    if ((lem->type & 6) == 6)
-    {
-        exit(1);
-    }
+    // if ((lem->type & 6) == 6)
+    // {
+    //     exit(1);
+    // }
 }
 
 void    ft_add_end_room(t_room *lem, char **room_data, int *j)
@@ -75,8 +75,8 @@ void    ft_add_end_room(t_room *lem, char **room_data, int *j)
     lem->path = NULL;
     lem->next = NULL;
     lem->next = initialize_struct();
-    if ((lem->type & 6) == 6)
-    {
-        exit(1);
-    }
+    // if ((lem->type & 6) == 6)
+    // {
+    //     exit(1);
+    // }
 }

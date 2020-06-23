@@ -12,28 +12,28 @@
 
 #include "../includes/lem_in.h"
 
-void    check_if_pipe(t_room *lem_head,char **twodarray, int *i, unsigned char *dip_Switch)
+static void    check_if_pipe(t_room *lem_head,char **twodarray, int *i, unsigned char *dip_Switch)
 {
     int strlenpipe;
     int j;
 
     strlenpipe = 0;
     j = *i;
-    if ((strlenpipe = ft_strlen_space(twodarray[j])) && twodarray[j][strlenpipe] == '\0' && twodarray[j][0] != '#')
+    if ((strlenpipe = ft_strlen_space(twodarray[j], twodarray, lem_head)) && twodarray[j][strlenpipe] == '\0' && twodarray[j][0] != '#')
     {
-    if (( strlenpipe = ft_strlen_pipes(twodarray[j])) == 1)
+    if (( strlenpipe = ft_strlen_pipes(twodarray[j], twodarray, lem_head)) == 1)
     {
         ft_add_pipe_address(lem_head, twodarray, &j);
     }
-    else{
-        ft_putstr("Error: Invalid Pipe \n");
-    }
+    else
+    err_duo(&lem_head, twodarray);
+
     *dip_Switch |= 8;
     *i = j;
     }
 }
 
-void    ft_check_for_random_ants(char **twodarray, int *i)
+static void    ft_check_for_random_ants(char **twodarray, int *i, t_room *lem)
 {
     int j;
 
@@ -41,25 +41,26 @@ void    ft_check_for_random_ants(char **twodarray, int *i)
     if (check_int(twodarray[j]) == 1)
     {
         ft_putstr("Error: Badly Formatted Map, Ants all ready Found \n");
-        exit(1);
+        err_duo(&lem, twodarray);
+        // exit(1);
     }
     *i = j;
 }
 
-void    ft_check_start_end_room(char **twodarray,int *ij, int total, unsigned char *dip_Switch)
+static void    ft_check_start_end_room(char **twodarray,int *ij, unsigned char *dip_Switch, t_room *lem)
 {
     if (twodarray[ij[0]][0] == '#' && twodarray[ij[0]][1] == '#')
     {
-        total = ft_check_start_end(twodarray[ij[0]]);
-        ft_keep_track_start_end(total, dip_Switch);
+        ij[2] = ft_check_start_end(twodarray[ij[0]]);
+        ft_keep_track_start_end(ij[2], dip_Switch, twodarray, lem);
         if ((*dip_Switch & 32) == 32)
-        ft_check_start_room(twodarray, &ij[0]);
+        ft_check_start_room(twodarray, &ij[0], lem);
         if ((*dip_Switch & 64) == 64)
-        ft_check_end_room(twodarray, &ij[0]);
+        ft_check_end_room(twodarray, &ij[0], lem);
     }
 }
 
-void    ft_skip_comment(char **twodarray,int *ij)
+static void    ft_skip_comment(char **twodarray,int *ij)
 {
         if (twodarray[ij[0]][0] == '#' && twodarray[ij[0]][1] != '#')
         ij[0]++;
@@ -67,31 +68,31 @@ void    ft_skip_comment(char **twodarray,int *ij)
 
 void    verify_map_and_data(t_room *lem_tmp, t_room *lem_head, char **twodarray, int *ant_amount)
 {
-    int     ij[2];
-    int     total;
+    int     ij[3];
+    // int     total;
     int     strlen;
     unsigned char   dip_Switch;
 
     ij[0] = 0;
     ij[1] = 0;
-    total = 0;
+    ij[2] = 0;
     strlen = 0;
-    ft_check_one(twodarray, &ij[0]);
-    ft_check_for_ant_amount(twodarray, &ij[0], ant_amount);
+    ft_check_one(twodarray, &ij[0], lem_head);
+    ft_check_for_ant_amount(twodarray, &ij[0], ant_amount, lem_head);
     while (twodarray[ij[0]])
     {
         ft_skip_comment(twodarray, &ij[0]);
-        ft_check_for_random_ants(twodarray, &ij[0]);
-        ft_check_start_end_room(twodarray, ij, total, &dip_Switch);
-        if ((strlen = ft_strlen_space(twodarray[ij[0]])) && twodarray[ij[0]][strlen] == ' ' && twodarray[ij[0]][strlen + 1]){
-            ft_check_valid_room(lem_tmp, twodarray, ij, &dip_Switch);
+        ft_check_for_random_ants(twodarray, &ij[0], lem_head);
+        ft_check_start_end_room(twodarray, ij, &dip_Switch, lem_head);
+        if ((strlen = ft_strlen_space(twodarray[ij[0]], twodarray, lem_head)) && twodarray[ij[0]][strlen] == ' ' && twodarray[ij[0]][strlen + 1]){
+            ft_check_valid_room(lem_tmp, lem_head, twodarray, ij, &dip_Switch);
             lem_tmp = lem_tmp->next;
         }
         check_if_pipe(lem_head, twodarray, &ij[0], &dip_Switch);
         ij[0]++;
         strlen = 0;
     }
-    ft_check_for_error(dip_Switch);
+    ft_check_for_error(dip_Switch, twodarray, lem_head);
 }
 
 /*

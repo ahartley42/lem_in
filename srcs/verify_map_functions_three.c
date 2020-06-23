@@ -12,7 +12,7 @@
 
 #include "../includes/lem_in.h"
 
-void    ft_check_one(char **twodarray, int *i)
+void    ft_check_one(char **twodarray, int *i, t_room *lem)
 {
     int j;
 
@@ -24,11 +24,11 @@ void    ft_check_one(char **twodarray, int *i)
     if (j < 2)
     {
         ft_putendl("Error: wrong");
-        exit(1);
+        err_duo(&lem, twodarray);
     }
 }
 
-void    ft_check_for_ant_amount(char **twodarray, int *i, int *ant_amount)
+void    ft_check_for_ant_amount(char **twodarray, int *i, int *ant_amount, t_room *lem)
 {
     int j;
 
@@ -50,74 +50,60 @@ void    ft_check_for_ant_amount(char **twodarray, int *i, int *ant_amount)
         j++;
     }
     if (*ant_amount == 0)
-    {
-        ft_putstr("Error: please enter ant's\n");
-        exit(1);
-    }
+    err_duo(&lem, twodarray);
     j++;
     *i = j;
 }
 
-void ft_check_start_room(char **twodarray, int *i)
+void ft_check_start_room(char **twodarray, int *i, t_room *lem)
 {
     int j;
     int strlen;
 
     j = *i;
     strlen = 0;
-    if (twodarray[j + 1])
+    if (twodarray[j + 1]) // checking to see if there is something after the ##start room if there is j++ or error out
     j++;
     else
-    {
-        ft_putendl("ERROR");
-        exit(1);
-    }
+    err_duo(&lem, twodarray);
+
     while ((twodarray[j][0] == '#' && (twodarray[j][1] != '#' || twodarray[j][1] == '\0')) || (twodarray[j][0] == '#' && twodarray[j][1] == '#'))
     j++;
-    if ((strlen = ft_strlen_space(twodarray[j])) && twodarray[j][strlen] == ' ' && twodarray[j][strlen + 1])
+    if ((strlen = ft_strlen_space(twodarray[j], twodarray, lem)) && twodarray[j][strlen] == ' ' && twodarray[j][strlen + 1])
     {
     }
     else
-    {
-        ft_putendl("Error: starting room invalid");
-        exit(1);
-    }
+    err_duo(&lem, twodarray);
     *i = j;
 }
 
-void ft_check_end_room(char **twodarray, int *i)
+void ft_check_end_room(char **twodarray, int *i, t_room *lem)
 {
     int j;
     int strlen;
 
     j = *i;
     strlen = 0;
-    if (twodarray[j + 1])
+    if (twodarray[j + 1]) // checking to see if there is something after the ##end room if there is j++ or error out
     j++;
     else
-    {
-        ft_putendl("ERROR");
-        exit(1);
-    }
+    err_duo(&lem, twodarray);
     while ((twodarray[j][0] == '#' && (twodarray[j][1] != '#' || twodarray[j][1] == '\0')) || (twodarray[j][0] == '#' && twodarray[j][1] == '#'))
     j++;
-    if ((strlen = ft_strlen_space(twodarray[j])) && twodarray[j][strlen] == ' ' && twodarray[j][strlen + 1])
+    if ((strlen = ft_strlen_space(twodarray[j], twodarray, lem)) && twodarray[j][strlen] == ' ' && twodarray[j][strlen + 1])
     {
     }
     else
-    {
-        ft_putendl("Error: ending room invalid");
-        exit(1);
-    }
+    err_duo(&lem, twodarray);
     *i = j;
 }
 
-void    ft_check_valid_room(t_room *lem_tmp, char **twodarray, int *ij, unsigned char *dip_Switch)
+void    ft_check_valid_room(t_room *lem_tmp, t_room *lem, char **twodarray, int *ij, unsigned char *dip_Switch)
 {
             char    **check_rooms;
-            ft_strlen_space_count(twodarray[ij[0]]);
+            ft_strlen_space_count(twodarray[ij[0]], twodarray, lem);
             check_rooms = ft_strsplit(twodarray[ij[0]], ' ');
-            ft_strlen_space_error(check_rooms[0]);
+            ft_strlen_space_error(check_rooms[0], twodarray, lem);
             if (check_int(check_rooms[1]) == 1 && check_int(check_rooms[2]) == 1)
             {
                 if ((*dip_Switch & 32) == 32){
@@ -131,10 +117,11 @@ void    ft_check_valid_room(t_room *lem_tmp, char **twodarray, int *ij, unsigned
                 {
                     ft_add_rooms(lem_tmp, check_rooms, &ij[1]);
                 }
-            }else
+            }
+            else
             {
-                ft_putstr("Error: Badly Formatted Map X Y not integer \n");
-                exit(1);
+                free2dArray(check_rooms);
+                err_duo(&lem, twodarray);
             }
             *dip_Switch |= 16;
             free2dArray(check_rooms);

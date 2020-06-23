@@ -1,0 +1,33 @@
+if exit exists
+
+void    ft_strlen_2d_array(char **str, t_room *lem)
+
+ft_check_one(twodarray, &ij[0], lem_head);
+
+ft_check_for_ant_amount(twodarray, &ij[0], ant_amount, lem_head);
+
+ft_check_for_random_ants(twodarray, &ij[0], lem_head);
+
+void ft_keep_track_start_end(int total, unsigned char *dip_Switch, char **twodarray, t_room *lem);
+
+void ft_check_start_room(char **twodarray, int *i, t_room *lem);
+
+void ft_check_end_room(char **twodarray, int *i, t_room *lem);
+
+int ft_strlen_space(char *str, char **twodarray, t_room *lem); // really not need to do this check because it does it in ft_strlen_2d_array but added a free to it
+
+void    ft_check_valid_room(t_room *lem_tmp, t_room *lem, char **twodarray, int *ij, unsigned char *dip_Switch);
+
+void ft_strlen_space_count(char *str, char **twodarray, t_room *lem);
+
+int ft_strlen_space_error(char *str, char **twodarray, t_room *lem);
+
+int    ft_strlen_pipes(char *str, char **twodarray, t_room *lem);
+
+void    check_x_and_y(t_room *lem_head, char **twodarray, char *firstName, char *lastName);
+
+void 	ft_wrong_name_error(char *firstName, char *lastName, t_room *lem_head, char **twodarray); // function needs to be created to free lastName firstName + struct and 2d array
+
+static void    check_if_pipe(t_room *lem_head,char **twodarray, int *i, unsigned char *dip_Switch);
+
+add_room.c // is the exit needed inside it comment out right now code is working perfect still

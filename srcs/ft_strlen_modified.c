@@ -13,17 +13,14 @@
 #include "../includes/lem_in.h"
 
 // looking for space in ft_strlen if it comes accross L error out
-int ft_strlen_space(char *str)
+int ft_strlen_space(char *str, char **twodarray, t_room *lem)
 {
     size_t i;
     
     i = 0;
 
     if(str[i] == 'L')
-    {
-        ft_putstr("Error: cannot have caps L at the start of the name \n");
-        exit(1);
-    }
+    err_duo(&lem, twodarray);
     while(str[i] != '\0')
     {
         if (str[i] == ' ')
@@ -36,24 +33,18 @@ int ft_strlen_space(char *str)
 }
 
 // looking for space in ft_strlen if it comes accross L or - in a name it will error out
-int ft_strlen_space_error(char *str)
+int ft_strlen_space_error(char *str, char **twodarray, t_room *lem)
 {
     int i;
     
     i = 0;
 
     if(str[i] == 'L')
-    {
-        ft_putstr("Error: cannot have caps L at the start of the name \n");
-        exit(1);
-    }
+    err_duo(&lem, twodarray);
     while(str[i] != '\0')
     {
         if (str[i] == '-')
-        {
-            ft_putstr("Error: cannot have a - in the name \n");
-            exit(1);
-        }
+        err_duo(&lem, twodarray);
         if (str[i] == ' ')
         {
             break;
@@ -64,7 +55,7 @@ int ft_strlen_space_error(char *str)
 }
 
 // counts the amount of spaces if smaller than 2 or bigger than two error
-void ft_strlen_space_count(char *str)
+void ft_strlen_space_count(char *str, char **twodarray, t_room *lem)
 {
     int i;
     int k;
@@ -80,12 +71,12 @@ void ft_strlen_space_count(char *str)
     if (k > 2 || k < 2)
     {
         ft_putstr("Error: Badly Formatted Map, room invalid \n");
-        exit(1);
+        err_duo(&lem, twodarray);
     }
 }
 
 // checking to see if there is only 1 '-' in the name else error
-int    ft_strlen_pipes(char *str)
+int    ft_strlen_pipes(char *str, char **twodarray, t_room *lem)
 {
     int i;
     int j;
@@ -93,25 +84,17 @@ int    ft_strlen_pipes(char *str)
     i = 0;
     j = 0;
     if(str[i] == 'L')
-    {
-        ft_putstr("Error: cannot have caps L at the start of the name \n");
-        exit(1);
-    }
+    err_duo(&lem, twodarray);
     if (str[i] == '-')
-    {
-        ft_putstr("Error: Badly Formatted pipes \n");
-        exit(1); 
-    }
+    err_duo(&lem, twodarray);
     while (str[i] != '\0')
     {
         if (str[i] == '-')
         j++;
         i++;
     }
-    if (j != 1){
-        ft_putstr("Error: Badly Formatted Map, pipe invalid \n");
-        exit(1);
-    }
+    if (j != 1)
+    err_duo(&lem, twodarray);
     return (1);
 }
 
