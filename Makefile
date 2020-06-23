@@ -19,7 +19,7 @@ GCC = gcc
 SRC_PATH = srcs/
 OBJ_PATH = obj/
 
-SRC = check_int.c free.c main.c read_map.c check_ants.c ft_strlen_modified.c verify_map_add_data.c initialize_struct.c add_rooms.c ft_strlen_modified_two.c ft_strcpy_modified.c error.c pathfinder.c verify_map_functions_one.c verify_map_functions_two.c
+SRC = check_int.c free.c main.c read_map.c check_ants.c ft_strlen_modified.c verify_map_add_data.c initialize_struct.c add_rooms.c ft_strlen_modified_two.c ft_strcpy_modified.c error.c pathfinder.c verify_map_functions_one.c verify_map_functions_two.c verify_map_functions_three.c
 OBJ = $(SRC:%.c=%.o)
 
 OBJ_USAGE = $(addprefix $(OBJ_PATH), $(OBJ))
