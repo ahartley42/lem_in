@@ -12,7 +12,6 @@
 
 #include "../includes/lem_in.h"
 
-// going to go through all the (tmp)->path to see if the room all ready exists inside if it does it will just skip it
 int ft_check_address_exists(char *firstName, char *lastName, t_room *lem_head)
 {
     t_room *tmp;
@@ -115,7 +114,7 @@ void    ft_add_pipe_address(t_room *lem_head,char **twodarray, int *i)
         {
             check_x_and_y(lem_head);
             ft_wrong_name_error(firstName, lastName, lem_head);
-            if (ft_check_address_exists(firstName, lastName, lem_head) == 1){ // working on this function
+            if (ft_check_address_exists(firstName, lastName, lem_head) == 1){
             while ((tmp) != NULL)
             {
              if (ft_strequ(firstName, (tmp)->name))
@@ -138,3 +137,9 @@ void    ft_add_pipe_address(t_room *lem_head,char **twodarray, int *i)
         free_two_strings(firstName, lastName);
     }
 }
+
+/*
+** line 15
+** going to go through all the (tmp)->path to see if the room all ready exists inside if it does it will just skip it
+** working on this function
+*/
