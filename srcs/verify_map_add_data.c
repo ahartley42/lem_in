@@ -217,7 +217,7 @@ void    verify_map_and_data(t_room *lem_tmp, t_room *lem_head, char **twodarray,
             ft_check_end_room(twodarray, &i);
         }
         if ((strlen = ft_strlen_space(twodarray[i])) && twodarray[i][strlen] == ' ' && twodarray[i][strlen + 1]){ // checks for room valid
-            // ft_check_valid_room(lem_tmp, twodarray, &i, &j, &isStart, &isEnd , &dip_Switch);
+            // ft_check_valid_room(lem_tmp, twodarray, &i, &j, &dip_Switch);
             char    **check_rooms;
             ft_strlen_space_count(twodarray[i]); // counting the amount of spaces more or less than 2 displays error
             check_rooms = ft_strsplit(twodarray[i], ' ');
@@ -225,19 +225,16 @@ void    verify_map_and_data(t_room *lem_tmp, t_room *lem_head, char **twodarray,
             if (check_int(check_rooms[1]) == 1 && check_int(check_rooms[2]) == 1)
             {
                 if ((dip_Switch & 32) == 32){
-                    printf("i was here start \n");
                     dip_Switch ^= 32;
                     ft_add_start_room(lem_tmp, check_rooms, &j);
                     lem_tmp = lem_tmp->next;
                 }else if ((dip_Switch & 64) == 64)
                 {
-                    printf("i was here end \n");
                     dip_Switch ^= 64;
                     ft_add_end_room(lem_tmp, check_rooms, &j);
                     lem_tmp = lem_tmp->next;
                 }else
                 {
-                    printf("i was here random \n");
                     ft_add_rooms(lem_tmp, check_rooms, &j);
                     lem_tmp = lem_tmp->next;
                 }
