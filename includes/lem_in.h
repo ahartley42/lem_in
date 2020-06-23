@@ -84,47 +84,48 @@ void				print_solution(t_room **room, int ants, int i);
 
 #endif
 
-
-//struct
-// line 31 - 32
-// line 23
-// id of room
-// line 24
-// id of ant
-// line 25
-// counter for how many times transversed
-// line 26
-// x and y coordinates
-// line 27
-// name of room
-// line 28
-// 4 = end, 2 = start, 1 = occupied
-// line 29
-// array of linked paths
-// line 30
-// node to next
-// line 32
-// *initialize_struct();
-// initialize_struct setting it to NULL and 0
-// line 34 - 36
-// adding Rooms
-// line 38 - 39
-// checking to see if integer
-// line 41 - 43
-// Freeing 2dArray and the whole linkList
-// line 46
-// Read_map
-// line 48
-// verify_map
-// line 50 - 61
-// verify_map_functions
-// line 63 - 69
-// strlen_modified
-// line 71 - 72
-// strcpy_modified
-// line 74 - 75
-// algorithm
-// line 77 - 79
-// error
-// line 81 - 83
-// pathfind algo and print solution
+/*
+** struct
+** line 31 - 32
+** line 23
+** id of room
+** line 24
+** id of ant
+** line 25
+** counter for how many times transversed
+** line 26
+** x and y coordinates
+** line 27
+** name of room
+** line 28
+** 4 = end, 2 = start, 1 = occupied
+** line 29
+** array of linked paths
+** line 30
+** node to next
+** line 32
+** *initialize_struct();
+** initialize_struct setting it to NULL and 0
+** line 34 - 36
+** adding Rooms
+** line 38 - 39
+** checking to see if integer
+** line 41 - 43
+** Freeing 2dArray and the whole linkList
+** line 46
+** Read_map
+** line 48
+** verify_map
+** line 50 - 61
+** verify_map_functions
+** line 63 - 69
+** strlen_modified
+** line 71 - 72
+** strcpy_modified
+** line 74 - 75
+** algorithm
+** line 77 - 79
+** error
+** line 81 - 83
+** pathfind algo and print solution
+*/
