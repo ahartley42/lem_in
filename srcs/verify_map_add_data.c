@@ -116,46 +116,36 @@ void ft_check_end_room(char **twodarray, int *i)
     *i = j;
 }
 
-// void    ft_check_valid_room(t_room *lem_tmp, char **twodarray, int *ij, unsigned char *dip_Switch)
-// {
-//     int     strlen;
-// printf("was i here1 \n");
-//     strlen = 0;
-//         if ((strlen = ft_strlen_space(twodarray[ij[0]])) && twodarray[ij[0]][strlen] == ' ' && twodarray[ij[0]][strlen + 1]){ // checks for room valid
-//         printf("was i here2 \n");
-//             char    **check_rooms;
-//             ft_strlen_space_count(twodarray[ij[0]]); // counting the amount of spaces more or less than 2 displays error
-//             check_rooms = ft_strsplit(twodarray[ij[0]], ' ');
-//             ft_strlen_space_error(check_rooms[0]); // checks for name starting with L and - inside the name
-//             if (check_int(check_rooms[1]) == 1 && check_int(check_rooms[2]) == 1)
-//             {
-//                 if ((*dip_Switch & 32) == 32){
-//                     printf("was i here3 \n");
-//                     *dip_Switch ^= 32;
-//                     ft_add_start_room(lem_tmp, check_rooms, &ij[1]);
-//                     lem_tmp = lem_tmp->next;
-//                 }else if ((*dip_Switch & 64) == 64)
-//                 {
-//                     printf("was i here4 \n");
-//                     *dip_Switch ^= 64;
-//                     ft_add_end_room(lem_tmp, check_rooms, &ij[1]);
-//                     lem_tmp = lem_tmp->next;
-//                 }else
-//                 {
-//                     printf("was i here5 \n");
-//                     ft_add_rooms(lem_tmp, check_rooms, &ij[1]);
-//                     lem_tmp = lem_tmp->next;
-//                 }
-//             }else
-//             {
-//                 ft_putstr("Error: Badly Formatted Map X Y not integer \n");
-//                 exit(1);
-//             }
-//             printf("was i here6 \n");
-//             *dip_Switch |= 16;
-//             free2dArray(check_rooms);
-//         }
-// }
+void    ft_check_valid_room(t_room *lem_tmp, char **twodarray, int *ij, unsigned char *dip_Switch)
+{
+            char    **check_rooms;
+            ft_strlen_space_count(twodarray[ij[0]]); // counting the amount of spaces more or less than 2 displays error
+            check_rooms = ft_strsplit(twodarray[ij[0]], ' ');
+            ft_strlen_space_error(check_rooms[0]); // checks for name starting with L and - inside the name
+            if (check_int(check_rooms[1]) == 1 && check_int(check_rooms[2]) == 1)
+            {
+                if ((*dip_Switch & 32) == 32){
+                    *dip_Switch ^= 32;
+                    ft_add_start_room(lem_tmp, check_rooms, &ij[1]);
+                    // lem_tmp = lem_tmp->next;
+                }else if ((*dip_Switch & 64) == 64)
+                {
+                    *dip_Switch ^= 64;
+                    ft_add_end_room(lem_tmp, check_rooms, &ij[1]);
+                    // lem_tmp = lem_tmp->next;
+                }else
+                {
+                    ft_add_rooms(lem_tmp, check_rooms, &ij[1]);
+                    // lem_tmp = lem_tmp->next;
+                }
+            }else
+            {
+                ft_putstr("Error: Badly Formatted Map X Y not integer \n");
+                exit(1);
+            }
+            *dip_Switch |= 16;
+            free2dArray(check_rooms);
+}
 
 void    check_if_pipe(t_room *lem_head,char **twodarray, int *i, unsigned char *dip_Switch)
 {
@@ -219,35 +209,9 @@ void    verify_map_and_data(t_room *lem_tmp, t_room *lem_head, char **twodarray,
             if ((dip_Switch & 64) == 64)
             ft_check_end_room(twodarray, &ij[0]);
         }
-        // ft_check_valid_room(lem_tmp, twodarray, ij, &dip_Switch);
         if ((strlen = ft_strlen_space(twodarray[ij[0]])) && twodarray[ij[0]][strlen] == ' ' && twodarray[ij[0]][strlen + 1]){ // checks for room valid
-            char    **check_rooms;
-            ft_strlen_space_count(twodarray[ij[0]]); // counting the amount of spaces more or less than 2 displays error
-            check_rooms = ft_strsplit(twodarray[ij[0]], ' ');
-            ft_strlen_space_error(check_rooms[0]); // checks for name starting with L and - inside the name
-            if (check_int(check_rooms[1]) == 1 && check_int(check_rooms[2]) == 1)
-            {
-                if ((dip_Switch & 32) == 32){
-                    dip_Switch ^= 32;
-                    ft_add_start_room(lem_tmp, check_rooms, &ij[1]);
-                    lem_tmp = lem_tmp->next;
-                }else if ((dip_Switch & 64) == 64)
-                {
-                    dip_Switch ^= 64;
-                    ft_add_end_room(lem_tmp, check_rooms, &ij[1]);
-                    lem_tmp = lem_tmp->next;
-                }else
-                {
-                    ft_add_rooms(lem_tmp, check_rooms, &ij[1]);
-                    lem_tmp = lem_tmp->next;
-                }
-            }else
-            {
-                ft_putstr("Error: Badly Formatted Map X Y not integer \n");
-                exit(1);
-            }
-            dip_Switch |= 16;
-            free2dArray(check_rooms);
+            ft_check_valid_room(lem_tmp, twodarray, ij, &dip_Switch);
+            lem_tmp = lem_tmp->next;
         }
         check_if_pipe(lem_head, twodarray, &ij[0], &dip_Switch); // checks to see if pipes is valid
         ij[0]++;
