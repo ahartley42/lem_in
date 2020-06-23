@@ -6,7 +6,7 @@
 /*   By: svan-nie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/22 12:05:26 by svan-nie          #+#    #+#             */
-/*   Updated: 2020/06/22 12:05:48 by svan-nie         ###   ########.fr       */
+/*   Updated: 2020/06/23 22:13:25 by svan-nie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int main(void)
 	i = 0;
     tmp = lem;
     map = read_map();
-    ft_strlen_2d_array(map);
+    ft_strlen_2d_array(map, lem);
     verify_map_and_data(tmp, lem, map, &ant_amount);
 	tmp = lem;
 	while (!(tmp->type & 2))
