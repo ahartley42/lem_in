@@ -35,10 +35,10 @@ int main(void)
 		err_duo(&lem, map);
 	while (map[i])
 		ft_putendl(map[i++]);
+    free2dArray(map);
 	i = 0;
 	while (++i < ant_amount + path_size(&tmp))
 		print_solution(&tmp, ant_amount, i);
-    free2dArray(map);
     froom(&lem);
     return (0);
 }
