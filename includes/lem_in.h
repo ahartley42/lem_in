@@ -81,6 +81,10 @@ int					pathfinder(t_room **room);
 int					path_size(t_room **room);
 void				print_solution(t_room **room, int ants, int i);
 
+void				err_map(char **map);
+void				err_room(t_room **room);
+void				err_duo(t_room **room, char **map);
+
 #endif
 
 /*
