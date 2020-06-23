@@ -19,7 +19,7 @@ void    check_if_pipe(t_room *lem_head,char **twodarray, int *i, unsigned char *
 
     strlenpipe = 0;
     j = *i;
-    if ((strlenpipe = ft_strlen_space(twodarray[j])) && twodarray[j][strlenpipe] == '\0' && twodarray[j][0] != '#') // checks to see if pipes is valid
+    if ((strlenpipe = ft_strlen_space(twodarray[j])) && twodarray[j][strlenpipe] == '\0' && twodarray[j][0] != '#')
     {
     if (( strlenpipe = ft_strlen_pipes(twodarray[j])) == 1)
     {
@@ -38,7 +38,7 @@ void    ft_check_for_random_ants(char **twodarray, int *i)
     int j;
 
     j = *i;
-    if (check_int(twodarray[j]) == 1) // checks to see if more than one ant
+    if (check_int(twodarray[j]) == 1)
     {
         ft_putstr("Error: Badly Formatted Map, Ants all ready Found \n");
         exit(1);
@@ -48,7 +48,7 @@ void    ft_check_for_random_ants(char **twodarray, int *i)
 
 void    ft_check_start_end_room(char **twodarray,int *ij, int total, unsigned char *dip_Switch)
 {
-    if (twodarray[ij[0]][0] == '#' && twodarray[ij[0]][1] == '#') // checks for start and end
+    if (twodarray[ij[0]][0] == '#' && twodarray[ij[0]][1] == '#')
     {
         total = ft_check_start_end(twodarray[ij[0]]);
         ft_keep_track_start_end(total, dip_Switch);
@@ -61,7 +61,7 @@ void    ft_check_start_end_room(char **twodarray,int *ij, int total, unsigned ch
 
 void    ft_skip_comment(char **twodarray,int *ij)
 {
-        if (twodarray[ij[0]][0] == '#' && twodarray[ij[0]][1] != '#') // checks for comment
+        if (twodarray[ij[0]][0] == '#' && twodarray[ij[0]][1] != '#')
         ij[0]++;
 }
 
@@ -70,8 +70,7 @@ void    verify_map_and_data(t_room *lem_tmp, t_room *lem_head, char **twodarray,
     int     ij[2];
     int     total;
     int     strlen;
-    //1, 2, 4, 8, 16, 32, 64, 128
-    unsigned char   dip_Switch; // [2] start, [4] end, [8] pipeTrack, [16] roomTrack, [32] isStart, [64] isEnd
+    unsigned char   dip_Switch;
 
     ij[0] = 0;
     ij[1] = 0;
@@ -82,15 +81,38 @@ void    verify_map_and_data(t_room *lem_tmp, t_room *lem_head, char **twodarray,
     while (twodarray[ij[0]])
     {
         ft_skip_comment(twodarray, &ij[0]);
-        ft_check_for_random_ants(twodarray, &ij[0]); // checks to see if more than one ant
+        ft_check_for_random_ants(twodarray, &ij[0]);
         ft_check_start_end_room(twodarray, ij, total, &dip_Switch);
-        if ((strlen = ft_strlen_space(twodarray[ij[0]])) && twodarray[ij[0]][strlen] == ' ' && twodarray[ij[0]][strlen + 1]){ // checks for room valid
+        if ((strlen = ft_strlen_space(twodarray[ij[0]])) && twodarray[ij[0]][strlen] == ' ' && twodarray[ij[0]][strlen + 1]){
             ft_check_valid_room(lem_tmp, twodarray, ij, &dip_Switch);
             lem_tmp = lem_tmp->next;
         }
-        check_if_pipe(lem_head, twodarray, &ij[0], &dip_Switch); // checks to see if pipes is valid
+        check_if_pipe(lem_head, twodarray, &ij[0], &dip_Switch);
         ij[0]++;
         strlen = 0;
     }
-    ft_check_for_error(dip_Switch); //saving lines checks to see if end and start < 1 or if pipeTrack and roomTrack is < 1
+    ft_check_for_error(dip_Switch);
 }
+
+// line 22
+// ft_strlen_space
+// checks to see if pipes is valid
+// line 36
+// ft_check_for_random_ants
+// checks to see if more than one ant
+// line 51
+// ft_check_start_end_room
+// checks for start and end
+// line 62
+// ft_skip_comment
+// checks for comment
+// line 74
+// dip_switch
+// 1, 2, 4, 8, 16, 32, 64, 128
+// [2] start, [4] end, [8] pipeTrack, [16] roomTrack, [32] isStart, [64] isEnd
+// line 90
+// check_if_pipe
+// checks to see if pipes is valid
+// line 94
+// ft_check_for_error
+// saving lines checks to see if end and start or trackroom or trackpipe is on if not error
