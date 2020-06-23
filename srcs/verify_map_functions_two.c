@@ -81,12 +81,7 @@ void    check_x_and_y(t_room *lem_head, char **twodarray, char *firstName, char 
         {
             while ((tmp2) != NULL)
             {
-                if (tmp->xy[0] == tmp2->xy[0])
-                {
-                    free_two_strings(firstName, lastName);
-                    err_duo(&lem_head, twodarray);
-                }
-                if (tmp->xy[1] == tmp2->xy[1])
+                if (tmp->xy[0] == tmp2->xy[0] && tmp->xy[1] == tmp2->xy[1])
                 {
                     free_two_strings(firstName, lastName);
                     err_duo(&lem_head, twodarray);
