@@ -26,33 +26,27 @@ int    ft_check_start_end(char *twodarray)
 }
 
 // keeping track if two starts or ends
-void ft_keep_track_start_end(int total, int *isStart, int *isEnd, unsigned char *dip_Switch)
+void ft_keep_track_start_end(int total, unsigned char *dip_Switch)
 {
-    int st;
-    int ed;
-    st = *isStart; // keeping track how many start and ends it finds
-    ed = *isEnd;
     if (total == 0)
     {
-        st++;
-        *isStart = st;
         if ((*dip_Switch & 2) == 2)
         {
             ft_putstr("Error: two starts error Program Exit\n");
             exit(1);
         }
+        *dip_Switch |= 32;
         if ((*dip_Switch & 2) == 0)
         *dip_Switch |= 2;
     }
     if (total == 1)
     {
-        ed++;
-        *isEnd = ed;
         if ((*dip_Switch & 4) == 4)
         {
             ft_putstr("Error: two ends error Program Exit\n");
             exit(1);
         }
+        *dip_Switch |= 64;
         if ((*dip_Switch & 4) == 0)
         *dip_Switch |= 4;
     }
