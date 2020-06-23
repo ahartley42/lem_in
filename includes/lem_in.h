@@ -89,9 +89,14 @@ void				error(unsigned char e);
 void 				ft_check_for_error(unsigned char dip_Switch);
 void 				ft_wrong_name_error(char *firstName, char *lastName, t_room *lem_head);
 
-//test
+//algorithm and solution
 int					pathfinder(t_room **room);
 int					path_size(t_room **room);
 void				print_solution(t_room **room, int ants, int i);
+
+//generic error
+void				err_map(char **map);
+void				err_room(t_room **room);
+void				err_duo(t_room **room, char **map);
 
 #endif
