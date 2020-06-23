@@ -140,14 +140,15 @@ void    ft_check_valid_room(t_room *lem_tmp, char **twodarray, int *ij, unsigned
             free2dArray(check_rooms);
 }
 
-// line 32
-// ft_check_for_ant_amount
-// looking for ant_amount once found breaks out and returns ant amount  if not found returns error
-// j++ incrementing past the ant_amount
-
-// line 118
-// ft_strlen_space_count
-// counting the amount of spaces more or less than 2 displays error
-// line 120
-// ft_strlen_space_error
-// checks for name starting with L and - inside the name
+/*
+** line 32
+** ft_check_for_ant_amount
+** looking for ant_amount once found breaks out and returns ant amount  if not found returns error
+** j++ incrementing past the ant_amount
+** line 118
+** ft_strlen_space_count
+** counting the amount of spaces more or less than 2 displays error
+** line 120
+** ft_strlen_space_error
+** checks for name starting with L and - inside the name
+*/
