@@ -25,7 +25,6 @@ int    ft_check_start_end(char *twodarray)
     return (2);
 }
 
-// keeping track if two starts or ends
 void ft_keep_track_start_end(int total, unsigned char *dip_Switch)
 {
     if (total == 0)
@@ -81,3 +80,8 @@ char    *ft_find_lastName(char **twodarray, int *i)
     ft_strcpy_after_hyphen(lastName, twodarray[j], '-');
     return (lastName);
 }
+
+/*
+** line 28
+** keeping track if two starts or ends
+*/
