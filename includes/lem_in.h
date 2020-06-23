@@ -41,7 +41,6 @@ int    				ft_check_ants(char *base);
 void    			free2dArray(char **str);
 void				froom(t_room **lst);
 void				free_two_strings(char *s1, char *s2);
-// void				ft_putendl_free_exit(char *str, char **map, t_room lem);
 
 char				**read_map();
 
