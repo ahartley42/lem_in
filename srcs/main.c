@@ -12,11 +12,12 @@
 
 #include "../includes/lem_in.h"
 
-int main(void){
-    t_room *lem;
-    t_room *tmp;
+int main(void)
+{
+    t_room	*lem;
+    t_room	*tmp;
     char    **map;
-    int ant_amount;
+    int		ant_amount;
 	int		i;
 
     lem = initialize_struct();
@@ -33,17 +34,10 @@ int main(void){
 	if (!path_size(&tmp))
 		err_duo(&lem, map);
 	while (map[i])
-	{
-		ft_putendl(map[i]);
-		i++;
-	}
-	i = 1;
-	while (i < ant_amount + path_size(&tmp))
-	{
+		ft_putendl(map[i++]);
+	i = 0;
+	while (++i < ant_amount + path_size(&tmp))
 		print_solution(&tmp, ant_amount, i);
-		i++;
-	}
-    // ft_putendl_free_exit("ERROR", map, lem);
     free2dArray(map);
     froom(&lem);
     return (0);
