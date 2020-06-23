@@ -6,7 +6,7 @@
 /*   By: svan-nie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/22 12:06:37 by svan-nie          #+#    #+#             */
-/*   Updated: 2020/06/22 12:06:38 by svan-nie         ###   ########.fr       */
+/*   Updated: 2020/06/22 18:42:01 by svan-nie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,19 +22,19 @@ void	error(unsigned char e)
 }
 
 // checks to see if start and end, and checks to see if it has enterd pipes and rooms
-void ft_check_for_error(int *start, int *end, int *pipeTrack, int *roomTrack)
+void ft_check_for_error(unsigned char dip_Switch)
 {
-        if (*start < 1 || *end < 1)
+    if ((dip_Switch & 2) == 0 || (dip_Switch & 4) == 0)
     {
         ft_putstr("Error: Badly Formatted Map no start or end \n");
-        exit(1);
+        exit(1);   
     }
-    if (*pipeTrack < 1)
+    if ((dip_Switch & 8) == 0)
     {
         ft_putstr("Error: Badly Formatted no Pipes \n");
         exit(1);
     }
-    if (*roomTrack < 1)
+    if ((dip_Switch & 16) == 0)
     {
         ft_putstr("Error: Badly Formatted no rooms \n");
         exit(1);
