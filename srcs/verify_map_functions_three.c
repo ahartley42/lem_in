@@ -36,11 +36,15 @@ void    ft_check_for_ant_amount(char **twodarray, int *i, int *ant_amount, t_roo
     while (twodarray[j])
     {
         if (twodarray[j][0] == '#') {
-            if (ft_strequ(twodarray[j], "##start") || ft_strequ(twodarray[j], "##end")){
-
-            }
+        if (twodarray[j][0] == '#' && twodarray[j][1] == '#'){
+        err_duo(&lem, twodarray);
+        }
             else
             j++;
+        }
+        if (twodarray[j][0] == '#' && twodarray[j][1] == '#'){
+            ft_putendl("wee\n");
+        err_duo(&lem, twodarray);
         }
         if (check_int(twodarray[j]) == 1)
         {

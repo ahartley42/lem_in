@@ -39,11 +39,7 @@ static void    ft_check_for_random_ants(char **twodarray, int *i, t_room *lem)
 
     j = *i;
     if (check_int(twodarray[j]) == 1)
-    {
-        ft_putstr("Error: Badly Formatted Map, Ants all ready Found \n");
-        err_duo(&lem, twodarray);
-        // exit(1);
-    }
+    err_duo(&lem, twodarray);
     *i = j;
 }
 

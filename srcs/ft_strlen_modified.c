@@ -64,13 +64,15 @@ void ft_strlen_space_count(char *str, char **twodarray, t_room *lem)
     k = 0;
     while (str[i] != '\0')
     {
-        if (str[i] == ' ')
+        if (str[i] == ' '){
         k++;
+        if (str[i + 1] == ' ')
+        err_duo(&lem, twodarray);
+        }
         i++; 
     }
     if (k > 2 || k < 2)
     {
-        ft_putstr("Error: Badly Formatted Map, room invalid \n");
         err_duo(&lem, twodarray);
     }
 }
