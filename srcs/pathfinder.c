@@ -66,10 +66,9 @@ int	pathfinder(t_room **room)
 			else
 			{
 				i = pathfinder(&((*room)->path[0]));
-				if (i != 1)
-					rpop(room, 0);
-				else
+				if (i == 1)
 					return (1);
+				rpop(room, 0);
 			}
 		}
 	}
@@ -92,23 +91,20 @@ int		path_size(t_room **room)
 
 void	print_solution(t_room **room, int ants, int i)
 {
-	if (i <= ants && !((*room)->type & 2))
+	if (i > 0)
 	{
-		ft_putchar('L');
-		ft_putnbr(i);
-		ft_putchar('-');
-		ft_putstr((*room)->name);
-	}
-	i--;
-	if ((*room)->type & 4 || i <= 0)
-		ft_putchar('\n');
-	else
-	{
-		if (i < ants && !((*room)->type & 2))
+		if (!((*room)->type & 4))
+			print_solution(&((*room)->path[0]), ants, i - 1);
+		if (!((*room)->type & 6) && i > 1 && i <= ants)
 			ft_putchar(' ');
-		print_solution(&((*room)->path[0]), ants, i);
+		if (i <= ants && !((*room)->type & 2))
+		{
+			ft_putchar('L');
+			ft_putnbr(i);
+			ft_putchar('-');
+			ft_putstr((*room)->name);
+		}
+		else if ((*room)->type & 2)
+			ft_putchar('\n');
 	}
 }
-
-
-//
