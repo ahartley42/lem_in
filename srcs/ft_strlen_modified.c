@@ -106,30 +106,42 @@ void    ft_strlen_2d_array(char **str, t_room *lem)
     int i;
     int k;
     int trackHyphen;
+	int	count;
 
     i = 0;
-    k = 0;
     trackHyphen = 0;
     while (str[i])
     {
+    	k = 0;
+		count = 0;
         while (str[i][k])
         {
             if (str[i][0] == 'L')
-            err_duo(&lem, str);
-            if (str[i][k] == '-'){
+            	err_duo(&lem, str);
+            if (str[i][k] == '-')
+			{
+				k = 0;
+				while (str[i][k])
+				{
+					if (str[i][k] == ' ')
+						count++;
+					k++;
+				}
+				if (count > 1)
+					break ;
                 trackHyphen++;
-                break;
+                	break;
             }
             k++;
         }
         if (trackHyphen == 1)
-        break;
-        k = 0;
+        	break;
         i++;
     }
     trackHyphen = 0;
     while (str[i])
     {
+        k = 0;
         while (str[i][k])
         {
             if (str[i][k] == '-')
@@ -142,7 +154,6 @@ void    ft_strlen_2d_array(char **str, t_room *lem)
         err_duo(&lem, str);
         else
         trackHyphen = 0;
-        k = 0;
         i++;
     }
     ft_strlen_check_names(str, lem);
