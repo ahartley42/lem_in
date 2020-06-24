@@ -110,7 +110,6 @@ void    ft_strlen_2d_array(char **str, t_room *lem)
     i = 0;
     k = 0;
     trackHyphen = 0;
-    ft_strlen_check_names(str, lem);
     while (str[i])
     {
         while (str[i][k])
@@ -146,4 +145,5 @@ void    ft_strlen_2d_array(char **str, t_room *lem)
         k = 0;
         i++;
     }
+    ft_strlen_check_names(str, lem);
 }

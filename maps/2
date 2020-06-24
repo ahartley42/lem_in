@@ -2,9 +2,6 @@
 #s
 5
 ##end
-#hello
-##bye
 end 0 1
 ##start
-##car
-start 2 2
+start 2 4

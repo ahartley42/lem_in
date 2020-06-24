@@ -83,7 +83,7 @@ char    *ft_find_firstName_space(char **twodarray, int *i)
 
     len = 0;
     j = *i;
-    len = ft_strlen_hyphen(twodarray, i);
+    len = ft_strlen_space_this(twodarray, i);
     firstName = ft_strnew(len);
     ft_strcpy_to_hyphen(firstName, twodarray[j], ' ');
     return (firstName);

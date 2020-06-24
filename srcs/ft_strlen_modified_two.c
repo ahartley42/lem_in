@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "../includes/lem_in.h"
-
 int ft_strlen_hyphen(char **twodarray,int *i)
 {
     int len;
@@ -20,6 +19,20 @@ int ft_strlen_hyphen(char **twodarray,int *i)
     len = 0;
 
     while (twodarray[j][len] != '-')
+    {
+        len++;
+    }
+    return (len);
+}
+
+int ft_strlen_space_this(char **twodarray,int *i)
+{
+    int len;
+    int j;
+    j = *i;
+    len = 0;
+
+    while (twodarray[j][len] != '\0' && twodarray[j][len] != ' ')
     {
         len++;
     }
@@ -57,9 +70,15 @@ void    ft_strlen_check_names(char **str, t_room *lem)
     k = 0;
     while (str[i])
     {
+        if (str[i + 1] == NULL)
+        break ;
+        if (str[i][0] == '#')
+        i++;
         if ((strlen = ft_strlen_space(str[i], str, lem)) && str[i][strlen] == ' ' && str[i][strlen + 1])
         {
             k = i;
+            if (str[i + 1] == NULL)
+            break ;
             k++;
             firstName = ft_find_firstName_space(str, &i);
             while (str[k])
@@ -77,5 +96,6 @@ void    ft_strlen_check_names(char **str, t_room *lem)
             free(firstName);
         }
         i++;
+        strlen = 0;
     }
 }

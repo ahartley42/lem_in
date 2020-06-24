@@ -6,7 +6,7 @@
 /*   By: svan-nie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/22 12:07:29 by svan-nie          #+#    #+#             */
-/*   Updated: 2020/06/24 16:51:02 by svan-nie         ###   ########.fr       */
+/*   Updated: 2020/06/24 19:31:23 by svan-nie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,7 @@ int 				ft_strlen_space(char *str, char **twodarray, t_room *lem);
 // void    			ft_strlen_2d_array(char **str);
 void    			ft_strlen_2d_array(char **str, t_room *lem);
 int 				ft_strlen_hyphen(char **twodarray,int *i);
+int 				ft_strlen_space_this(char **twodarray,int *i);
 int    				ft_strlen_till_end(char **twodarray, int *i, int *len);
 void    			ft_strlen_check_names(char **str, t_room *lem);
 
