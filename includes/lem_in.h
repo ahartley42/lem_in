@@ -6,7 +6,7 @@
 /*   By: svan-nie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/22 12:07:29 by svan-nie          #+#    #+#             */
-/*   Updated: 2020/06/24 00:37:35 by svan-nie         ###   ########.fr       */
+/*   Updated: 2020/06/24 16:51:02 by svan-nie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ int    				ft_check_start_end(char *twodarray);
 void 				ft_keep_track_start_end(int total, unsigned char *dip_Switch, char **twodarray, t_room *lem);
 char    			*ft_find_firstName(char **twodarray, int *i);
 char    			*ft_find_lastName(char **twodarray, int *i);
+char    			*ft_find_firstName_space(char **twodarray, int *i);
 int 				ft_check_address_exists(char *firstName, char *lastName, t_room *lem_head);
 // void    			check_x_and_y(t_room *lem_head);
 // void    			check_x_and_y(t_room *lem_head, char **twodarray);
@@ -77,6 +78,7 @@ int 				ft_strlen_space(char *str, char **twodarray, t_room *lem);
 void    			ft_strlen_2d_array(char **str, t_room *lem);
 int 				ft_strlen_hyphen(char **twodarray,int *i);
 int    				ft_strlen_till_end(char **twodarray, int *i, int *len);
+void    			ft_strlen_check_names(char **str, t_room *lem);
 
 char				*ft_strcpy_to_hyphen(char *dest, const char *src, char n);
 char				*ft_strcpy_after_hyphen(char *dest, const char *src, char n);

@@ -75,6 +75,21 @@ char    *ft_find_lastName(char **twodarray, int *i)
     return (lastName);
 }
 
+char    *ft_find_firstName_space(char **twodarray, int *i)
+{
+    char    *firstName;
+    int     len;
+    int     j;
+
+    len = 0;
+    j = *i;
+    len = ft_strlen_hyphen(twodarray, i);
+    firstName = ft_strnew(len);
+    ft_strcpy_to_hyphen(firstName, twodarray[j], ' ');
+    return (firstName);
+}
+
+
 /*
 ** line 28
 ** keeping track if two starts or ends
