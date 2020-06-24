@@ -11,15 +11,35 @@
 # **************************************************************************** #
 
 LEM = lem-in
+
 LIBFT = -L./libft -lft
+
 LIBFT_A = libft/libft.a
+
 FLAGS = -Wall -Wextra -Werror
+
 GCC = gcc
 
 SRC_PATH = srcs/
+
 OBJ_PATH = obj/
 
-SRC = check_int.c free.c main.c read_map.c check_ants.c ft_strlen_modified.c verify_map_add_data.c initialize_struct.c add_rooms.c ft_strlen_modified_two.c ft_strcpy_modified.c error.c pathfinder.c verify_map_functions_one.c verify_map_functions_two.c verify_map_functions_three.c err.c
+SRC = check_int.c \
+	free.c \
+	main.c \
+	read_map.c \
+	check_ants.c \
+	ft_strlen_modified.c \
+	verify_map_add_data.c \
+	initialize_struct.c \
+	add_rooms.c \
+	ft_strlen_modified_two.c \
+	ft_strcpy_modified.c error.c \
+	pathfinder.c verify_map_functions_one.c \
+	verify_map_functions_two.c \
+	verify_map_functions_three.c \
+	err.c
+
 OBJ = $(SRC:%.c=%.o)
 
 OBJ_USAGE = $(addprefix $(OBJ_PATH), $(OBJ))
@@ -27,24 +47,24 @@ OBJ_USAGE = $(addprefix $(OBJ_PATH), $(OBJ))
 all: $(LEM)
 
 $(LEM):	$(OBJ_PATH) $(OBJ_USAGE) $(LIBFT_A)
-	$(GCC) $(FLAGS) -o $@ $(OBJ_USAGE) $(LIBFT)
+	@$(GCC) $(FLAGS) -o $@ $(OBJ_USAGE) $(LIBFT)
 
 $(LIBFT_A):
-	cd libft && make
+	@cd libft && make
 
 $(OBJ_PATH)%.o: $(SRC_PATH)%.c
-	$(GCC) $(FLAGS) -c $^ -o $@ -I ./includes
+	@$(GCC) $(FLAGS) -c $^ -o $@ -I ./includes
 
 $(OBJ_PATH):
-	mkdir -p $(OBJ_PATH)
+	@mkdir -p $(OBJ_PATH)
 
 clean:
-	cd libft && make clean
-	rm -rf $(OBJ_PATH)
+	@cd libft && make clean
+	@rm -rf $(OBJ_PATH)
 
 fclean:	clean
-	cd libft && make fclean
-	rm -f $(LEM)
+	@cd libft && make fclean
+	@rm -f $(LEM)
 
 re:	fclean	all
-	cd libft && make re
+	@cd libft && make re
