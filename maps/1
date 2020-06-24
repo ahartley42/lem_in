@@ -1,6 +1,6 @@
 #jax
 #s
-5
+20
 ##end
 ##car
 #hello
@@ -11,8 +11,10 @@ end 1 2
 start 2 3
 a 3 4
 b 4 5
+c 5 6
 start-a
 a-b
-b-end
+b-c
+c-end
 #hello
 start-b
