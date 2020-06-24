@@ -12,9 +12,10 @@
 
 #include "../includes/lem_in.h"
 
-char **validate_map(char *array)
+static char	**validate_map(char *array)
 {
 	char **dblarray;
+
 	if (array == NULL)
 	{
 		ft_putendl("ERROR");
@@ -23,6 +24,7 @@ char **validate_map(char *array)
 	dblarray = ft_strsplit(array, '\n');
 	if (dblarray == NULL)
 	{
+		free(array);
 		ft_putendl("ERROR");
 		exit(1);
 	}
@@ -31,8 +33,7 @@ char **validate_map(char *array)
 }
 
 
-//test for leaks
-char	*fjoin(char *s1, char *s2)
+static char	*fjoin(char *s1, char *s2)
 {
 	char	*ans;
 	char	*tmp;
@@ -54,14 +55,14 @@ char	*fjoin(char *s1, char *s2)
 	return (ans);
 }
 
-char **read_map()
+char		**read_map()
 {
 	int     ret;
 	char    *line;
 	char    *temp;
 
 	temp = NULL;
-	while ((ret = get_next_line(0, &line) == 1))
+	while ((ret = get_next_line(0, &line)) == 1)
 	{
 			temp = fjoin(temp, line);
 			free(line);

@@ -15,13 +15,9 @@
 int    ft_check_start_end(char *twodarray)
 {
      if (ft_strequ(twodarray, "##start"))
-    {
         return (0);
-    }
     else if (ft_strequ(twodarray, "##end"))
-    {
         return (1);
-    }
     return (2);
 }
 

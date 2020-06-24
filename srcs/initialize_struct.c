@@ -12,7 +12,7 @@
 
 # include "../includes/lem_in.h"
 
-t_room *initialize_struct()//initialize 
+t_room *initialize_struct()
 {
     t_room *lem;
 

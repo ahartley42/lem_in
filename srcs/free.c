@@ -46,19 +46,3 @@ void	free_two_strings(char *s1, char *s2)
 	free(s1);
 	free(s2);
 }
-
-// void	ft_putendl_free_exit(char *str, char **map, t_room lem)
-// {
-//         int i;
-
-//         i = 0;
-//         while (str[i] != '\0')       
-//         {
-//                 write(1, &str[i], 1);
-//                 i++;
-//         }
-//         write(1, "\n", 1);
-//         free2dArray(map);
-//         froom(&lem);
-//         exit(1);
-// }
