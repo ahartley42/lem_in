@@ -2,11 +2,10 @@
 ##start
 end 1 2
 start 2 3
-a 3 4
+a  
 ##end
 b 4 5
 start-a
-end-end
 a-b
 b-end
 start-b
