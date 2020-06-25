@@ -35,7 +35,6 @@ void    			ft_add_rooms(t_room *lem, char **room_data, int *j);
 void    			ft_add_start_room(t_room *lem, char **room_data, int *j);
 void    			ft_add_end_room(t_room *lem, char **room_data, int *j);
 int					check_int(char *s);
-int    				ft_check_ants(char *base);
 void    			free2dArray(char **str);
 void				froom(t_room **lst);
 void				free_two_strings(char *s1, char *s2);
