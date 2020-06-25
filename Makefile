@@ -47,7 +47,7 @@ all: $(LEM)
 
 $(LEM):	$(OBJ_PATH) $(OBJ_USAGE) $(LIBFT_A)
 	@$(GCC) $(FLAGS) -o $@ $(OBJ_USAGE) $(LIBFT)
-	@echo "\e[1;32mcreating lem-in\e[0m"
+	@echo "\e[1;33mlem-in COMPILED SUCCESSFULLY\e[0m"
 
 $(LIBFT_A):
 	@cd libft && make
@@ -61,12 +61,12 @@ $(OBJ_PATH):
 clean:
 	@cd libft && make clean
 	@rm -rf $(OBJ_PATH)
-	@echo "\e[1;31mremoving objects\e[0m"
+	@echo "\e[1;31mOBJECT FILES REMOVED\e[0m"
 
 fclean:	clean
 	@cd libft && make fclean
 	@rm -f $(LEM)
-	@echo "\e[1;31mremoving lem-in\e[0m"
+	@echo "\e[1;31mlem-in REMOVED\e[0m"
 
 re:	fclean	all
 	@cd libft && make re
