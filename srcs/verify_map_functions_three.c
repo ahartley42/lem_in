@@ -20,13 +20,10 @@ void    ft_check_one(char **tda, int *i, t_room *lem)
 	while (tda[j])
 		j++;
 	if (j < 2)
-	{
-		ft_putendl("Error: wrong");
 		err_duo(&lem, tda);
-	}
 }
 
-void    ft_check_for_ant_amount(char **tda, int *i, int *ant_amount, t_room *lem)
+void    ft_check_for_ant_amount(char **tda, int *i, int *ants, t_room *lem)
 {
 	int j;
 
@@ -43,12 +40,12 @@ void    ft_check_for_ant_amount(char **tda, int *i, int *ant_amount, t_room *lem
 			err_duo(&lem, tda);
 		if (check_int(tda[j]) == 1)
 		{
-			*ant_amount = ft_atoi(tda[j]);
+			*ants = ft_atoi(tda[j]);
 			break;
 		}
 		j++;
 	}
-	if (*ant_amount <= 0)
+	if (*ants <= 0)
 		err_duo(&lem, tda);
 	j++;
 	*i = j;
@@ -87,17 +84,19 @@ void ft_check_end_room(char **tda, int *i, t_room *lem)
 		j++;
 	else
 		err_duo(&lem, tda);
-	while ((tda[j][0] == '#' && (tda[j][1] != '#' || tda[j][1] == '\0')) || (tda[j][0] == '#' && tda[j][1] == '#'))
+	while ((tda[j][0] == '#' && (tda[j][1] != '#' || tda[j][1] == '\0')) || \
+			(tda[j][0] == '#' && tda[j][1] == '#'))
 		j++;
-	if ((slen = ft_strlen_space(tda[j], tda, lem)) && tda[j][slen] == ' ' && tda[j][slen + 1])
-	{
-	}
+	if ((slen = ft_strlen_space(tda[j], tda, lem)) && tda[j][slen] == ' ' && \
+			tda[j][slen + 1])
+		;
 	else
 		err_duo(&lem, tda);
 	*i = j;
 }
 
-void    ft_check_valid_room(t_room *tmp, t_room *lem, char **tda, int *ij, unsigned char *dip)
+void    ft_check_valid_room(t_room *tmp, t_room *lem, char **tda, int *ij, \
+		unsigned char *dip)
 {
 	char    **check_rooms;
 
@@ -106,17 +105,6 @@ void    ft_check_valid_room(t_room *tmp, t_room *lem, char **tda, int *ij, unsig
 	ft_strlen_space_error(check_rooms[0], tda, lem);
 	if (check_int(check_rooms[1]) == 1 && check_int(check_rooms[2]) == 1)
 	{
-/*		if ((*dip_Switch & 32) == 32)
-		{
-			*dip_Switch ^= 32;
-			ft_add_start_room(tmp, check_rooms, &ij[1]);
-		}
-		else if ((*dip_Switch & 64) == 64)
-		{
-			*dip_Switch ^= 64;
-			ft_add_end_room(tmp, check_rooms, &ij[1]);
-		}
-		*/
 		if (*dip & 96)
 		{
 			if (*dip & 32)
@@ -138,14 +126,14 @@ void    ft_check_valid_room(t_room *tmp, t_room *lem, char **tda, int *ij, unsig
 }
 
 /*
-** line 32
-** ft_check_for_ant_amount
-** looking for ant_amount once found breaks out and returns ant amount  if not found returns error
-** j++ incrementing past the ant_amount
-** line 118
-** ft_strlen_space_count
-** counting the amount of spaces more or less than 2 displays error
-** line 120
-** ft_strlen_space_error
-** checks for name starting with L and - inside the name
+** #ft_check_for_ant_amount
+** #looking for ant_amount once found breaks out and returns ant amount
+** 	if not found returns error
+** #j++ incrementing past the ant_amount
+**
+** #ft_strlen_space_count
+** #counting the amount of spaces more or less than 2 displays error
+** 
+** #ft_strlen_space_error
+** #checks for name starting with L and - inside the name
 */

@@ -58,23 +58,21 @@ void	ft_strlen_check_names(char **str, t_room *lem)
 {
 	int i;
 	int k;
-	int strlen;
+	int slen;
 	char *firstName;
 	char *compareName;
 
 	i = 0;
-	k = 0;
 	while (str[i] && str[i + 1])
 	{
-		strlen = 0;
+		slen = 0;
 		if (str[i][0] == '#')
 			i++;
-		if ((strlen = ft_strlen_space(str[i], str, lem)) && str[i][strlen] == ' ' && str[i][strlen + 1])
+		if ((slen = ft_strlen_space(str[i], str, lem)) && str[i][slen] == ' ' && str[i][slen + 1])
 		{
-			k = i;
-			if (str[i + 1] == NULL)
+			k = i + 1;
+			if (str[k] == NULL)
 				break ;
-			k++;
 			firstName = ft_find_firstName_space(str, &i);
 			while (str[k])
 			{

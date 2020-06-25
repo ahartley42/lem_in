@@ -12,81 +12,75 @@
 
 #include "../includes/lem_in.h"
 
-int    ft_check_start_end(char *twodarray)
+int    ft_check_start_end(char *tda)
 {
-     if (ft_strequ(twodarray, "##start"))
-        return (0);
-    else if (ft_strequ(twodarray, "##end"))
-        return (1);
-    return (2);
+	if (ft_strequ(tda, "##start"))
+		return (0);
+	else if (ft_strequ(tda, "##end"))
+		return (1);
+	return (2);
 }
 
-void ft_keep_track_start_end(int total, unsigned char *dip_Switch, char **twodarray, t_room *lem)
+void ft_keep_track_start_end(int t, unsigned char *dip, char **tda, t_room *lem)
 {
-    if (total == 0)
-    {
-        if ((*dip_Switch & 2) == 2)
-        err_duo(&lem, twodarray);
-        *dip_Switch |= 32;
-        if ((*dip_Switch & 2) == 0)
-        *dip_Switch |= 2;
-    }
-    if (total == 1)
-    {
-        if ((*dip_Switch & 4) == 4)
-        err_duo(&lem, twodarray);
-        *dip_Switch |= 64;
-        if ((*dip_Switch & 4) == 0)
-        *dip_Switch |= 4;
-    }
+	if (t == 0)
+	{
+		if ((*dip & 2) == 2)
+			err_duo(&lem, tda);
+		*dip |= 32;
+		if ((*dip & 2) == 0)
+			*dip |= 2;
+	}
+	if (t == 1)
+	{
+		if ((*dip & 4) == 4)
+			err_duo(&lem, tda);
+		*dip |= 64;
+		if ((*dip & 4) == 0)
+			*dip |= 4;
+	}
 }
 
-char    *ft_find_firstName(char **twodarray, int *i)
+char    *ft_find_firstName(char **tda, int *i)
 {
-    char    *firstName;
-    int     len;
-    int     j;
+	char    *firstName;
+	int     len;
+	int     j;
 
-    len = 0;
-    j = *i;
-    len = ft_strlen_hyphen(twodarray, i);
-    firstName = ft_strnew(len);
-    ft_strcpy_to_hyphen(firstName, twodarray[j], '-');
-    return (firstName);
+	len = 0;
+	j = *i;
+	len = ft_strlen_hyphen(tda, i);
+	firstName = ft_strnew(len);
+	ft_strcpy_to_hyphen(firstName, tda[j], '-');
+	return (firstName);
 }
 
-char    *ft_find_lastName(char **twodarray, int *i)
+char    *ft_find_lastName(char **tda, int *i)
 {
-    char    *lastName;
-    int     len;
-    int     len2;
-    int     j;
+	char    *lastName;
+	int     len;
+	int     len2;
+	int     j;
 
-    len = 0;
-    j = *i;
-    len = ft_strlen_hyphen(twodarray, i);
-    len2 = ft_strlen_till_end(twodarray, i, &len);
-    lastName = ft_strnew(len2);
-    ft_strcpy_after_hyphen(lastName, twodarray[j], '-');
-    return (lastName);
+	len = 0;
+	j = *i;
+	len = ft_strlen_hyphen(tda, i);
+	len2 = ft_strlen_till_end(tda, i, &len);
+	lastName = ft_strnew(len2);
+	ft_strcpy_after_hyphen(lastName, tda[j], '-');
+	return (lastName);
 }
 
-char    *ft_find_firstName_space(char **twodarray, int *i)
+char    *ft_find_firstName_space(char **tda, int *i)
 {
-    char    *firstName;
-    int     len;
-    int     j;
+	char    *firstName;
+	int     len;
+	int     j;
 
-    len = 0;
-    j = *i;
-    len = ft_strlen_space_this(twodarray, i);
-    firstName = ft_strnew(len);
-    ft_strcpy_to_hyphen(firstName, twodarray[j], ' ');
-    return (firstName);
+	len = 0;
+	j = *i;
+	len = ft_strlen_space_this(tda, i);
+	firstName = ft_strnew(len);
+	ft_strcpy_to_hyphen(firstName, tda[j], ' ');
+	return (firstName);
 }
-
-
-/*
-** line 28
-** keeping track if two starts or ends
-*/
