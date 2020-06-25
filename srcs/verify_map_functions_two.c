@@ -62,15 +62,17 @@ void    ft_add_pipe_address(t_room *lem, char **tda, int *i)
 	t_room	*tmp2;
 	char    *firstName;
 	char    *lastName;
+	int		j;
 
-	while (tda[(*i)])
+	j = *i;
+	while (tda[j])
 	{
-		tmp = lem;
-		tmp2 = lem;
-		firstName = ft_find_firstName(tda, i);
-		lastName = ft_find_lastName(tda, i);
-		if (tda[(*i)][0] != '#')
+		if (tda[j][0] != '#')
 		{
+			tmp = lem;
+			tmp2 = lem;
+			firstName = ft_find_firstName(tda, &j);
+			lastName = ft_find_lastName(tda, &j);
 			check_x_and_y(lem, tda, firstName, lastName);
 			ft_wrong_name_error(firstName, lastName, lem, tda);
 			if (ft_check_address_exists(firstName, lastName, lem) == 1)
@@ -82,8 +84,8 @@ void    ft_add_pipe_address(t_room *lem, char **tda, int *i)
 				rpush(&tmp, tmp2);
 				rpush(&tmp2, tmp);
 			}
+			free_two_strings(firstName, lastName);
 		}
-		(*i)++;
-		free_two_strings(firstName, lastName);
+		j++;
 	}
 }
