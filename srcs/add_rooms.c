@@ -27,7 +27,6 @@ void    ft_add_rooms(t_room *lem, char **room_data, int *j)
     lem->run = 0;
     lem->type = 0;
     lem->path = NULL;
-    lem->next = NULL;
     lem->next = initialize_struct();
 }
 
@@ -47,7 +46,6 @@ void    ft_add_start_room(t_room *lem, char **room_data, int *j)
     lem->type = 0;
     lem->type |= 2;
     lem->path = NULL;
-    lem->next = NULL;
     lem->next = initialize_struct();
 }
 
@@ -67,6 +65,5 @@ void    ft_add_end_room(t_room *lem, char **room_data, int *j)
     lem->type = 0;
     lem->type |= 4;
     lem->path = NULL;
-    lem->next = NULL;
     lem->next = initialize_struct();
 }
