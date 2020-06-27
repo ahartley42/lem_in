@@ -18,8 +18,7 @@ static char	**validate_map(char *array)
 
 	if (!array)
 		return (NULL);
-	dblarray = ft_strsplit(array, '\n');
-	if (!dblarray)
+	if (!(dblarray = ft_strsplit(array, '\n')))
 	{
 		free(array);
 		return (NULL);
