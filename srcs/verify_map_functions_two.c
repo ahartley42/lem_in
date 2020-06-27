@@ -12,13 +12,13 @@
 
 #include "../includes/lem_in.h"
 
-int ft_check_address_exists(char *firstName, char *lastName, t_room *lem_head)
+int		ft_check_address_exists(char *firstName, char *lastName, t_room *lem)
 {
 	t_room *tmp;
 	t_room *tmp2;
 
-	tmp = lem_head;
-	tmp2 = lem_head;
+	tmp = lem;
+	tmp2 = lem;
 	while (tmp && !(ft_strequ(firstName, (tmp)->name)))
 		tmp = tmp->next;
 	while (tmp2 && !(ft_strequ(lastName, (tmp2)->name)))

@@ -51,12 +51,6 @@ static void    ft_check_start_end_room(char **tda,int *ij, unsigned char *dip, \
 	}
 }
 
-static void    ft_skip_comment(char **tda,int *ij)
-{
-	if (tda[ij[0]][0] == '#' && tda[ij[0]][1] != '#')
-		ij[0]++;
-}
-
 void    verify_map_and_data(t_room *tmp, t_room *lem, char **tda, int *ants)
 {
 	int     ij[3];
@@ -73,13 +67,13 @@ void    verify_map_and_data(t_room *tmp, t_room *lem, char **tda, int *ants)
 		slen = 0;
 		ft_check_for_random_ants(tda, &ij[0], lem);
 		ft_check_start_end_room(tda, ij, &dip, lem);
-		if ((slen = ft_strlen_space(tda[ij[0]], tda, lem)) && tda[ij[0]][slen] == ' ' && tda[ij[0]][slen + 1])
+		if ((slen = ft_strlen_space(tda[ij[0]], tda, lem)) && \
+				tda[ij[0]][slen] == ' ' && tda[ij[0]][slen + 1])
 		{
 			ft_check_valid_room(tmp, lem, tda, ij, &dip);
 			tmp = tmp->next;
 		}
 		check_if_pipe(lem, tda, &ij[0], &dip);
-		ft_skip_comment(tda, &ij[0]);
 		ij[0]++;
 	}
 	ft_check_for_error(dip, tda, lem);

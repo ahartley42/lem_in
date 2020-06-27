@@ -62,9 +62,12 @@ void ft_check_start_room(char **tda, int *i, t_room *lem)
 		j++;
 	else
 		err_duo(&lem, tda);
-	while ((tda[j][0] == '#' && (tda[j][1] != '#' || tda[j][1] == '\0')) || \
-			(tda[j][0] == '#' && tda[j][1] == '#'))
+	while (tda[j][0] == '#')
+	{
 		j++;
+		if (!tda[j])
+			err_duo(&lem, tda);
+	}
 	if ((slen = ft_strlen_space(tda[j], tda, lem)) && tda[j][slen] == ' ' && \
 			tda[j][slen + 1])
 		;
@@ -84,9 +87,12 @@ void ft_check_end_room(char **tda, int *i, t_room *lem)
 		j++;
 	else
 		err_duo(&lem, tda);
-	while ((tda[j][0] == '#' && (tda[j][1] != '#' || tda[j][1] == '\0')) || \
-			(tda[j][0] == '#' && tda[j][1] == '#'))
+	while (tda[j][0] == '#')
+	{
 		j++;
+		if (!tda[j])
+			err_duo(&lem, tda);
+	}
 	if ((slen = ft_strlen_space(tda[j], tda, lem)) && tda[j][slen] == ' ' && \
 			tda[j][slen + 1])
 		;
