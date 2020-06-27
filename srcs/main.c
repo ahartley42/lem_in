@@ -24,7 +24,8 @@ int main(void)
     ant_amount = 0;
 	i = 0;
     tmp = lem;
-    map = read_map();
+    if (!(map = read_map()))
+		err_duo(&lem, map);
     ft_strlen_2d_array(map, lem);
     verify_map_and_data(tmp, lem, map, &ant_amount);
 	tmp = lem;

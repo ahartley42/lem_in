@@ -16,17 +16,13 @@ static char	**validate_map(char *array)
 {
 	char **dblarray;
 
-	if (array == NULL)
-	{
-		ft_putendl("ERROR");
-		exit(1);
-	}
+	if (!array)
+		return (NULL);
 	dblarray = ft_strsplit(array, '\n');
-	if (dblarray == NULL)
+	if (!dblarray)
 	{
 		free(array);
-		ft_putendl("ERROR");
-		exit(1);
+		return (NULL);
 	}
     free(array);
 	return (dblarray);
