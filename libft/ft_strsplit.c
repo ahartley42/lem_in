@@ -3,38 +3,65 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strsplit.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: svan-nie <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: ahartley <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/06/04 07:41:14 by svan-nie          #+#    #+#             */
-/*   Updated: 2019/06/05 14:45:59 by svan-nie         ###   ########.fr       */
+/*   Created: 2019/05/31 09:52:47 by ahartley          #+#    #+#             */
+/*   Updated: 2019/06/12 15:46:00 by ahartley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	**ft_strsplit(char const *s, char c)
+static int	ft_wordcount(const char *s, char c)
 {
+	int	i;
+	int	ans;
+
+	i = 0;
+	ans = 0;
+	while (s[i])
+	{
+		while (s[i] == c)
+			i++;
+		if (s[i])
+			ans++;
+		while (s[i] && s[i] != c)
+			i++;
+	}
+	return (ans);
+}
+
+char		**ft_strsplit(char const *s, char c)
+{
+	char	**ans;
 	int		i;
 	int		j;
 	int		k;
-	char	**str2;
 
-	if (!s || !(str2 = (char **)malloc(sizeof(*str2) *
-					(ft_countwords(s, c) + 1))))
+	if (!s || !(ans = (char **)malloc(sizeof(char *) * ft_wordcount(s, c) + 1)))
 		return (NULL);
-	i = -1;
+	i = 0;
 	j = 0;
-	while (++i < ft_countwords(s, c))
+	while (j < ft_wordcount(s, c))
 	{
 		k = 0;
-		if (!(str2[i] = ft_strnew(ft_get_word_len(&s[j], c) + 1)))
-			str2[i] = (NULL);
-		while (s[j] == c)
-			j++;
-		while (s[j] != c && s[j])
-			str2[i][k++] = s[j++];
-		str2[i][k] = '\0';
+		while (s[i] == c)
+			i++;
+		while (s[i + k] && s[i + k] != c)
+			k++;
+		if (!(ans[j] = ft_strsub(s, i, k)))
+			return (NULL);
+		i = i + k;
+		j++;
 	}
-	str2[i] = 0;
-	return (str2);
+	ans[j] = 0;
+	return (ans);
 }
+/*
+** i = s index
+** j = 1st index of ans
+** k = word length after split
+** i = i + k is necessary for i to jump to the next split or null
+** strncpy used to copy the entire string of 'k' length to ans[j]
+** j increments to iterate through the entire 2D array
+*/

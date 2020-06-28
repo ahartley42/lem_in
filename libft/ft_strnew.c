@@ -15,15 +15,8 @@
 char	*ft_strnew(size_t size)
 {
 	char	*str;
-	int		count;
 
-	count = 0;
-	if (!(str = (char*)malloc(sizeof(char) * (size + 1))))
+	if (!(str = (char *)ft_memalloc(size + 1)))
 		return (NULL);
-	while (str[count])
-	{
-		str[count] = 0;
-		count++;
-	}
 	return (str);
 }
