@@ -96,7 +96,7 @@ void    ft_strlen_2d_array(char **str, t_room *lem)
 	i = -1;
 	while (str[++i])
 	{
-		if (ft_strchr(str[i], 'L'))
+		if (str[i][0] == 'L')
 			err_duo(&lem, str);
 		if (ft_strchr(str[i], ' ') != ft_strrchr(str[i], ' '))
 		{
