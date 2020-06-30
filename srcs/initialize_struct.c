@@ -16,7 +16,8 @@ t_room *initialize_struct()
 {
     t_room *lem;
 
-    lem = (t_room *)malloc(sizeof(*lem));
+    if (!(lem = (t_room *)malloc(sizeof(*lem))))
+		return (NULL);
     lem->room_id = 0;
     lem->ant_id = 0;
     lem->run = 0;
