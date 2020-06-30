@@ -38,17 +38,14 @@ void    check_x_and_y(t_room *lem, char **tda, char *firstName, char *lastName)
 	while ((tmp) != NULL)
 	{
 		tmp2 = tmp2->next;
-		while ((tmp2) != NULL)
+		while (tmp2 && tmp2->next)
 		{
-			while ((tmp2) != NULL)
+			if (tmp->xy[0] == tmp2->xy[0] && tmp->xy[1] == tmp2->xy[1])
 			{
-				if (tmp->xy[0] == tmp2->xy[0] && tmp->xy[1] == tmp2->xy[1])
-				{
-					free_two_strings(firstName, lastName);
-					err_duo(&lem, tda);
-				}
-				tmp2 = tmp2->next;
+				free_two_strings(firstName, lastName);
+				err_duo(&lem, tda);
 			}
+			tmp2 = tmp2->next;
 		}
 		tmp = tmp->next;
 		if ((tmp) != NULL)
