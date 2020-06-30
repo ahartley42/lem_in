@@ -17,18 +17,24 @@ static int push_to_line(int ret, int fd, char **s, char **line)
     int     length;
     char    *temp;
     if (ret < 0)
+	{
+		ft_strdel(&s[fd]);
         return (-1);
+	}
     else if (ret == 0 && s[fd] == NULL)
         return (0);
     else
     {
         length = 0;
-        while (s[fd][length] != '\0' && s[fd][length] != '\n') {
+        while (s[fd][length] != '\0' && s[fd][length] != '\n')
             length++;
-        }
-
         if (s[fd][length] == '\n')
         {
+			if (s[fd][length + 1] == '\n')
+			{
+				ft_strdel(&s[fd]);
+				return (-1);
+			}
             *line = ft_strsub(s[fd], 0, length);
             temp = ft_strdup(&(s[fd][length + 1]));
             free(s[fd]);
@@ -51,8 +57,10 @@ int get_next_line(const int fd, char **line)
     char        buf[BUFF_SIZE + 1];
     char        *temp;
     int         ret;
+	int			nl;
 
     ret = 0;
+	nl = 0;
     if (fd < 0 || line == NULL)
         return (-1);
     while ((ret = read(fd, buf, BUFF_SIZE)) > 0)
