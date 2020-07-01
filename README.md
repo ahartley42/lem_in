@@ -47,6 +47,7 @@ Multiple lines may hold a single room each. Even if the syntax is correct for ea
 * No starting room is detected (defined by `##start` command)
 * No ending room is detected (defined by `##end` command)
 * The starting room is the same as the ending room
+* More than 1 starting/ending rooms are detected
 * There is no room beneath a command line
 
 ### pipes
