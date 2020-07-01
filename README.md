@@ -3,11 +3,15 @@ lem_in is an ant-farm reader which displays the routes ants will follow from the
 
 ## creating and running the ant-farm reader
 Simply run the following command on the terminal:
-`make re`
-Once the command says "lem-in COMPILED SUCCESSFULLY", the program has been created.
+```
+make re
+```
+Once the output reads `lem-in COMPILED SUCCESSFULLY`, the program has been created.
 
 To run lem-in, you need to run the following command:
-`./lem-in < map.txt`
+```
+./lem-in < map.txt
+```
 where **map.txt** is your map input
 
 Note: you have to create your own map, as map.txt does not exist. Sample working maps 1-3 can be found in the `maps` directory, whereas error maps 1-24 can be found in the `maps/wrong` directory.
@@ -20,10 +24,12 @@ Once you have completed typing your map out, simply end off by pressing `ctrl + 
 
 ## map rules
 The ant-farm reader is very strict, so even the slightest margin of error will be picked up. The correct format is as follows:
-`ants
+```
+ants
 rooms
-pipes`
-where ants represents the number of ants being passed, rooms represent the room names with their x and y coordinates, and pipes represent the links between rooms
+pipes
+```
+where **ants** represents the number of ants being passed, **rooms** represent the room names with their x and y coordinates, and **pipes** represent the links between rooms
 maps may also have comments which are lines starting with `#` or commands which are lines starting with `##`.
 
 ### ants
@@ -33,7 +39,9 @@ Only 1 line may consist of a value representing the number of ants
 
 ### rooms
 a single room has the following syntax:
-`room_name x_coordinate y_coordinate`
+```
+room_name x_coordinate y_coordinate
+```
 where **room_name** represents the name of the room, and **x_coordinate** + **y_coordinate** both represent the x-y coordinates of the room
 * The room name may not start with `#` or `L`, and may not contain `-` or a space; they may be named any other way you wish, but please note it is case sensitive
 * The coordinates must strictly be integers; negative values are accepted
@@ -52,7 +60,9 @@ Multiple lines may hold a single room each. Even if the syntax is correct for ea
 
 ### pipes
 a pipe has the following syntax:
-`room1-room2`
+```
+room1-room2
+```
 where **room1** and **room2** both represents the room names defined in the map. They are linked together using only the `-` symbol with no spacing in between.
 
 Multiple lines may hold a pipe each. Even if the syntax is correct for each pipe, the following can error out the program:
@@ -65,7 +75,9 @@ An empty line anywhere in the program will result in an error
 
 ## result
 On a valid map, the output will print out a copy of the map as well as a line-by-line process of how the ants are moving through the rooms. This is displayed by the syntax:
-`Lx-y`
+```
+Lx-y
+```
 where **x** is the ant ID number and **y** is the room name the ant is currently occupying.
 
 If an error in the map is detected, the result will simply display `ERROR` in red.
